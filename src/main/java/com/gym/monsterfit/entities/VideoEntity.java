@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "video")
-public class Video {
+public class VideoEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +13,7 @@ public class Video {
 	private String url;
 	private String nombre;
 	
-	public Video(Integer id, String url, String nombre) {
+	public VideoEntity(Integer id, String url, String nombre) {
 		this.id = id;
 		this.url = url;
 		this.nombre = nombre;

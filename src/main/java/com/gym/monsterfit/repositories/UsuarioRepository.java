@@ -2,9 +2,9 @@ package com.gym.monsterfit.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.gym.monsterfit.entities.Usuario;
+import com.gym.monsterfit.entities.UsuarioEntity;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
+public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Integer>{
     
-    Usuario findByEmail(String email);
+    UsuarioEntity findByEmail(String email);
 }

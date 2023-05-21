@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "historialRutina")
-public class Historial {
+public class HistorialEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +16,7 @@ public class Historial {
 	
 	@ManyToOne
 	@JoinColumn(name = "miembroGimnasio")
-	private Miembro miembro;
+	private MiembroEntity miembro;
 	
 	private Integer series;
 	private String tiempo;
@@ -26,7 +26,7 @@ public class Historial {
 	
 	
 	
-	public Historial(Integer id, RutinaEjercicio rutinaEjercicio, Miembro miembro, Integer series, String tiempo,
+	public HistorialEntity(Integer id, RutinaEjercicio rutinaEjercicio, MiembroEntity miembro, Integer series, String tiempo,
 			Integer peso, Integer repeticiones) {
 		super();
 		this.id = id;
@@ -49,10 +49,10 @@ public class Historial {
 	public void setRutinaEjercicio(RutinaEjercicio rutinaEjercicio) {
 		this.rutinaEjercicio = rutinaEjercicio;
 	}
-	public Miembro getMiembro() {
+	public MiembroEntity getMiembro() {
 		return miembro;
 	}
-	public void setMiembro(Miembro miembro) {
+	public void setMiembro(MiembroEntity miembro) {
 		this.miembro = miembro;
 	}
 	public Integer getSeries() {

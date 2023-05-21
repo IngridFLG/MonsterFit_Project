@@ -3,7 +3,7 @@ package com.gym.monsterfit.entities;
 import javax.persistence.*;
 @Entity
 @Table(name = "ejercicio")
-public class Ejercicio {
+public class EjercicioEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,11 +13,11 @@ public class Ejercicio {
 	
 	@OneToOne
 	@JoinColumn(name = "video_id")
-	private Video video;
+	private VideoEntity video;
 	
 	
 
-	public Ejercicio(Integer id, String descripcion, Video video) {
+	public EjercicioEntity(Integer id, String descripcion, VideoEntity video) {
 		this.id = id;
 		this.descripcion = descripcion;
 		this.video = video;
@@ -39,11 +39,11 @@ public class Ejercicio {
 		this.descripcion = descripcion;
 	}
 
-	public Video getVideo() {
+	public VideoEntity getVideo() {
 		return video;
 	}
 
-	public void setVideo(Video video) {
+	public void setVideo(VideoEntity video) {
 		this.video = video;
 	}
 	

@@ -1,7 +1,7 @@
 package com.gym.monsterfit.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.gym.monsterfit.entities.Video;
+import com.gym.monsterfit.entities.VideoEntity;
 
-public interface VideoRepository extends JpaRepository<Video, Integer>{
+public interface VideoRepository extends JpaRepository<VideoEntity, Integer>{
 
 }

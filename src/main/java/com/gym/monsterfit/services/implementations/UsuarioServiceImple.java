@@ -14,15 +14,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.gym.monsterfit.entities.Usuario;
+import com.gym.monsterfit.entities.UsuarioEntity;
 import com.gym.monsterfit.exceptions.EmailExistsException;
 import com.gym.monsterfit.repositories.RolRepository;
 import com.gym.monsterfit.repositories.UsuarioRepository;
-import com.gym.monsterfit.services.interfaces.UsuarioServiceInterface;
+import com.gym.monsterfit.services.interfaces.UsuarioService;
 import com.gym.monsterfit.shared.DTO.UsuarioDTO;
 
 @Service("userService")
-public class UsuarioService implements UsuarioServiceInterface {
+public class UsuarioServiceImple implements UsuarioService {
 
 
     @Autowired
@@ -37,7 +37,7 @@ public class UsuarioService implements UsuarioServiceInterface {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario usuarioEntity = usuarioRepository.findByEmail(email);
+        UsuarioEntity usuarioEntity = usuarioRepository.findByEmail(email);
 
         if (usuarioEntity == null) {
             throw new UsernameNotFoundException(email);
@@ -52,23 +52,47 @@ public class UsuarioService implements UsuarioServiceInterface {
     }
 
     @Override
-    public UsuarioDTO crearUsuario(UsuarioDTO usuario) {
+    public UsuarioDTO createUsuario(UsuarioDTO usuario) {
         if (usuarioRepository.findByEmail(usuario.getEmail()) != null)
         throw new EmailExistsException("El correo electronico ya existe");
 
-        Usuario usuarioEntity = new Usuario();
+        UsuarioEntity usuarioEntity = new UsuarioEntity();
         BeanUtils.copyProperties(usuario, usuarioEntity);
 
         usuarioEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
 
         usuarioEntity.setRol(rolRepository.findByAuthority("ROLE_CLIENTE"));
 
-        Usuario storedUserDetails = usuarioRepository.save(usuarioEntity);
+        UsuarioEntity storedUserDetails = usuarioRepository.save(usuarioEntity);
 
         UsuarioDTO userToReturn = new UsuarioDTO();
         BeanUtils.copyProperties(storedUserDetails, userToReturn);
 
         return userToReturn;
     }
+
+	@Override
+	public List<UsuarioDTO> getAllUsuario() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UsuarioDTO getUsuarioById(UsuarioDTO usuario) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UsuarioDTO updateUsuario(Integer id, UsuarioDTO usuario) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteUsuario(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
     
 }

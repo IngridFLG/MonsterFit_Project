@@ -13,7 +13,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class UsuarioEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +30,7 @@ public class Usuario {
 
     @ManyToOne
     @JoinColumn(name = "authority_id", nullable = false)
-    private Rol rol;
+    private RolEntity rol;
 
     public Integer getId() {
         return id;
@@ -56,11 +56,11 @@ public class Usuario {
         this.encryptedPassword = encryptedPassword;
     }
 
-    public Rol getRol() {
+    public RolEntity getRol() {
         return rol;
     }
 
-    public void setRol(Rol rol) {
+    public void setRol(RolEntity rol) {
         this.rol = rol;
     }
 

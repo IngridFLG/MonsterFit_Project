@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "calendario")
-public class Calendario {
+public class CalendarioEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +16,7 @@ public class Calendario {
 	private Integer ano;
 	
 	
-	public Calendario(Integer id, Integer dia, String mes, Integer ano) {
+	public CalendarioEntity(Integer id, Integer dia, String mes, Integer ano) {
 		this.id = id;
 		this.dia = dia;
 		this.mes = mes;
