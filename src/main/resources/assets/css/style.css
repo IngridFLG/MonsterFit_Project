@@ -1,0 +1,72 @@
+/*Estilos para el index*/
+
+.navbar-custom {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.navbar-brand, .nav-link {
+    color: #fff;
+}
+
+.nav-link {
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out !important;
+}
+
+.h1titulo {
+    font-size: 6rem;
+    --bs-text-opacity: 1;
+    color: rgba(255, 255, 255), var(--bs-text-opacity) !important;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 40px;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+header.masthead {
+    position: relative;
+    overflow: hidden;
+    padding-top: calc(7rem + 100px);
+    padding-bottom: 7rem;
+    background: url("../img/gym1.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
+    background-size: cover;
+}
+
+.nav-link:focus, .nav-link:hover {
+    color: rgba(134, 114, 78, 0.8);
+}
+
+.navbar-brand:focus, .navbar-brand:hover {
+    color: rgba(134, 114, 78, 0.8);
+}
+
+.btn-index {
+    --bs-btn-bg: #000000FF;
+    --bs-btn-border-color: #bca27f;
+}
+
+/*Estilos para el login*/
+
+.section-img {
+    background: url("../img/gym1.jpg");
+}
+
+.btn-login {
+    color: white;
+    --bs-btn-bg: #000000FF;
+    --bs-btn-border-color: #bca27f;
+}
+
+.p-5 {
+    padding: 5rem !important;
+}
+
+
+
+
