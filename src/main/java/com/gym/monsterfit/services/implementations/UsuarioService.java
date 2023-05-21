@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.gym.monsterfit.entities.UsuarioEntity;
+import com.gym.monsterfit.entities.Usuario;
 import com.gym.monsterfit.exceptions.EmailExistsException;
 import com.gym.monsterfit.repositories.RolRepository;
 import com.gym.monsterfit.repositories.UsuarioRepository;
@@ -37,7 +37,7 @@ public class UsuarioService implements UsuarioServiceInterface {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UsuarioEntity usuarioEntity = usuarioRepository.findByEmail(email);
+        Usuario usuarioEntity = usuarioRepository.findByEmail(email);
 
         if (usuarioEntity == null) {
             throw new UsernameNotFoundException(email);
@@ -56,14 +56,14 @@ public class UsuarioService implements UsuarioServiceInterface {
         if (usuarioRepository.findByEmail(usuario.getEmail()) != null)
         throw new EmailExistsException("El correo electronico ya existe");
 
-        UsuarioEntity usuarioEntity = new UsuarioEntity();
+        Usuario usuarioEntity = new Usuario();
         BeanUtils.copyProperties(usuario, usuarioEntity);
 
         usuarioEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
 
         usuarioEntity.setRol(rolRepository.findByAuthority("ROLE_CLIENTE"));
 
-        UsuarioEntity storedUserDetails = usuarioRepository.save(usuarioEntity);
+        Usuario storedUserDetails = usuarioRepository.save(usuarioEntity);
 
         UsuarioDTO userToReturn = new UsuarioDTO();
         BeanUtils.copyProperties(storedUserDetails, userToReturn);

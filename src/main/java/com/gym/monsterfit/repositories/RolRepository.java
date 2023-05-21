@@ -2,9 +2,9 @@ package com.gym.monsterfit.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.gym.monsterfit.entities.RolEntity;
+import com.gym.monsterfit.entities.Rol;
 
-public interface RolRepository extends JpaRepository<RolEntity, Integer> {
+public interface RolRepository extends JpaRepository<Rol, Integer> {
     
-    RolEntity findByAuthority(String authority);
+    Rol findByAuthority(String authority);
 }
