@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "miembroGimnasio")
-public class Miembro {
+public class MiembroEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class Miembro {
 	
 	@OneToOne
 	@JoinColumn(name = "id_usuario")
-	private Usuario usuario;
+	private UsuarioEntity usuario;
 
 	public Integer getId() {
 		return id;
@@ -68,15 +68,15 @@ public class Miembro {
 		this.peso = peso;
 	}
 
-	public Usuario getUsuario() {
+	public UsuarioEntity getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(UsuarioEntity usuario) {
 		this.usuario = usuario;
 	}
 
-	public Miembro(Integer id, String nombre, Integer edad, String sexo, Integer altura, Double peso, Usuario usuario) {
+	public MiembroEntity(Integer id, String nombre, Integer edad, String sexo, Integer altura, Double peso, UsuarioEntity usuario) {
 		this.nombre = nombre;
 		this.edad = edad;
 		this.sexo = sexo;

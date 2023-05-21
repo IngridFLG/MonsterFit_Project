@@ -10,7 +10,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "authorities", uniqueConstraints= {@UniqueConstraint(columnNames= {"id", "authority"})})
-public class Rol {
+public class RolEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +20,10 @@ public class Rol {
     private String authority;
     
 
-    public Rol() {
+    public RolEntity() {
     }
 
-    public Rol(Integer id, String authority) {
+    public RolEntity(Integer id, String authority) {
         this.id = id;
         this.authority = authority;
     }

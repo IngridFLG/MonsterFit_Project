@@ -12,15 +12,15 @@ public class RutinaEjercicio {
 	
 	@ManyToOne
 	@JoinColumn(name = "rutina")
-	private Rutina rutina;
+	private RutinaEntity rutina;
 	
 	@ManyToOne
 	@JoinColumn(name = "ejercicio_id")
-	private Ejercicio ejercicio;
+	private EjercicioEntity ejercicio;
 	
 	@ManyToOne
 	@JoinColumn(name = "calendario_id")
-	private Calendario calendario;
+	private CalendarioEntity calendario;
 	
 	private String tiempo;
 	private Integer peso;
@@ -29,7 +29,7 @@ public class RutinaEjercicio {
 	
 	
 	
-	public RutinaEjercicio(Integer id, Rutina rutina, Ejercicio ejercicio, Calendario calendario, String tiempo,
+	public RutinaEjercicio(Integer id, RutinaEntity rutina, EjercicioEntity ejercicio, CalendarioEntity calendario, String tiempo,
 			Integer peso, Integer series, Integer repeticiones) {
 		this.id = id;
 		this.rutina = rutina;
@@ -46,22 +46,22 @@ public class RutinaEjercicio {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Rutina getRutina() {
+	public RutinaEntity getRutina() {
 		return rutina;
 	}
-	public void setRutina(Rutina rutina) {
+	public void setRutina(RutinaEntity rutina) {
 		this.rutina = rutina;
 	}
-	public Ejercicio getEjercicio() {
+	public EjercicioEntity getEjercicio() {
 		return ejercicio;
 	}
-	public void setEjercicio(Ejercicio ejercicio) {
+	public void setEjercicio(EjercicioEntity ejercicio) {
 		this.ejercicio = ejercicio;
 	}
-	public Calendario getCalendario() {
+	public CalendarioEntity getCalendario() {
 		return calendario;
 	}
-	public void setCalendario(Calendario calendario) {
+	public void setCalendario(CalendarioEntity calendario) {
 		this.calendario = calendario;
 	}
 	public String getTiempo() {

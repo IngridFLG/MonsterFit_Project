@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gym.monsterfit.models.request.UsuarioRequest;
-import com.gym.monsterfit.services.implementations.JWTService;
+import com.gym.monsterfit.services.implementations.JWTServiceImple;
 
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -27,9 +27,9 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
     
     @Autowired
-    private JWTService jwtService;
+    private JWTServiceImple jwtService;
 
-    public AuthenticationFilter(AuthenticationManager authenticationManager, JWTService jwtService) {
+    public AuthenticationFilter(AuthenticationManager authenticationManager, JWTServiceImple jwtService) {
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
     }

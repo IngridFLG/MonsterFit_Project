@@ -9,7 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import io.jsonwebtoken.Claims;
 
 
-public interface JWTServiceInterface {
+public interface JWTService {
     
     public String create(Authentication auth) throws IOException;
 	public boolean validate(String token);

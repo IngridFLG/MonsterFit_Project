@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gym.monsterfit.security.SecurityConstants;
-import com.gym.monsterfit.services.interfaces.JWTServiceInterface;
+import com.gym.monsterfit.services.interfaces.JWTService;
 import com.gym.monsterfit.shared.SimpleGrantedAuthorityMixin;
 
 import io.jsonwebtoken.Claims;
@@ -24,7 +24,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 
 @Component
-public class JWTService implements JWTServiceInterface{
+public class JWTServiceImple implements JWTService{
     
 	@Override
     public String create(Authentication auth) throws IOException {
