@@ -12,7 +12,7 @@ public interface EjercicioService {
 	
 	public EjercicioEntity createEjercicio(EjercicioEntity ejercicio);
 	
-	public EjercicioEntity updateEjercicio(Integer id,EjercicioEntity ejercicio);
+	public EjercicioEntity updateEjercicio(EjercicioEntity ejercicio);
 	
 	public void deleteEjercicio(Integer id);
 }

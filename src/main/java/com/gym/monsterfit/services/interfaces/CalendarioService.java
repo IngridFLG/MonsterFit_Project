@@ -14,7 +14,7 @@ public interface CalendarioService {
 	
 	public CalendarioEntity createCalendario(CalendarioEntity calendario);
 	
-	public CalendarioEntity updateCalendario(Integer id,CalendarioEntity calendario);
+	public CalendarioEntity updateCalendario(CalendarioEntity calendario);
 	
 	public void deleteCalendario(Integer id);
 }

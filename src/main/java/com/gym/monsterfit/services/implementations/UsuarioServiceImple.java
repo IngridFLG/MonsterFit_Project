@@ -72,27 +72,23 @@ public class UsuarioServiceImple implements UsuarioService {
     }
 
 	@Override
-	public List<UsuarioDTO> getAllUsuario() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<UsuarioEntity> getAllUsuario() {
+		return usuarioRepository.findAll();
 	}
 
 	@Override
-	public UsuarioDTO getUsuarioById(UsuarioDTO usuario) {
-		// TODO Auto-generated method stub
-		return null;
+	public UsuarioEntity getUsuarioById(UsuarioEntity usuario) {
+		return usuarioRepository.findById(usuario.getId()).orElse(null);
 	}
 
 	@Override
-	public UsuarioDTO updateUsuario(Integer id, UsuarioDTO usuario) {
-		// TODO Auto-generated method stub
-		return null;
+	public UsuarioEntity updateUsuario(UsuarioEntity usuario) {
+		return usuarioRepository.save(usuario);
 	}
 
 	@Override
 	public void deleteUsuario(Integer id) {
-		// TODO Auto-generated method stub
-		
+		usuarioRepository.deleteById(id);
 	}
     
 }

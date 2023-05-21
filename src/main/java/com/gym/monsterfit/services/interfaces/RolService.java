@@ -12,7 +12,7 @@ public interface RolService {
 	
 	public RolEntity createRol(RolEntity miembro);
 	
-	public RolEntity updateRol(Integer id,RolEntity miembro);
+	public RolEntity updateRol(RolEntity miembro);
 	
 	public void deleteRol(Integer id);
 }

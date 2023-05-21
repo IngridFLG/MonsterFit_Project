@@ -11,7 +11,7 @@ public interface VideoService {
 	
 	public VideoEntity createVideo(VideoEntity video);
 	
-	public VideoEntity updateVideo(Integer id,VideoEntity video);
+	public VideoEntity updateVideo(VideoEntity video);
 	
 	public void deleteVideo(Integer id);
 }

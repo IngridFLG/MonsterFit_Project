@@ -4,17 +4,17 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "rutina")
-public class RutinaEntity {
+public class TipoEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String tipo;
+	private String nombre;
 	
 	
-	public RutinaEntity(Integer id, String tipo) {
+	public TipoEntity(Integer id, String tipo) {
 		this.id = id;
-		this.tipo = tipo;
+		this.nombre = tipo;
 	}
 	
 	public Integer getId() {
@@ -24,10 +24,10 @@ public class RutinaEntity {
 		this.id = id;
 	}
 	public String getTipo() {
-		return tipo;
+		return nombre;
 	}
 	public void setTipo(String tipo) {
-		this.tipo = tipo;
+		this.nombre = tipo;
 	}
 	
 	

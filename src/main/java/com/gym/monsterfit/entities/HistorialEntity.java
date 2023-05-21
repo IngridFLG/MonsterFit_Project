@@ -12,7 +12,7 @@ public class HistorialEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "rutinaEjercicio")
-	private RutinaEjercicio rutinaEjercicio;
+	private RutinaEjercicioEntity rutinaEjercicio;
 	
 	@ManyToOne
 	@JoinColumn(name = "miembroGimnasio")
@@ -26,7 +26,7 @@ public class HistorialEntity {
 	
 	
 	
-	public HistorialEntity(Integer id, RutinaEjercicio rutinaEjercicio, MiembroEntity miembro, Integer series, String tiempo,
+	public HistorialEntity(Integer id, RutinaEjercicioEntity rutinaEjercicio, MiembroEntity miembro, Integer series, String tiempo,
 			Integer peso, Integer repeticiones) {
 		super();
 		this.id = id;
@@ -43,10 +43,10 @@ public class HistorialEntity {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public RutinaEjercicio getRutinaEjercicio() {
+	public RutinaEjercicioEntity getRutinaEjercicio() {
 		return rutinaEjercicio;
 	}
-	public void setRutinaEjercicio(RutinaEjercicio rutinaEjercicio) {
+	public void setRutinaEjercicio(RutinaEjercicioEntity rutinaEjercicio) {
 		this.rutinaEjercicio = rutinaEjercicio;
 	}
 	public MiembroEntity getMiembro() {

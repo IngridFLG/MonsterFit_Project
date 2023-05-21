@@ -3,16 +3,16 @@ package com.gym.monsterfit.services.interfaces;
 
 import java.util.List;
 
-import com.gym.monsterfit.entities.RutinaEjercicio;
+import com.gym.monsterfit.entities.RutinaEjercicioEntity;
 public interface RutinaEjercicioService {
 
-	public List<RutinaEjercicio> getAllRutinaEjercicio();
+	public List<RutinaEjercicioEntity> getAllRutinaEjercicio();
 	
-	public RutinaEjercicio getRutinaEjercicioById(RutinaEjercicio rutina);
+	public RutinaEjercicioEntity getRutinaEjercicioById(RutinaEjercicioEntity rutina);
 	
-	public RutinaEjercicio createRutinaEjercicio(RutinaEjercicio rutina);
+	public RutinaEjercicioEntity createRutinaEjercicio(RutinaEjercicioEntity rutina);
 	
-	public RutinaEjercicio updateRutinaEjercicio(Integer id,RutinaEjercicio rutina);
+	public RutinaEjercicioEntity updateRutinaEjercicio(RutinaEjercicioEntity rutina);
 	
 	public void deleteRutinaEjercicio(Integer id);
 }

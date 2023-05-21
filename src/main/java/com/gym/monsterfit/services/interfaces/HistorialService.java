@@ -12,7 +12,7 @@ public interface HistorialService {
 	
 	public HistorialEntity createHistorial(HistorialEntity ejercicio);
 	
-	public HistorialEntity updateHistorial(Integer id,HistorialEntity ejercicio);
+	public HistorialEntity updateHistorial(HistorialEntity ejercicio);
 	
 	public void deleteHistorial(Integer id);
 }

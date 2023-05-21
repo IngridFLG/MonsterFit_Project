@@ -12,7 +12,7 @@ public interface MiembroService {
 	
 	public MiembroEntity createMiembro(MiembroEntity miembro);
 	
-	public MiembroEntity updateMiembro(Integer id,MiembroEntity miembro);
+	public MiembroEntity updateMiembro(MiembroEntity miembro);
 	
 	public void deleteMiembro(Integer id);
 }
