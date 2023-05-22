@@ -4,7 +4,7 @@ package com.gym.monsterfit.services.interfaces;
 import java.util.List;
 
 import com.gym.monsterfit.entities.RolEntity;
-public interface RolService {
+public interface RolServiceInterface {
 
 	public List<RolEntity> getAllMiembro();
 	

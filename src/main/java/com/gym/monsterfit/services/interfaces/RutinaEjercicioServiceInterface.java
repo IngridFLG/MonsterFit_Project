@@ -4,7 +4,7 @@ package com.gym.monsterfit.services.interfaces;
 import java.util.List;
 
 import com.gym.monsterfit.entities.RutinaEjercicioEntity;
-public interface RutinaEjercicioService {
+public interface RutinaEjercicioServiceInterface {
 
 	public List<RutinaEjercicioEntity> getAllRutinaEjercicio();
 	

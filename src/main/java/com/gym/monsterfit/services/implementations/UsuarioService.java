@@ -18,11 +18,11 @@ import com.gym.monsterfit.entities.UsuarioEntity;
 import com.gym.monsterfit.exceptions.EmailExistsException;
 import com.gym.monsterfit.repositories.RolRepository;
 import com.gym.monsterfit.repositories.UsuarioRepository;
-import com.gym.monsterfit.services.interfaces.UsuarioService;
+import com.gym.monsterfit.services.interfaces.UsuarioServiceInterface;
 import com.gym.monsterfit.shared.DTO.UsuarioDTO;
 
 @Service("userService")
-public class UsuarioServiceImple implements UsuarioService {
+public class UsuarioService implements UsuarioServiceInterface {
 
 
     @Autowired

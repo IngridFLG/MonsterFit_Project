@@ -13,8 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.gym.monsterfit.services.implementations.JWTServiceImple;
-import com.gym.monsterfit.services.interfaces.UsuarioService;
+import com.gym.monsterfit.services.implementations.JWTService;
+import com.gym.monsterfit.services.interfaces.UsuarioServiceInterface;
 
 
 @EnableGlobalMethodSecurity(securedEnabled=true, prePostEnabled=true)
@@ -23,10 +23,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter   {
     
   
     @Autowired
-    UsuarioService usuarioService;
+    UsuarioServiceInterface usuarioService;
 
     @Autowired
-    JWTServiceImple jwtService;
+    JWTService jwtService;
     
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;

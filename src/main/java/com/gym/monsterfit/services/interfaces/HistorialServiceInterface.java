@@ -4,7 +4,7 @@ package com.gym.monsterfit.services.interfaces;
 import java.util.List;
 
 import com.gym.monsterfit.entities.HistorialEntity;
-public interface HistorialService {
+public interface HistorialServiceInterface {
 
 	public List<HistorialEntity> getAllHistorial();
 	

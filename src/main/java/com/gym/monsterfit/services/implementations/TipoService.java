@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.gym.monsterfit.entities.TipoEntity;
 import com.gym.monsterfit.repositories.TipoRepository;
-import com.gym.monsterfit.services.interfaces.TipoService;
+import com.gym.monsterfit.services.interfaces.TipoServiceInterface;
 
 @Service
-public class TipoServiceImple implements TipoService{
+public class TipoService implements TipoServiceInterface{
 
 	@Autowired
 	private TipoRepository repository;

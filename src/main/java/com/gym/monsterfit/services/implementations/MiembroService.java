@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.gym.monsterfit.entities.MiembroEntity;
 import com.gym.monsterfit.repositories.MiembroRepository;
-import com.gym.monsterfit.services.interfaces.MiembroService;
+import com.gym.monsterfit.services.interfaces.MiembroServiceInterface;
 
 @Service
-public class MiembroServiceImple implements MiembroService{
+public class MiembroService implements MiembroServiceInterface{
 
 	@Autowired
 	private MiembroRepository repository;

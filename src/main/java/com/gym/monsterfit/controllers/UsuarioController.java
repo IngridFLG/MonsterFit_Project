@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gym.monsterfit.models.request.UsuarioRequest;
 import com.gym.monsterfit.models.response.UsuarioResponse;
-import com.gym.monsterfit.services.implementations.UsuarioServiceImple;
+import com.gym.monsterfit.services.implementations.UsuarioService;
 import com.gym.monsterfit.shared.DTO.UsuarioDTO;
 
 @Controller
@@ -17,7 +17,7 @@ import com.gym.monsterfit.shared.DTO.UsuarioDTO;
 public class UsuarioController {
  
     @Autowired
-    UsuarioServiceImple userService;
+    UsuarioService userService;
 
     @PostMapping("/crear")
     public UsuarioResponse crearUusuario(@RequestBody UsuarioRequest userDetails){

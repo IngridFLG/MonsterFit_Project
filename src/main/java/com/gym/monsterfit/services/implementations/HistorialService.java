@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.gym.monsterfit.entities.HistorialEntity;
 import com.gym.monsterfit.repositories.HistorialRepository;
-import com.gym.monsterfit.services.interfaces.HistorialService;
+import com.gym.monsterfit.services.interfaces.HistorialServiceInterface;
 
 @Service
-public class HistorialServiceImple implements HistorialService{
+public class HistorialService implements HistorialServiceInterface{
 	
 	@Autowired
 	private HistorialRepository repository;

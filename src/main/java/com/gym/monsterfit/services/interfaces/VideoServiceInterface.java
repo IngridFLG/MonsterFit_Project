@@ -3,7 +3,7 @@ package com.gym.monsterfit.services.interfaces;
 import java.util.List;
 import com.gym.monsterfit.entities.VideoEntity;
 
-public interface VideoService {
+public interface VideoServiceInterface {
 
 	public List<VideoEntity> getAllUsuario();
 	

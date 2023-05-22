@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.gym.monsterfit.entities.CalendarioEntity;
 import com.gym.monsterfit.repositories.CalendarioRepository;
-import com.gym.monsterfit.services.interfaces.CalendarioService;
+import com.gym.monsterfit.services.interfaces.CalendarioServiceInterface;
 
 @Service
-public class CalendarioServiceImple implements CalendarioService{
+public class CalendarioService implements CalendarioServiceInterface{
 	
 	@Autowired
 	private CalendarioRepository calendarioRepository;

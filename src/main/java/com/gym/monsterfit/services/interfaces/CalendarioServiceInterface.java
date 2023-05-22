@@ -6,7 +6,7 @@ import java.util.List;
 import com.gym.monsterfit.entities.CalendarioEntity;
 
 
-public interface CalendarioService {
+public interface CalendarioServiceInterface {
 
 	public List<CalendarioEntity> getAllCalendarios();
 	

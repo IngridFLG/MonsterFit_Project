@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.gym.monsterfit.entities.VideoEntity;
 import com.gym.monsterfit.repositories.VideoRepository;
-import com.gym.monsterfit.services.interfaces.VideoService;
+import com.gym.monsterfit.services.interfaces.VideoServiceInterface;
 
 @Service
-public class VideoServiceImple implements VideoService{
+public class VideoService implements VideoServiceInterface{
 	
 	@Autowired
 	private VideoRepository repository;
