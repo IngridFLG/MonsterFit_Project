@@ -46,10 +46,6 @@ header.masthead {
     color: rgba(134, 114, 78, 0.8);
 }
 
-.btn-index {
-    --bs-btn-bg: #000000FF;
-    --bs-btn-border-color: #bca27f;
-}
 
 /*Estilos para el login*/
 
@@ -57,16 +53,15 @@ header.masthead {
     background: url("../img/gym1.jpg");
 }
 
-.btn-login {
-    color: white;
-    --bs-btn-bg: #000000FF;
-    --bs-btn-border-color: #bca27f;
-}
-
 .p-5 {
     padding: 5rem !important;
 }
 
+/*Estilos para el registro de datos*/
+
+.espaciado{
+    height: 100px;
+}
 
 
 
