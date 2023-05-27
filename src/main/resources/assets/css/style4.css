@@ -66,6 +66,8 @@ span {
     background: #2f2d2d;
     color: #fff;
     transition: all 0.3s;
+    padding: .5rem;
+    padding-top: 5.5rem;
 }
 
 #sidebar.active {
