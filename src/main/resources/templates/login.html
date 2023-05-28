@@ -41,20 +41,21 @@
                                 <div class="alert alert-danger">Email o contraseña
                                     inválidos</div>
                             </div>
-        
                             <div th:if=${param.logout}>
                                 <div class="alert alert-info">Ha cerrado sesión exitosamente
                                 </div>
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input placeholder="Email" type="email" id="typeEmailX-2"
-                                    class="form-control form-control-lg center"/>
+                                <label for="email"></label>
+                                <input name="email" placeholder="Email" type="email" id="typeEmailX-2"
+                                    required class="form-control form-control-lg center"/>
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input placeholder="Contraseña" type="password" id="typePasswordX-2"
-                                    class="form-control form-control-lg"/>
+                                <label  for="encryptedPassword password"></label>
+                                <input name="encryptedPassword password" type="password" id="typePasswordX-2"
+                                   required placeholder="Contraseña" class="form-control form-control-lg"/>
                             </div>
 
 
@@ -63,7 +64,7 @@
                             </div>
 
 
-                            <button class="btn btn-dark btn-lg btn-block" type="submit">Aceptar</button>
+                            <button class="btn btn-dark btn-lg btn-block" value="Iniciar sesión" name="login-submit" id="login-submit" type="submit">Aceptar</button>
                         </form>
                     </div>
                 </div>

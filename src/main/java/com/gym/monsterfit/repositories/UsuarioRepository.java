@@ -6,5 +6,5 @@ import com.gym.monsterfit.entities.UsuarioEntity;
 
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Integer>{
     
-    UsuarioEntity findByEmail(String email);
+    public UsuarioEntity findByEmail(String email);
 }

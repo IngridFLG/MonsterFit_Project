@@ -1,10 +1,11 @@
 package com.gym.monsterfit.services.implementations;
 
-import java.util.ArrayList;
+
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
-
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,8 +15,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.gym.monsterfit.entities.RolEntity;
 import com.gym.monsterfit.entities.UsuarioEntity;
-import com.gym.monsterfit.exceptions.EmailExistsException;
 import com.gym.monsterfit.repositories.RolRepository;
 import com.gym.monsterfit.repositories.UsuarioRepository;
 import com.gym.monsterfit.services.interfaces.UsuarioServiceInterface;
@@ -37,38 +38,27 @@ public class UsuarioService implements UsuarioServiceInterface {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UsuarioEntity usuarioEntity = usuarioRepository.findByEmail(email);
+        UsuarioEntity usuario= usuarioRepository.findByEmail(email);
 
-        if (usuarioEntity == null) {
-            throw new UsernameNotFoundException(email);
-        }
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        if (usuarioEntity.getRol() != null) {
-            authorities.add(new SimpleGrantedAuthority(usuarioEntity.getRol().getAuthority()));
-        } else {
-            throw new UsernameNotFoundException("Error en el Login: usuario '" + email + "' no tiene roles asignados!");
-        }
-        return new User(usuarioEntity.getEmail(), usuarioEntity.getEncryptedPassword(), authorities);
-    }
+        if(usuario == null) {
+			throw new UsernameNotFoundException("Usuario o password inválidos");
+		}
+		return new User(usuario.getEmail(),usuario.getPassword(), mapearAutoridadesRoles(usuario.getRoles()));
+	}
+
+	private Collection<? extends GrantedAuthority> mapearAutoridadesRoles(Collection<RolEntity> roles){
+		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getAuthority())).collect(Collectors.toList());
+	}
 
     @Override
-    public UsuarioDTO createUsuario(UsuarioDTO usuario) {
-        if (usuarioRepository.findByEmail(usuario.getEmail()) != null)
-        throw new EmailExistsException("El correo electronico ya existe");
+    public UsuarioDTO createUsuario(UsuarioDTO usuarioDTO) {
+        
+        UsuarioEntity usuario = new UsuarioEntity(usuarioDTO.getEmail(),bCryptPasswordEncoder.encode(usuarioDTO.getPassword()),
+        Arrays.asList(new RolEntity( "ROLE_CLIENTE")));
+        usuarioRepository.save(usuario);
 
-        UsuarioEntity usuarioEntity = new UsuarioEntity();
-        BeanUtils.copyProperties(usuario, usuarioEntity);
-
-        usuarioEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
-
-        usuarioEntity.setRol(rolRepository.findByAuthority("ROLE_CLIENTE"));
-
-        UsuarioEntity storedUserDetails = usuarioRepository.save(usuarioEntity);
-
-        UsuarioDTO userToReturn = new UsuarioDTO();
-        BeanUtils.copyProperties(storedUserDetails, userToReturn);
-
-        return userToReturn;
+		return usuarioDTO;
+         
     }
 
     @Override

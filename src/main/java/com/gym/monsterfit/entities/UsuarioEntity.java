@@ -1,12 +1,17 @@
 package com.gym.monsterfit.entities;
 
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
@@ -36,10 +41,22 @@ public class UsuarioEntity {
 
     @Column(nullable = false, length = 255)
     @NotEmpty
-    private String encryptedPassword;
+    private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "authority_id", nullable = false)
-    private RolEntity rol;
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "usuarios_roles",
+			joinColumns = @JoinColumn(name = "usuario_id",referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(name = "rol_id",referencedColumnName = "id")
+			)
+	private Collection<RolEntity> roles;
+
+    public UsuarioEntity(@NotEmpty @Email String email, @NotEmpty String password,
+            Collection<RolEntity> roles) {
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
+    
     
 }

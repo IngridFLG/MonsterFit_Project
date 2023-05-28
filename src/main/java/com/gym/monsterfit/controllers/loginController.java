@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.gym.monsterfit.entities.UsuarioEntity;
-import com.gym.monsterfit.services.implementations.UsuarioService;
 import com.gym.monsterfit.services.interfaces.UsuarioServiceInterface;
 
 @Controller

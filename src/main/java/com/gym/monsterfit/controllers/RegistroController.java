@@ -9,11 +9,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.gym.monsterfit.models.request.UsuarioRequest;
+import com.gym.monsterfit.entities.UsuarioEntity;
 import com.gym.monsterfit.services.implementations.UsuarioService;
 import com.gym.monsterfit.shared.DTO.UsuarioDTO;
 
@@ -37,19 +36,18 @@ public class RegistroController {
 
 	@PostMapping
 	public String registrarCuentaDeUsuario(@ModelAttribute("usuario") @Valid  UsuarioDTO userDetails,
-			BindingResult result, RedirectAttributes redirectAttrs) {
-		if (result.hasErrors()) {
-			redirectAttrs.addFlashAttribute("error", "Error al registrar usuario. Por favor revise los campos.");
-			return "redirect:/signin?error";
+	BindingResult result, RedirectAttributes redirectAttrs) {
+		
+		UsuarioEntity usuarioEntity = usuarioService.selectUsuariobyEmail(userDetails.getEmail());
+		UsuarioDTO usuario = new UsuarioDTO();
+		if(usuarioEntity != null){
+			BeanUtils.copyProperties(usuarioEntity, usuario);
 		}
-		try {
-			usuarioService.createUsuario(userDetails);
-		} catch (Exception e) {
-			redirectAttrs.addFlashAttribute("error",
-					"Error al registrar usuario. Por favor intenta de nuevo más tarde.");
-			return "redirect:/signin?error";
+		if(userDetails.getEmail().equals(usuario.getEmail())){
+			return "redirect:/registro?error";
 		}
-		redirectAttrs.addFlashAttribute("exito", "Usuario registrado exitosamente.");
-		return "redirect:/signin?exito";
+
+		usuarioService.createUsuario(userDetails);
+		return "redirect:/registro?exito";
 	}
 }
