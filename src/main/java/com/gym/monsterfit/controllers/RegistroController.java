@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,16 +36,14 @@ public class RegistroController {
 	}
 
 	@PostMapping
-	public String registrarCuentaDeUsuario(@ModelAttribute("usuario") @Valid UsuarioRequest userDetails,
+	public String registrarCuentaDeUsuario(@ModelAttribute("usuario") @Valid  UsuarioDTO userDetails,
 			BindingResult result, RedirectAttributes redirectAttrs) {
 		if (result.hasErrors()) {
 			redirectAttrs.addFlashAttribute("error", "Error al registrar usuario. Por favor revise los campos.");
 			return "redirect:/signin?error";
 		}
 		try {
-            UsuarioDTO userDTO = new UsuarioDTO();
-            BeanUtils.copyProperties(userDetails, userDTO);
-			usuarioService.createUsuario(userDTO);
+			usuarioService.createUsuario(userDetails);
 		} catch (Exception e) {
 			redirectAttrs.addFlashAttribute("error",
 					"Error al registrar usuario. Por favor intenta de nuevo más tarde.");
