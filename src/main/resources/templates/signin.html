@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -18,7 +18,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
     <div class="container px-5">
-        <a class="navbar-brand" href="index.html">Monster Fit</a>
+        <a class="navbar-brand" th:href="@{/index}">Monster Fit</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
                 class="navbar-toggler-icon"></span></button>
@@ -37,30 +37,30 @@
                     <div class="card-body p-5 text-center abs-center">
 
                         <h3 class="mb-5">Registrarse</h3>
+                        <form th:action="@{/registro}" method="post" th:object="${usuario}">
+                            <div class="form-outline mb-4">
+                                <input placeholder="Email" type="email" id="typeEmailX-2"
+                                    class="form-control form-control-lg center" name="email" th:field="*{email}" />
+                            </div>
 
-                        <div class="form-outline mb-4">
-                            <input placeholder="Email" type="email" id="typeEmailX-2"
-                                   class="form-control form-control-lg center"/>
-                        </div>
+                            <div class="form-outline mb-4">
+                                <input placeholder="Contraseña" type="password" id="typePasswordX-2"
+                                    class="form-control form-control-lg" th:field="*{password}"/>
+                            </div>
 
-                        <div class="form-outline mb-4">
-                            <input placeholder="Contraseña" type="password" id="typePasswordX-2"
-                                   class="form-control form-control-lg"/>
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <input placeholder="Confirmar contraseña" type="password" id="typePasswordX-3"
-                                   class="form-control form-control-lg"/>
-                        </div>
-
-
-                        <div class="d-flex justify-content-start mb-4">
-                            <label class="form-check-label"> ¿ya tienes una cuenta? <a href="login.html"> iniciar sesión</a> </label>
-                        </div>
+                            <div class="form-outline mb-4">
+                                <input placeholder="Confirmar contraseña" type="password" id="typePasswordX-3"
+                                    class="form-control form-control-lg"/>
+                            </div>
 
 
-                        <button class="btn btn-dark btn-lg btn-block" type="submit">Aceptar</button>
+                            <div class="d-flex justify-content-start mb-4">
+                                <label class="form-check-label"> ¿ya tienes una cuenta? <a th:href="@{/login}"> iniciar sesión</a> </label>
+                            </div>
 
+
+                            <button class="btn btn-dark btn-lg btn-block" type="submit">Aceptar</button>
+                        </form>
                     </div>
                 </div>
             </div>
