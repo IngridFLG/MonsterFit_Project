@@ -1,0 +1,121 @@
+/*Estilos para el index*/
+
+.navbar-custom {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.navbar-brand, .nav-link {
+    color: #fff;
+}
+
+.nav-link {
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out !important;
+}
+
+.h1titulo {
+    font-size: 6rem;
+    --bs-text-opacity: 1;
+    color: rgba(255, 255, 255), var(--bs-text-opacity) !important;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 40px;
+}
+.h2titulo {
+    font-size: 3.5rem;
+    --bs-text-opacity: 1;
+    color: rgba(255, 255, 255), var(--bs-text-opacity) !important;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 30px;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+header.masthead {
+    position: relative;
+    overflow: hidden;
+    padding-top: calc(7rem + 100px);
+    padding-bottom: 7rem;
+    background: url("../img/gym1.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
+    background-size: cover;
+}
+header.masthead2 {
+    position: relative;
+    overflow: hidden;
+    padding-top: calc(3rem + 100px);
+    padding-bottom: 10rem;
+    background-size: cover;
+}
+
+.nav-link:focus, .nav-link:hover {
+    color: rgba(134, 114, 78, 0.8);
+}
+
+.navbar-brand:focus, .navbar-brand:hover {
+    color: rgba(134, 114, 78, 0.8);
+}
+
+.container {
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-bottom: 7.3rem;
+}
+
+.button {
+  width: 300px;
+  height: 300px;
+  background-color: rgba(212, 180, 141, 0.8);
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding-bottom: 2rem;
+}
+
+.button:hover {
+  background-color: rgba(134, 114, 78, 0.8);
+  /*background-color: #e1e1e*/
+}
+
+.button img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+
+
+/*Estilos para el login*/
+
+.section-img {
+    background: url("../img/gym1.jpg");
+}
+
+.p-5 {
+    padding: 5rem !important;
+}
+
+/*Estilos para el registro de datos*/
+
+.espaciado{
+    height: 100px;
+}
+
+.centrar-titulo{
+    text-align: center;
+}
+
+
+
