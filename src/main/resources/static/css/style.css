@@ -38,7 +38,7 @@ header.masthead {
     overflow: hidden;
     padding-top: calc(7rem + 100px);
     padding-bottom: 7rem;
-    background: url("../img/gym1.jpg");
+    background: url("img/gym1.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: scroll;
@@ -100,7 +100,7 @@ header.masthead2 {
 /*Estilos para el login*/
 
 .section-img {
-    background: url("../img/gym1.jpg");
+    background: url("img/gym1.jpg");
 }
 
 .p-5 {
