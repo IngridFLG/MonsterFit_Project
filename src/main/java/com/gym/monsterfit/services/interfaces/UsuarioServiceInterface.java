@@ -18,4 +18,6 @@ public interface UsuarioServiceInterface extends UserDetailsService {
 	public UsuarioEntity updateUsuario(UsuarioEntity usuario);
 
 	public void deleteUsuario(Integer id);
+
+	public UsuarioEntity selectUsuariobyEmail(String email);
 }

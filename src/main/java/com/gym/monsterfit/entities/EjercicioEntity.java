@@ -1,6 +1,16 @@
 package com.gym.monsterfit.entities;
 
 import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "ejercicio")
 public class EjercicioEntity {
@@ -14,38 +24,5 @@ public class EjercicioEntity {
 	@OneToOne
 	@JoinColumn(name = "video_id")
 	private VideoEntity video;
-	
-	
 
-	public EjercicioEntity(Integer id, String descripcion, VideoEntity video) {
-		this.id = id;
-		this.descripcion = descripcion;
-		this.video = video;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public VideoEntity getVideo() {
-		return video;
-	}
-
-	public void setVideo(VideoEntity video) {
-		this.video = video;
-	}
-	
-	
 }

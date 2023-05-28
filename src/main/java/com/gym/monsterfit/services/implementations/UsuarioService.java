@@ -71,6 +71,11 @@ public class UsuarioService implements UsuarioServiceInterface {
         return userToReturn;
     }
 
+    @Override
+	public UsuarioEntity selectUsuariobyEmail(String email) {
+		return usuarioRepository.findByEmail(email);
+	}
+
 	@Override
 	public List<UsuarioEntity> getAllUsuario() {
 		return usuarioRepository.findAll();
