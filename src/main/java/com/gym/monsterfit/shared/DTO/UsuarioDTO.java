@@ -1,10 +1,14 @@
 package com.gym.monsterfit.shared.DTO;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class UsuarioDTO {
     
     /**
@@ -18,7 +22,7 @@ public class UsuarioDTO {
     private String email;
 
     /**
-     * La contraseña del usuario (sin encriptar).
+     * La contraseña del usuario.
      */
     private String password;
 

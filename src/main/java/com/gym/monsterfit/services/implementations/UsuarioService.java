@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,7 +23,7 @@ import com.gym.monsterfit.repositories.UsuarioRepository;
 import com.gym.monsterfit.services.interfaces.UsuarioServiceInterface;
 import com.gym.monsterfit.shared.DTO.UsuarioDTO;
 
-@Service("userService")
+@Service
 public class UsuarioService implements UsuarioServiceInterface {
 
 
@@ -38,8 +39,8 @@ public class UsuarioService implements UsuarioServiceInterface {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UsuarioEntity usuario= usuarioRepository.findByEmail(email);
-
+        System.out.println("------" + email);
+		UsuarioEntity usuario = selectUsuariobyEmail(email);
         if(usuario == null) {
 			throw new UsernameNotFoundException("Usuario o password inválidos");
 		}

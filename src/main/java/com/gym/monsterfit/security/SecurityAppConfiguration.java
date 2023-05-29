@@ -20,7 +20,6 @@ import com.gym.monsterfit.services.implementations.UsuarioService;
 @EnableWebSecurity
 public class SecurityAppConfiguration extends WebSecurityConfigurerAdapter {
 	
-	@Lazy
 	@Autowired
 	private UsuarioService usuarioService;
 
