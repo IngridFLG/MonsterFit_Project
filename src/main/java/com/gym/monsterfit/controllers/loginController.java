@@ -28,7 +28,14 @@ public class loginController {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			UsuarioEntity usuario = usuarioService.selectUsuariobyEmail(auth.getName());
 			modelo.addAttribute("usuario", usuario);
-			return "index";
+			boolean tieneRolAdmin = usuario.getRoles().stream().anyMatch(rol -> rol.getAuthority().equals("ROLE_ADMIN"));
+			if (tieneRolAdmin) {
+				return "adminHome";
+				
+			} else {
+				return "form";
+				
+			}
 		} catch (Exception e) {
 			System.out.println("Error al cargar la página de inicio: " + e.getMessage());
 			return "redirect:/";
