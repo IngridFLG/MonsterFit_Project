@@ -1,17 +1,15 @@
 package com.gym.monsterfit.entities;
 
-import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
@@ -43,20 +41,19 @@ public class UsuarioEntity {
     @NotEmpty
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	@JoinTable(
-			name = "usuarios_roles",
-			joinColumns = @JoinColumn(name = "usuario_id",referencedColumnName = "id"),
-			inverseJoinColumns = @JoinColumn(name = "rol_id",referencedColumnName = "id")
-			)
-	private Collection<RolEntity> roles;
+    @ManyToOne
+    @JoinColumn(name = "authority_id", nullable = false)
+    private RolEntity rol;
 
-    public UsuarioEntity(@NotEmpty @Email String email, @NotEmpty String password,
-            Collection<RolEntity> roles) {
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private MiembroEntity miembro;
+    
+    public UsuarioEntity(@NotEmpty @Email String email, @NotEmpty String password, RolEntity rol) {
         this.email = email;
         this.password = password;
-        this.roles = roles;
+        this.rol = rol;
     }
-    
+
+
     
 }

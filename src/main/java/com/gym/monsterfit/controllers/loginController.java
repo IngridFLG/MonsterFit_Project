@@ -28,8 +28,7 @@ public class loginController {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			UsuarioEntity usuario = usuarioService.selectUsuariobyEmail(auth.getName());
 			modelo.addAttribute("usuario", usuario);
-			boolean tieneRolAdmin = usuario.getRoles().stream().anyMatch(rol -> rol.getAuthority().equals("ROLE_ADMIN"));
-			if (tieneRolAdmin) {
+			if (usuario.getRol() != null && usuario.getRol().getAuthority().equals("ROLE_ADMIN")) {
 				return "adminHome";
 				
 			} else {

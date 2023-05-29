@@ -20,11 +20,11 @@ public class HistorialEntity {
 	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name = "rutinaEjercicio")
+	@JoinColumn(name = "rutinaEjercicio_id")
 	private RutinaEjercicioEntity rutinaEjercicio;
 	
 	@ManyToOne
-	@JoinColumn(name = "miembroGimnasio")
+	@JoinColumn(name = "miembroGimnasio_id")
 	private MiembroEntity miembro;
 	
 	private Integer series;

@@ -1,6 +1,11 @@
 package com.gym.monsterfit.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +25,7 @@ public class RutinaEjercicioEntity {
 	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name = "rutina")
+	@JoinColumn(name = "rutina_id")
 	private TipoEntity tipo;
 	
 	@ManyToOne
@@ -35,6 +40,10 @@ public class RutinaEjercicioEntity {
 	private Integer peso;
 	private Integer series;
 	private Integer repeticiones;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "rutinaEjercicio", cascade = CascadeType.ALL)
+    private List<HistorialEntity> historiales = new ArrayList<>();
 	
 	
 }

@@ -1,14 +1,13 @@
 package com.gym.monsterfit.entities;
 
 
-import java.util.Collection;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -35,8 +34,5 @@ public class RolEntity {
     public RolEntity(String authority) {
         this.authority = authority;
     }
-   
-    @ManyToMany(mappedBy = "roles")
-    private Collection<UsuarioEntity> users;
     
 }

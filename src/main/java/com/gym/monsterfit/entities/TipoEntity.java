@@ -1,6 +1,11 @@
 package com.gym.monsterfit.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +26,8 @@ public class TipoEntity {
 	
 	private String nombre; //Nombre del Tipo de rutina
 	
-	
+	@JsonIgnore
+	@OneToMany(mappedBy = "tipo", cascade = CascadeType.ALL)
+    private List<RutinaEjercicioEntity> rutinaEjercicios = new ArrayList<>();
 	
 }
