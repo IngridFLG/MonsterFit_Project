@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h2>Formulario de Ejercicio</h2>
+    
+    <div th:if="${ejercicioEntity.id == null}">
+    	<form  th:action="@{/ejercicio/registrar}" th:object="${ejercicioEntity}" method="post">
+        <!-- Campo de Descripción -->
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" name="descripcion" th:field="*{descripcion}" />
+        
+        <!-- Campo de Video -->
+        <label for="video">Video:</label>
+        <input type="text" id="video" name="video" th:field="*{video}" />
+        
+        <!-- Campo de Tiempo -->
+        <label for="tiempo">Tiempo:</label>
+        <input type="text" id="tiempo" name="tiempo" th:field="*{tiempo}" />
+        
+        <!-- Campo de Peso -->
+        <label for="peso">Peso:</label>
+        <input type="text" id="peso" name="peso" th:field="*{peso}" />
+        
+        <!-- Campo de Series -->
+        <label for="series">Series:</label>
+        <input type="text" id="series" name="series" th:field="*{series}" />
+        
+        <!-- Campo de Repeticiones -->
+        <label for="repeticiones">Repeticiones:</label>
+        <input type="text" id="repeticiones" name="repeticiones" th:field="*{repeticiones}" />
+        
+        <!-- Botón Guardar -->
+        <button type="submit">Guardar</button>
+    </form>
+    </div>
+    
+    <div th:if="${ejercicioEntity.id != null}" >
+    	<form th:action="@{/ejercicio/editar/{id}(id=${ejercicioEntity.id})}" th:object="${ejercicioEntity}" method="post">
+        <!-- Campo de Descripción -->
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" name="descripcion" th:field="*{descripcion}" />
+        
+        <!-- Campo de Video -->
+        <label for="video">Video:</label>
+        <input type="text" id="video" name="video" th:field="*{video}" />
+        
+        <!-- Campo de Tiempo -->
+        <label for="tiempo">Tiempo:</label>
+        <input type="text" id="tiempo" name="tiempo" th:field="*{tiempo}" />
+        
+        <!-- Campo de Peso -->
+        <label for="peso">Peso:</label>
+        <input type="text" id="peso" name="peso" th:field="*{peso}" />
+        
+        <!-- Campo de Series -->
+        <label for="series">Series:</label>
+        <input type="text" id="series" name="series" th:field="*{series}" />
+        
+        <!-- Campo de Repeticiones -->
+        <label for="repeticiones">Repeticiones:</label>
+        <input type="text" id="repeticiones" name="repeticiones" th:field="*{repeticiones}" />
+        
+        <!-- Botón Guardar -->
+        <button type="submit">Editar</button>
+    </form>
+    </div>
+    
+</body>
+</html>
