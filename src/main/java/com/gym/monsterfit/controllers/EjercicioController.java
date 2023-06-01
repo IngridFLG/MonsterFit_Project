@@ -26,7 +26,7 @@ public class EjercicioController {
 	@GetMapping("/listar")
 	public String listarEjercicios(Model model) {
 		List<EjercicioEntity> ejercicios = ejercicioRepository.findAll();
-		System.out.println("entro auqi get ejercicio listar");
+		System.out.println("entro aqui get ejercicio listar");
 		for(EjercicioEntity ejercicio : ejercicios) {
 			System.out.println(ejercicio.getDescripcion());
 		}
