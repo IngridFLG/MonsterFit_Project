@@ -32,7 +32,7 @@ public class LoginController {
 				return "redirect:/ejercicio/listar";
 				
 			} else {
-				return "form";
+				return "listarEjercicio";
 				
 			}
 		} catch (Exception e) {
