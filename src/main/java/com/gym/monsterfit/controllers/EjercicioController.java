@@ -1,7 +1,6 @@
 package com.gym.monsterfit.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 

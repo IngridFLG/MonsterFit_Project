@@ -11,7 +11,7 @@ import com.gym.monsterfit.entities.UsuarioEntity;
 import com.gym.monsterfit.services.interfaces.UsuarioServiceInterface;
 
 @Controller
-public class loginController {
+public class LoginController {
     
 	@Autowired
 	UsuarioServiceInterface usuarioService;
@@ -29,7 +29,7 @@ public class loginController {
 			UsuarioEntity usuario = usuarioService.selectUsuariobyEmail(auth.getName());
 			modelo.addAttribute("usuario", usuario);
 			if (usuario.getRol() != null && usuario.getRol().getAuthority().equals("ROLE_ADMIN")) {
-				return "adminHome";
+				return "redirect:/ejercicio/listar";
 				
 			} else {
 				return "form";
