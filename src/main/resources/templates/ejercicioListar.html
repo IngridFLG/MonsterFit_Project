@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h2>Lista de Ejercicios</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Descripción</th>
+                <th>URL Video</th>
+                <th>Tiempo</th>
+                <th>Peso</th>
+                <th>Series</th>
+                <th>Repeticiones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterar sobre la lista de ejercicios -->
+            <tr th:each="ejercicio : ${ejercicios}">
+                <td th:text="${ejercicio.descripcion}"></td>
+                <td th:text="${ejercicio.video}"></td>
+                <td th:text="${ejercicio.tiempo}"></td>
+                <td th:text="${ejercicio.peso}"></td>
+                <td th:text="${ejercicio.series}"></td>
+                <td th:text="${ejercicio.repeticiones}"></td>
+                <td><a th:href="@{/ejercicio/editar/{id}(id=${ejercicio.id})}" > Editar</a>  </td>
+                <td> <a th:href="@{/ejercicio/eliminar/{id}(id=${ejercicio.id})}">Eliminar</a> </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <a th:href="@{/ejercicio/registrar}" >Agregar nuevo ejercicio</a>
+    
+</body>
+</html>

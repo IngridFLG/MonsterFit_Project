@@ -1,7 +1,21 @@
 package com.gym.monsterfit.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "rutinaEjercicio")
 public class RutinaEjercicioEntity {
@@ -11,7 +25,7 @@ public class RutinaEjercicioEntity {
 	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name = "rutina")
+	@JoinColumn(name = "rutina_id")
 	private TipoEntity tipo;
 	
 	@ManyToOne
@@ -26,71 +40,10 @@ public class RutinaEjercicioEntity {
 	private Integer peso;
 	private Integer series;
 	private Integer repeticiones;
-	
-	
-	
-	public RutinaEjercicioEntity(Integer id, TipoEntity tipo, EjercicioEntity ejercicio, CalendarioEntity calendario, String tiempo,
-			Integer peso, Integer series, Integer repeticiones) {
-		this.id = id;
-		this.tipo = tipo;
-		this.ejercicio = ejercicio;
-		this.calendario = calendario;
-		this.tiempo = tiempo;
-		this.peso = peso;
-		this.series = series;
-		this.repeticiones = repeticiones;
-	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public TipoEntity getRutina() {
-		return tipo;
-	}
-	public void setRutina(TipoEntity rutina) {
-		this.tipo = rutina;
-	}
-	public EjercicioEntity getEjercicio() {
-		return ejercicio;
-	}
-	public void setEjercicio(EjercicioEntity ejercicio) {
-		this.ejercicio = ejercicio;
-	}
-	public CalendarioEntity getCalendario() {
-		return calendario;
-	}
-	public void setCalendario(CalendarioEntity calendario) {
-		this.calendario = calendario;
-	}
-	public String getTiempo() {
-		return tiempo;
-	}
-	public void setTiempo(String tiempo) {
-		this.tiempo = tiempo;
-	}
-	public Integer getPeso() {
-		return peso;
-	}
-	public void setPeso(Integer peso) {
-		this.peso = peso;
-	}
-	public Integer getSeries() {
-		return series;
-	}
-	public void setSeries(Integer series) {
-		this.series = series;
-	}
-	public Integer getRepeticiones() {
-		return repeticiones;
-	}
-	public void setRepeticiones(Integer repeticiones) {
-		this.repeticiones = repeticiones;
-	}
-	
-	
-	
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "rutinaEjercicio", cascade = CascadeType.ALL)
+    private List<HistorialEntity> historiales = new ArrayList<>();
 	
 	
 }

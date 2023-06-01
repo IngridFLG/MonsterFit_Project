@@ -1,7 +1,21 @@
 package com.gym.monsterfit.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "miembroGimnasio")
 public class MiembroEntity {
@@ -17,75 +31,10 @@ public class MiembroEntity {
 	private Double peso;
 	
 	@OneToOne
-	@JoinColumn(name = "id_usuario")
-	private UsuarioEntity usuario;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public Integer getEdad() {
-		return edad;
-	}
-
-	public void setEdad(Integer edad) {
-		this.edad = edad;
-	}
-
-	public String getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-
-	public Integer getAltura() {
-		return altura;
-	}
-
-	public void setAltura(Integer altura) {
-		this.altura = altura;
-	}
-
-	public Double getPeso() {
-		return peso;
-	}
-
-	public void setPeso(Double peso) {
-		this.peso = peso;
-	}
-
-	public UsuarioEntity getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(UsuarioEntity usuario) {
-		this.usuario = usuario;
-	}
-
-	public MiembroEntity(Integer id, String nombre, Integer edad, String sexo, Integer altura, Double peso, UsuarioEntity usuario) {
-		this.nombre = nombre;
-		this.edad = edad;
-		this.sexo = sexo;
-		this.altura = altura;
-		this.peso = peso;
-		this.usuario = usuario;
-	}
+	@JoinColumn(name = "usuario_id")
+	private UsuarioEntity usuario;	
 	
-	
-	
-	
+	@JsonIgnore
+	@OneToMany(mappedBy = "miembro", cascade = CascadeType.ALL)
+    private List<HistorialEntity> historiales = new ArrayList<>();
 }
