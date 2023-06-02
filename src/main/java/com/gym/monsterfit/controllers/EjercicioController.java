@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +31,7 @@ public class EjercicioController {
 		List<EjercicioEntity> ejercicios = ejercicioRepository.findAll();
 		
 		model.addAttribute("ejercicios", ejercicios);
-		return "listarEjercicio";
+		return "admin/listarEjercicio";
 	}
 	
 	
@@ -41,15 +42,20 @@ public class EjercicioController {
 			ejercicioEntity = ejercicioRepository.findById(id).get();
 		}
 		model.addAttribute("ejercicio", ejercicioEntity);
-		return "agregarEjercicio";
+		return "admin/agregarEjercicio";
 	}
-	
-	
+
 	@PostMapping("/registrar")
-	public String agregarEjercicio(@Valid EjercicioEntity ejercicioEntity, BindingResult result) {
+	public String agregarEjercicio(@ModelAttribute("ejercicio") @Valid EjercicioEntity ejercicioEntity, BindingResult result, Model model) {
 		if(result.hasErrors()) {
-			return "listarEjercicio";
+			return "admin/agregarEjercicio";
 		}
+		EjercicioEntity ejercicio = ejercicioRepository.findByNombre(ejercicioEntity.getNombre());
+		if (ejercicio != null) {
+            model.addAttribute("nombreDuplicado", true);
+            return "admin/agregarEjercicio";
+        }
+
 		ejercicioRepository.save(ejercicioEntity);
 		return "redirect:/ejercicio/listar";
 	}
