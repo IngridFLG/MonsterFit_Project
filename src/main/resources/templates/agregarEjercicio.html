@@ -24,6 +24,8 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
         crossorigin="anonymous"></script>
+        <script type="text/javascript" src="../static/js/validarFormulario.js"
+     <script th:src="@{/js/validarFormulario.js}"></script>
 </head>
 
 <body>
@@ -80,8 +82,9 @@
                             <div class="card-body p-5 bg-transparent">
                                 <h1 th:if="${ejercicio.id == null}" class="h1 centrar-titulo">Agregar ejercicio</h1>
                                 <h1 th:if="${ejercicio.id != null}" class="h1 centrar-titulo">Editar ejercicio</h1>
-
-                                <form method="post" th:action="@{/ejercicio/registrar}" th:object="${ejercicio}">
+                                
+                                <form method="post" th:action="@{/ejercicio/registrar}" th:object="${ejercicio}"
+                                onsubmit="return validarFormulario();">
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -124,34 +127,36 @@
                                             </div>
                                         </div>
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-form-label text-start" for="series">Series</label>
-                                            <input type="number" id="series" name="series"
-                                                class="form-control text-center" pattern="^(?:[1-9]|[1-9][0-9]|100)$"
-                                                th:field="*{series}" th:value="${ejercicio.series}" />
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-form-label text-start" for="series">Series</label>
+                                                <input type="number" id="series" name="series"
+                                                    class="form-control text-center"
+                                                    pattern="^(?:[1-9]|[1-9][0-9]|100)$" th:field="*{series}"
+                                                    th:value="${ejercicio.series}" />
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-form-label text-start"
-                                                for="repeticiones">Repeticiones</label>
-                                            <input type="number" pattern="^(?:[1-9]|[1-9][0-9]|100)$" id="repeticiones"
-                                                class="form-control text-center" name="repeticiones"
-                                                th:field="*{repeticiones}" th:value="${ejercicio.repeticiones}" />
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-form-label text-start"
+                                                    for="repeticiones">Repeticiones</label>
+                                                <input type="number" pattern="^(?:[1-9]|[1-9][0-9]|100)$"
+                                                    id="repeticiones" class="form-control text-center"
+                                                    name="repeticiones" th:field="*{repeticiones}"
+                                                    th:value="${ejercicio.repeticiones}" />
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row g-3">
-                                        <div class="col-md-6"></div>
-                                        <div class="col-md-6 d-flex justify-content-end">
-                                            <button type="submit"
-                                                th:text="${ejercicio.id == null ? 'Agregar' : 'Actualizar'}"
-                                                class="btn btn-success"
-                                                style="background-color:#343a40; border:none">Guardar</button>
+                                        <div class="row g-3">
+                                            <div class="col-md-6"></div>
+                                            <div class="col-md-6 d-flex justify-content-end">
+                                                <button type="submit"
+                                                    th:text="${ejercicio.id == null ? 'Agregar' : 'Actualizar'}"
+                                                    class="btn btn-success"
+                                                    style="background-color:#343a40; border:none">Guardar</button>
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </form>
                             </div>
@@ -161,28 +166,28 @@
             </div>
         </section>
     </div>
-        
 
-        <!-- jQuery CDN - Slim version (=without AJAX) -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-        <!-- Popper.JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
-            integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
-            crossorigin="anonymous"></script>
-        <!-- Bootstrap JS -->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
-            integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
-            crossorigin="anonymous"></script>
 
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').toggleClass('active');
-                });
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
             });
-        </script>
+        });
+    </script>
 </body>
 
 </html>
