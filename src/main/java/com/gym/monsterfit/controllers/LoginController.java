@@ -32,7 +32,7 @@ public class LoginController {
 				return "redirect:/ejercicio/listar";
 				
 			} else {
-				return "listarEjercicio";
+				return "asignarRutina";
 				
 			}
 		} catch (Exception e) {
