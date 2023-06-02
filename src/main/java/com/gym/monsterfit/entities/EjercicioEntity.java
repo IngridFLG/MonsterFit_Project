@@ -24,9 +24,9 @@ public class EjercicioEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	private String descripcion;
+	private String nombre;
 	
-	private String video;
+	private String url;
 	
 	private String tiempo;
 
