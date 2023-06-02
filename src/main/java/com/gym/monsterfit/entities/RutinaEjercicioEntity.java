@@ -1,6 +1,7 @@
 package com.gym.monsterfit.entities;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
@@ -32,14 +33,7 @@ public class RutinaEjercicioEntity {
 	@JoinColumn(name = "ejercicio_id")
 	private EjercicioEntity ejercicio;
 	
-	@ManyToOne
-	@JoinColumn(name = "calendario_id")
-	private CalendarioEntity calendario;
-	
-	private String tiempo;
-	private Integer peso;
-	private Integer series;
-	private Integer repeticiones;
+	private Date fecha;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "rutinaEjercicio", cascade = CascadeType.ALL)

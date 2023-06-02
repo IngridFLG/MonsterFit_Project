@@ -3,7 +3,7 @@
 .navbar-custom {
     padding-top: 1rem;
     padding-bottom: 1rem;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgb(47, 45, 45);
 }
 
 .navbar-brand, .nav-link {
@@ -115,6 +115,21 @@ header.masthead2 {
 
 .centrar-titulo{
     text-align: center;
+}
+
+/*Estilos asignarRutina*/
+
+.titulo{
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.centrar-from{
+    margin-bottom: 100px
+}
+
+.centrar-button{
+
 }
 
 
