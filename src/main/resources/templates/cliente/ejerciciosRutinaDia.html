@@ -15,24 +15,18 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
-        <div class="container px-5">
-            <a class="navbar-brand" href="../index.html">Monster Fit</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="tu_ruta_de_redireccion">
-                            <img src="../../static/css/icon/cerrar-sesión.svg" width="20" height="20">
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<nav class="navbar navbar-expand-lg navbar-custom d-flex justify-content-around">
+    <div class="ml-5">
+        <a class="navbar-brand" href="index.html">Monster Fit</a>
+    </div>
+    <div class="mr-5">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link"
+                                    href="tu_ruta_de_redireccion"><img
+                    src="../../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}" width="22.5" height="22.5"></a></li>
+        </ul>
+    </div>
+</nav>
 
     <div class="container py-5 min-vh-100 mt-5">
         <div class="d-flex">
@@ -42,20 +36,24 @@
         </div>
         <div class="row">
             <div class="md-4 py-2">
-                <a href="ruta1.html" class="btn btn-dark btn-lg btn-block mb-3 w-100">Flexiones
-                    <img src="../static/css/img/check-solid.svg" th:src="@{/css/img/check-solid.svg}"
-                        style="padding-right: 15px;">
-                    <img src="../static/css/img/trash-solid.svg" th:src="@{/css/img/trash-solid.svg}">
+                <div></div>
+                <a href="ruta1.html" class="btn btn-dark btn-lg btn-block mb-3 w-100">
+                    <input type="checkbox" class="form-check-input"> Flexiones
                 </a>
             </div>
             <div class="md-4 py-2">
-                <a href="ruta2.html" class="btn btn-dark btn-lg btn-block mb-3 w-100">Abdominales</a>
+                <a href="ruta2.html" class="btn btn-dark btn-lg btn-block mb-3 w-100">
+                    <input type="checkbox" class="form-check-input"> Correr
+                </a>
             </div>
             <div class="md-4 py-2">
-                <a href="ruta3.html" class="btn btn-dark btn-lg btn-block mb-3 w-100">Correr en cinta</a>
+                <a href="ruta3.html" class="btn btn-dark btn-lg btn-block mb-3 w-100">
+                    <input type="checkbox" class="form-check-input"> Sentadilla
+                </a>
             </div>
         </div>
-        <a href="ruta1.html" class="btn btn-dark btn-lg btn-block mb-3 text-start">Realizado </a>
+        <a href="ruta1.html" class="btn btn-dark btn-lg btn-block mb-3 text-start">Aceptar </a>
     </div>
+
 </body>
 </html>
