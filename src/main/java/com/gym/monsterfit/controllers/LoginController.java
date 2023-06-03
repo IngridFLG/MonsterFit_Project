@@ -32,7 +32,7 @@ public class LoginController {
 				return "redirect:/ejercicio/listar";
 				
 			} else {
-				return "admin/agregarEjercicioRutina";
+				return "cliente/formularioCliente";
 				
 			}
 		} catch (Exception e) {

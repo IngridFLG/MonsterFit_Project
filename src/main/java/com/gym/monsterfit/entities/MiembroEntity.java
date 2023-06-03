@@ -24,10 +24,16 @@ public class MiembroEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@Column(nullable = false, length = 50)
 	private String nombre;
+
 	private Integer edad;
+
+	@Column(nullable = false, length = 1)
 	private String sexo;
+
 	private Integer altura;
+	
 	private Double peso;
 	
 	@OneToOne

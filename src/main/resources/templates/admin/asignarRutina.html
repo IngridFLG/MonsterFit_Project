@@ -49,7 +49,8 @@
 
     <ul class="list-unstyled components d-flex flex-column mb-3 justify-content-center">
       <li>
-        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" >
+        <a th:href="@{/ejercicio/listar}"  aria-expanded="false">
+          <!--<i class="fas fa-home"></i> -->
           Ejercicio
         </a>
       </li>
@@ -65,20 +66,19 @@
   <div class="container">
     <h1 class="titulo">Asignar rutina</h1>
 
-    <form action="/submit" method="post">
+    <form th:action="@{/rutina}" method="post">
       <div class="form-group centrar-from">
         <label for="selectOption">Select Option</label>
         <select class="form-control" id="selectOption" name="selectedOption">
           <option value="">-- Select an option --</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
+          <option th:each="rutina : ${tiposRutina}"  th:value="${rutina.id}" th:text="${rutina.nombre}">Option 1</option>
+          
         </select>
       </div>
 
       <div class="form-group centrar-from">
         <label for="inputDate">Select Date (Input)</label>
-        <input type="date" class="form-control" id="inputDate" />
+        <input type="date" class="form-control" id="inputDate" name="inputDate" />
       </div>
 
       <button class="btn btn-dark btn-lg centrar-button" type="submit">Aceptar</button>

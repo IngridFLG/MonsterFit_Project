@@ -28,7 +28,7 @@ public class RolEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 25)
+    @Column(nullable = false, length = 15)
     private String authority;
 
     public RolEntity(String authority) {
