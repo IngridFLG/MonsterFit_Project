@@ -73,12 +73,12 @@
         </nav>
         <div id="content">
             <div class="container">
-                <h1 class="titulo">Bajar de peso</h1>
+                <h1 class="titulo" th:value="${tipoEntity.id}" th:text="${tipoEntity.nombre}"></h1>
                 <form>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="fecha">Fecha</label>
-                            <input type="date" name="fecha">
+                            <label for="fecha" >Fecha</label>
+                            <input type="date" name="inputDate" th:value="${fecha}" > 
                             <button>Agregar ejercicio</button>
                         </div>
                     </div>
