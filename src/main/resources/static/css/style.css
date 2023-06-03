@@ -64,6 +64,10 @@ header.masthead2 {
   text-align: center;
 }
 
+.container2{
+    text-align: left !important;
+}
+
 .button-container {
   display: flex;
   justify-content: space-between;
@@ -95,6 +99,9 @@ header.masthead2 {
   margin-bottom: 10px;
 }
 
+.btn{
+    text-align: left;
+}
 
 
 /*Estilos para el login*/
@@ -105,6 +112,10 @@ header.masthead2 {
 
 .p-5 {
     padding: 5rem !important;
+}
+
+.min-vh-100 {
+    min-height: 82.4vh!important;
 }
 
 /*Estilos para el registro de datos*/
@@ -128,8 +139,8 @@ header.masthead2 {
     margin-bottom: 100px
 }
 
-.centrar-button{
-
+.b{
+    background-color: #2f2d2d;
 }
 
 
