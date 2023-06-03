@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Monster Fit</title>
+    <title>Listar ejercicio</title>
     <link rel="icon" type="image/x-icon" href="../static/css/icon/barra-con-pesas.ico"
         th:href="@{/css/icon/barra-con-pesas.ico}" />
     <!-- Bootstrap CSS CDN -->
@@ -27,10 +27,10 @@
 </head>
 
 <body>
-    <!-- Navigation-->
+
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container px-5">
-            <a class="navbar-brand" th:href="@{/ejercicio/listar}" style="padding-left: 16rem;">Monster Fit</a>
+            <a class="navbar-brand" href="index.html" style="padding-left: 16rem;">Monster Fit</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -38,10 +38,9 @@
         </div>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" style="padding-left: 23rem;"
-                        sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><img
-                                src="../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}"
-                                width="22.5" height="22.5"></a></li>
+                <li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link" style="padding-left: 23rem;"
+                        th:href="@{/logout}"><img src="../static/css/icon/cerrar-sesión.svg"
+                            th:src="@{/css/icon/cerrar-sesión.svg}" width="22.5" height="22.5"></a></li>
             </ul>
         </div>
     </nav>
@@ -60,7 +59,7 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a th:href="@{/ejercicio/listar}" aria-expanded="false">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
                         <!--<i class="fas fa-home"></i> -->
                         Ejercicio
                     </a>
@@ -72,42 +71,34 @@
                 </li>
             </ul>
         </nav>
-
-        <!-- Page Content  -->
         <div id="content">
-            <h2 class="mb-5 text-center">Listado de Ejercicios</h2>
-
-
-            <a th:href="@{/ejercicio/formulario}" class="btn btn-dark btn-xl rounded-pill mt-5">Agregar nuevo
-                ejercicio</a>
-            <br><br>
-
             <div class="container">
+                <h1 class="titulo">Bajar de peso</h1>
+                <form>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fecha">Fecha</label>
+                            <input type="date" name="fecha">
+                            <button>Agregar ejercicio</button>
+                        </div>
+                    </div>
+                </form>
+
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Id</th>
+
                             <th scope="col">Nombre</th>
-                            <th scope="col">Video</th>
-                            <th scope="col">Tiempo (min)</th>
-                            <th scope="col">Peso (kg)</th>
-                            <th scope="col">Series</th>
-                            <th scope="col">Repeticiones</th>
-                            <th scope="col">Acciones</th>
+                            <th scope="col">Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="ejer: ${ejercicios}">
-                            <td th:text="${ejer.id}"></td>
-                            <td th:text="${ejer.nombre}"></td>
-                            <td th:text="${ejer.url}"></td>
-                            <td th:text="${ejer.tiempo ?: '0'}"></td>
-                            <td th:text="${ejer.peso ?: '0'}"></td>
-                            <td th:text="${ejer.series ?: '0'}"></td>
-                            <td th:text="${ejer.repeticiones ?: '0'}"></td>
+                        <tr>
+                            <td>dsds</td>
                             <td>
-                                <a th:href="@{/ejercicio/formulario(id=${ejer.id})}">Editar </a>
-                                <a th:href="@{/ejercicio/eliminar/{id}(id=${ejer.id})}">Eliminar</a>
+                                <a><img src="../static/css/img/trash-solid.svg" th:src="@{/css/img/trash-solid.svg}"
+                                        width="22.5" height="22.5"></a>
+
                             </td>
                         </tr>
                     </tbody>
@@ -115,7 +106,6 @@
             </div>
         </div>
     </div>
-
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -136,6 +126,7 @@
             });
         });
     </script>
+
 </body>
 
 </html>
