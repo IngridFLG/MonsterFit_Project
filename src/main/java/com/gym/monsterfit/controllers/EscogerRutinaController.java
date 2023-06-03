@@ -50,6 +50,13 @@ public class EscogerRutinaController {
     	
     	return "admin/agregarEjercicioRutina";
     }
+    
+    
+    @PostMapping("/guardar")
+    public String procesarFormRutina() {
+    	System.out.println("emtro en post guardar");
+    	return "admin/asignarRutina";
+    }
 
 
 }
