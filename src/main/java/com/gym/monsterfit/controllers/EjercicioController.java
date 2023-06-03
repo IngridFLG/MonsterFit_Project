@@ -50,7 +50,7 @@ public class EjercicioController {
 			return "admin/agregarEjercicio";
 		}
 		EjercicioEntity ejercicio = ejercicioRepository.findByNombre(ejercicioEntity.getNombre());
-		if (ejercicio != null) {
+		if (ejercicio != null && !ejercicio.getId().equals(ejercicioEntity.getId())) {
             model.addAttribute("nombreDuplicado", true);
             return "admin/agregarEjercicio";
         }
@@ -64,10 +64,6 @@ public class EjercicioController {
 		
 		EjercicioEntity ejercicio = ejercicioRepository.findById(id)
         .orElseThrow(() -> new IllegalArgumentException("Ejercicio no encontrado con id: " + id));
-		if (ejercicio == null) {
-            model.addAttribute("nombreDuplicado", true);
-            return "admin/agregarEjercicio";
-        }
 		
 		ejercicio.setNombre(ejercicioEntity.getNombre());
 		ejercicio.setUrl(ejercicioEntity.getUrl());
