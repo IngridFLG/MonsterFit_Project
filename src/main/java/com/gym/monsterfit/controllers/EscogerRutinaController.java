@@ -21,7 +21,7 @@ public class EscogerRutinaController {
     public String mostrarFormulario(Model model) {
         List<TipoEntity> tiposRutina = tipoRepository.findAll();
         model.addAttribute("tiposRutina", tiposRutina);
-        return "seleccionar-rutina";
+        return "admin/agregarEjercicioRutina";
     }
 
 

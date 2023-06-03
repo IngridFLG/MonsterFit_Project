@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Listar ejercicio</title>
+    <title>Agregar ejercicio Rutina</title>
     <link rel="icon" type="image/x-icon" href="../static/css/icon/barra-con-pesas.ico"
         th:href="@{/css/icon/barra-con-pesas.ico}" />
     <!-- Bootstrap CSS CDN -->
@@ -59,7 +59,7 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <a th:href="@{/ejercicio/listar}"  aria-expanded="false">
                         <!--<i class="fas fa-home"></i> -->
                         Ejercicio
                     </a>
