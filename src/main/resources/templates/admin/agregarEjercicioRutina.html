@@ -79,7 +79,7 @@
 			<div class="container">
 				<form th:action="@{/rutina/guardar}" method="post">
 					<h1 class="titulo" th:value="${tipoEntity.id}"
-						th:text="${tipoEntity.nombre}"></h1>
+						th:text="${tipoEntity.nombre}" ></h1>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="fecha">Fecha</label> <input type="date"
@@ -106,6 +106,8 @@
 							
 						</tbody>
 					</table>
+					
+					<input type="hidden" name="ejerciciosIds" id="ejerciciosIds">
 
 					<button type="submit">Guardar</button>
 				</form>
@@ -131,58 +133,55 @@
 
 
 	<script type="text/javascript">
-		document
-				.addEventListener(
-						"DOMContentLoaded",
-						function() {
-							var select = document
-									.getElementById("selectOption");
-							var tabla = document
-									.getElementById("tablaEjercicios");
-							select
-									.addEventListener(
-											"change",
-											function() {
-												var ejercicioSeleccionado = select.options[select.selectedIndex];
-												if (ejercicioSeleccionado.value !== "") {
-													var fila = tabla
-															.insertRow();
-													var celdaNombre = fila
-															.insertCell();
-													var celdaEliminar = fila
-															.insertCell();
-													celdaNombre.textContent = ejercicioSeleccionado.text;
-													var inputId = document
-															.createElement("input");
-													inputId.type = "hidden";
-													inputId.value = ejercicioSeleccionado.value;
-													celdaEliminar
-															.appendChild(inputId);
-													var enlaceEliminar = document
-															.createElement("a");
-													var iconoEliminar = document
-															.createElement("img");
-													iconoEliminar
-															.setAttribute(
-																	"th:src",
-																	"@{/css/img/trash-solid.svg}");
-													iconoEliminar.width = 22.5;
-													iconoEliminar.height = 22.5;
-													enlaceEliminar
-															.appendChild(iconoEliminar);
-													celdaEliminar
-															.appendChild(enlaceEliminar);
-													enlaceEliminar
-															.addEventListener(
-																	"click",
-																	function() {
-																		tabla
-																				.deleteRow(fila.rowIndex);
-																	});
-													select.selectedIndex = 0;
-												}
-											});
-						});
+	document.addEventListener("DOMContentLoaded", function() {
+		  var select = document.getElementById("selectOption");
+		  var tabla = document.getElementById("tablaEjercicios");
+		  var ejercicioIdsInput = document.getElementById("ejerciciosIds");
+
+		  select.addEventListener("change", function() {
+		    var ejercicioSeleccionado = select.options[select.selectedIndex];
+		    if (ejercicioSeleccionado.value !== "") {
+		      var fila = tabla.insertRow();
+		      var celdaNombre = fila.insertCell();
+		      var celdaEliminar = fila.insertCell();
+		      celdaNombre.textContent = ejercicioSeleccionado.text;
+
+		      var inputId = document.createElement("input");
+		      inputId.type = "hidden";
+		      inputId.value = ejercicioSeleccionado.value;
+		      celdaEliminar.appendChild(inputId);
+
+		      var enlaceEliminar = document.createElement("a");
+		      var iconoEliminar = document.createElement("img");
+		      iconoEliminar.setAttribute("th:src", "@{/css/img/trash-solid.svg}");
+		      iconoEliminar.width = 22.5;
+		      iconoEliminar.height = 22.5;
+		      enlaceEliminar.appendChild(iconoEliminar);
+		      celdaEliminar.appendChild(enlaceEliminar);
+
+		      enlaceEliminar.addEventListener("click", function() {
+		        tabla.deleteRow(fila.rowIndex);
+		        updateEjercicioIds();
+		      });
+
+		      select.selectedIndex = 0;
+		      updateEjercicioIds();
+		    }
+		  });
+
+		  function updateEjercicioIds() {
+		    var ejercicioIds = [];
+		    var filas = tabla.getElementsByTagName("tr");
+		    for (var i = 0; i < filas.length; i++) {
+		      var celdaEliminar = filas[i].getElementsByTagName("td")[1];
+		      var inputId = celdaEliminar.getElementsByTagName("input")[0];
+		      var ejercicioId = inputId.value;
+		      ejercicioIds.push(ejercicioId);
+		    }
+		    ejercicioIdsInput.value = ejercicioIds.join(",");
+		  }
+		});
+
 	</script>
 
 	<script type="text/javascript">

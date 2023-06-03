@@ -18,7 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "rutina_ejercicio")
+@Table(name = "rutinaEjercicio")
 public class RutinaEjercicioEntity {
 
 	@Id
@@ -29,14 +29,18 @@ public class RutinaEjercicioEntity {
 	@JoinColumn(name = "rutina_id")
 	private TipoEntity tipo;
 	
-	@ManyToOne
-	@JoinColumn(name = "ejercicio_id")
-	private EjercicioEntity ejercicio;
+	@ManyToMany
+    @JoinTable(
+            name = "rutina_ejercicio_ejercicio",
+            joinColumns = @JoinColumn(name = "rutina_ejercicio_id"),
+            inverseJoinColumns = @JoinColumn(name = "ejercicio_id")
+    )
+    private List<EjercicioEntity> ejercicios;
 	
 	private Date fecha;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "rutina_ejercicio", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "rutinaEjercicio", cascade = CascadeType.ALL)
     private List<HistorialEntity> historiales = new ArrayList<>();
 	
 	

@@ -38,7 +38,7 @@ public class EjercicioEntity {
 	private Integer repeticiones;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "ejercicio", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "ejercicios", cascade = CascadeType.ALL)
     private List<RutinaEjercicioEntity> rutinaEjercicios = new ArrayList<>();
 	
 

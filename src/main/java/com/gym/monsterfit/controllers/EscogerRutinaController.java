@@ -38,6 +38,7 @@ public class EscogerRutinaController {
     
     @PostMapping
     public String procesarSeleccionTipoRutina(@RequestParam("selectedOption") String rutina, @RequestParam("inputDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha1, Model modal) {
+    	System.out.println("RUTINA: " + rutina);
     	TipoEntity tipoEntity = tipoRepository.getReferenceById(Integer.parseInt(rutina));
     	System.out.println(tipoEntity.getNombre());
     	System.out.println(fecha1);
@@ -53,8 +54,13 @@ public class EscogerRutinaController {
     
     
     @PostMapping("/guardar")
-    public String procesarFormRutina() {
-    	System.out.println("emtro en post guardar");
+    public String procesarFormRutina(
+            @RequestParam("inputDate") String fechaString,
+            @RequestParam("ejerciciosIds") Integer[] ejerciciosIds) {
+    	System.out.println("tipoId" +  " fecha: " + fechaString);
+    	for(int i = 0; i < ejerciciosIds.length; i++) {
+    		System.out.println(ejerciciosIds[i]);
+    	}
     	return "admin/asignarRutina";
     }
 
