@@ -18,16 +18,19 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "rutina")
-public class TipoEntity {
+public class RutinaEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String nombre; //Nombre del Tipo de rutina
-	
+	@Column(nullable = false, length = 50)
+	private String nombre;
+
 	@JsonIgnore
-	@OneToMany(mappedBy = "tipo", cascade = CascadeType.ALL)
-    private List<RutinaEjercicioEntity> rutinaEjercicios = new ArrayList<>();
+	@OneToMany(mappedBy = "rutina")
+    private List<RutinaEjercicioEntity> rutina= new ArrayList<>();
+	
+	
 	
 }
