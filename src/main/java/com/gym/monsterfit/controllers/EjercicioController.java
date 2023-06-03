@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,7 +50,7 @@ public class EjercicioController {
 			return "admin/agregarEjercicio";
 		}
 		EjercicioEntity ejercicio = ejercicioRepository.findByNombre(ejercicioEntity.getNombre());
-		if (ejercicio != null) {
+		if (ejercicio != null && !ejercicio.getId().equals(ejercicioEntity.getId())) {
             model.addAttribute("nombreDuplicado", true);
             return "admin/agregarEjercicio";
         }
@@ -61,10 +60,11 @@ public class EjercicioController {
 	}
 	
 	@GetMapping("/editar")
-	public String editarEjercicio(@RequestParam("id") Integer id, @ModelAttribute("ejercicio") EjercicioEntity ejercicioEntity) {
+	public String editarEjercicio(@RequestParam("id") Integer id, @ModelAttribute("ejercicio") EjercicioEntity ejercicioEntity, Model model) {
 		
 		EjercicioEntity ejercicio = ejercicioRepository.findById(id)
         .orElseThrow(() -> new IllegalArgumentException("Ejercicio no encontrado con id: " + id));
+		
 		ejercicio.setNombre(ejercicioEntity.getNombre());
 		ejercicio.setUrl(ejercicioEntity.getUrl());
 		ejercicio.setPeso(ejercicio.getPeso());
