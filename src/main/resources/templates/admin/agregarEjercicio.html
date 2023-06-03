@@ -7,25 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Monster Fit</title>
-    <link rel="icon" type="image/x-icon" href="../static/css/icon/barra-con-pesas.ico"
-        th:href="@{/css/icon/barra-con-pesas.ico}" />
+    <title>Agregar ejercicio</title>
+    <link rel="icon" type="image/x-icon" href="../static/css/icon/barra-con-pesas.ico" th:href="@{/css/icon/barra-con-pesas.ico}" />
     <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/style4.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
 
     <!-- Font Awesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
-        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
-        crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
-        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
-        crossorigin="anonymous"></script>
-        <script type="text/javascript" src="../static/js/validarFormulario.js"
-     <script th:src="@{/js/validarFormulario.js}"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -33,17 +28,13 @@
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container px-5">
             <a class="navbar-brand" th:href="@{/ejercicio/listar}" style="padding-left: 16rem;">Monster Fit</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" style="padding-left: 23rem;"
-                        sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><img
-                                src="../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}"
-                                width="22.5" height="22.5"></a></a></li>
+                <li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link" style="padding-left: 23rem;"  th:href="@{/logout}"><img src="../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}" width="22.5" height="22.5"></a></li>
             </ul>
         </div>
     </nav>
@@ -80,15 +71,17 @@
                     <div class="col-12">
                         <div>
                             <div class="card-body p-5 bg-transparent">
-                                <h1 th:if="${ejercicio.id == null}" class="h1 centrar-titulo">Agregar ejercicio</h1>
-                                <h1 th:if="${ejercicio.id != null}" class="h1 centrar-titulo">Editar ejercicio</h1>
+                                <h1 th:if="${ejercicio?.id == null}" class="h1 centrar-titulo">Agregar ejercicio</h1>
+                                <h1 th:if="${ejercicio?.id != null}" class="h1 centrar-titulo">Editar ejercicio</h1>
+
+
                                 
                                 <form method="post" th:action="@{/ejercicio/registrar}" th:object="${ejercicio}"
                                 onsubmit="return validarFormulario();">
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="hidden" name="id" th:if="${ejercicio.id != null}"
+                                                <input type="hidden" name="id" th:if="${ejercicio?.id != null}"
                                                     th:field="*{id}" />
 
                                                 <label class="col-form-label text-start" for="nombre">Nombre del
@@ -96,6 +89,14 @@
                                                 <input type="text" id="nombre" name="nombre"
                                                     class="form-control text-center" th:field="*{nombre}"
                                                     th:value="${ejercicio.nombre}" required />
+                                                    <script th:if="${nombreDuplicado}">
+                                                        Swal.fire({
+                                                            icon: 'error',
+                                                            title: 'Error',
+                                                            text: 'El nombre del ejercicio ya está registrado',
+                                                        });
+                                                    </script>
+                                                    
                                             </div>
                                         </div>
 
@@ -188,6 +189,7 @@
             });
         });
     </script>
+    <script type="text/javascript" src="../static/js/validarFormulario.js" th:src="@{/js/validarFormulario.js}"></script>
 </body>
 
 </html>

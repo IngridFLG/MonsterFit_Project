@@ -17,13 +17,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ejercicio")
+@Table(name = "ejercicio", indexes = {@Index(columnList = "nombre", name = "index_nombre", unique = true) })
 public class EjercicioEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@Column(unique = true)
 	private String nombre;
 	
 	private String url;
