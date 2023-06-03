@@ -1,5 +1,6 @@
 package com.gym.monsterfit.entities;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,22 +25,27 @@ public class EjercicioEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(unique = true)
+	@Column(unique = true, length = 50)
 	private String nombre;
 	
+	@Column(nullable = false, length = 255)
 	private String url;
 	
+	@Column(nullable = false, length = 50)
 	private String tiempo;
 
-	private Integer peso;
+	private Float peso;
 
 	private Integer series;
 
 	private Integer repeticiones;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "ejercicio", cascade = CascadeType.ALL)
-    private List<RutinaEjercicioEntity> rutinaEjercicios = new ArrayList<>();
+	@OneToMany(mappedBy = "ejercicio")
+    private List<RutinaEjercicioEntity> ejercicio= new ArrayList<>();
+
+
+
 	
 
 

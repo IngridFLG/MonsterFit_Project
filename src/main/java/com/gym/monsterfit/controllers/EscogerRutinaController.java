@@ -1,9 +1,9 @@
 package com.gym.monsterfit.controllers;
 
 import com.gym.monsterfit.entities.EjercicioEntity;
-import com.gym.monsterfit.entities.TipoEntity;
+import com.gym.monsterfit.entities.RutinaEntity;
 import com.gym.monsterfit.repositories.EjercicioRepository;
-import com.gym.monsterfit.repositories.TipoRepository;
+import com.gym.monsterfit.repositories.RutinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -21,14 +21,14 @@ import java.util.List;
 public class EscogerRutinaController {
 
     @Autowired
-    TipoRepository tipoRepository;
+    RutinaRepository rutinaRepository;
     
     @Autowired
     EjercicioRepository ejercicioRepository;
 
     @GetMapping
     public String mostrarFormulario(Model model) {
-        List<TipoEntity> tiposRutina = tipoRepository.findAll();
+        List<RutinaEntity> tiposRutina = rutinaRepository.findAll();
         
         model.addAttribute("tiposRutina", tiposRutina);
         return "admin/asignarRutina";
@@ -38,12 +38,12 @@ public class EscogerRutinaController {
     
     @PostMapping
     public String procesarSeleccionTipoRutina(@RequestParam("selectedOption") String rutina, @RequestParam("inputDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha1, Model modal) {
-    	TipoEntity tipoEntity = tipoRepository.getReferenceById(Integer.parseInt(rutina));
-    	System.out.println(tipoEntity.getNombre());
+    	RutinaEntity RutinaEntity = rutinaRepository.getReferenceById(Integer.parseInt(rutina));
+    	System.out.println(RutinaEntity.getNombre());
     	System.out.println(fecha1);
     	
     	List<EjercicioEntity> ejercicios = ejercicioRepository.findAll();
-    	modal.addAttribute("tipoEntity", tipoEntity);
+    	modal.addAttribute("RutinaEntity", RutinaEntity);
     	modal.addAttribute("fecha", fecha1);
     	
     	modal.addAttribute("ejercicios", ejercicios);
