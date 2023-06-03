@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
     <meta charset="utf-8">
@@ -12,8 +12,8 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style4.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/style4.css" th:href="@{/css/style4.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}" />
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
@@ -42,14 +42,14 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
 
-            <button type="button" id="sidebarCollapse" class="btn btn-info">
-                <i class="fas fa-align-left"></i>
-            </button>
+        <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fas fa-align-left"></i>
+        </button>
 
-            <div class="sidebar-header">
-                <h3>Administrador</h3>
-                <strong>AD</strong>
-            </div>
+        <div class="sidebar-header">
+            <h3>Administrador</h3>
+            <strong>AD</strong>
+        </div>
 
             <ul class="list-unstyled components">
                 <li>
@@ -100,33 +100,26 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="col-form-label text-start" for="url">Url del video</label>
-                                                <input type="text" id="url" name="url" class="form-control text-center"
-                                                    required pattern="^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$"
-                                                    th:field="*{url}" th:value="${ejercicio.url}" />
-                                            </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label text-start" for="url">Url del video</label>
+                                            <input type="text" id="url" name="url" class="form-control text-center" required pattern="^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$" th:field="*{url}" th:value="${ejercicio.url}" />
                                         </div>
+                                    </div>
 
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="col-form-label text-start" for="tiempo">Tiempo en
-                                                    minutos</label>
-                                                <input type="number" pattern="^(?:[1-9]|[1-9][0-9]|100)(?:\.\d+)?$"
-                                                    id="tiempo" name="tiempo" class="form-control text-center"
-                                                    th:field="*{tiempo}" th:value="${ejercicio.tiempo}" />
-                                            </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label text-start" for="tiempo">Tiempo en minutos</label>
+                                            <input type="number" pattern="^(?:[1-9]|[1-9][0-9]|100)(?:\.\d+)?$" id="tiempo" name="tiempo" class="form-control text-center" th:field="*{tiempo}" th:value="${ejercicio.tiempo}" />
                                         </div>
+                                    </div>
 
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="col-form-label text-start" for="peso">Peso en Kg</label>
-                                                <input type="number" pattern="^(?:[1-9]|[1-9][0-9]|100)$" step="0.1"
-                                                    id="peso" class="form-control text-center" name="peso"
-                                                    th:field="*{peso}" th:value="${ejercicio.peso}" />
-                                            </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label text-start" for="peso">Peso en Kg</label>
+                                            <input type="number" pattern="^(?:[1-9]|[1-9][0-9]|100)$" step="0.1" id="peso" class="form-control text-center" name="peso" th:field="*{peso}" th:value="${ejercicio.peso}" />
                                         </div>
+                                    </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -191,5 +184,4 @@
     </script>
     <script type="text/javascript" src="../static/js/validarFormulario.js" th:src="@{/js/validarFormulario.js}"></script>
 </body>
-
 </html>
