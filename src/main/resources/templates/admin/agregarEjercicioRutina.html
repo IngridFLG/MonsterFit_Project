@@ -79,7 +79,11 @@
                         <div class="form-group">
                             <label for="fecha" >Fecha</label>
                             <input type="date" name="inputDate" th:value="${fecha}" > 
-                            <button>Agregar ejercicio</button>
+                             <select class="form-control" id="selectOption" name="selectedOption">
+					          <option value="">-- Select an option --</option>
+					          <option th:each="ejercicio : ${ejercicios}"  th:value="${ejercicio.id}" th:text="${ejercicio.nombre}"></option>
+					          
+					        </select>
                         </div>
                     </div>
                 </form>

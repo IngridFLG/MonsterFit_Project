@@ -1,6 +1,8 @@
 package com.gym.monsterfit.controllers;
 
+import com.gym.monsterfit.entities.EjercicioEntity;
 import com.gym.monsterfit.entities.TipoEntity;
+import com.gym.monsterfit.repositories.EjercicioRepository;
 import com.gym.monsterfit.repositories.TipoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,6 +22,9 @@ public class EscogerRutinaController {
 
     @Autowired
     TipoRepository tipoRepository;
+    
+    @Autowired
+    EjercicioRepository ejercicioRepository;
 
     @GetMapping
     public String mostrarFormulario(Model model) {
@@ -37,9 +42,11 @@ public class EscogerRutinaController {
     	System.out.println(tipoEntity.getNombre());
     	System.out.println(fecha1);
     	
-    	
+    	List<EjercicioEntity> ejercicios = ejercicioRepository.findAll();
     	modal.addAttribute("tipoEntity", tipoEntity);
     	modal.addAttribute("fecha", fecha1);
+    	
+    	modal.addAttribute("ejercicios", ejercicios);
     	
     	return "admin/agregarEjercicioRutina";
     }
