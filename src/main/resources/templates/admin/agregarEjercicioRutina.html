@@ -8,8 +8,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>Listar ejercicio</title>
-    <link rel="icon" type="image/x-icon" href="../static/css/icon/barra-con-pesas.ico"
-        th:href="@{/css/icon/barra-con-pesas.ico}" />
+	<link rel="icon" type="image/x-icon" href="../../static/css/icon/barra-con-pesas.ico"
+		  th:href="@{/css/icon/barra-con-pesas.ico}" />
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
         integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -30,35 +30,30 @@
 
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-custom">
-		<div class="container px-5">
-			<a class="navbar-brand" href="index.html"
-				style="padding-left: 16rem;">Monster Fit</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-		</div>
-		<div class="collapse navbar-collapse" id="navbarResponsive">
-			<ul class="navbar-nav ms-auto">
-				<li class="nav-item" sec:authorize="isAuthenticated()"><a
-					class="nav-link" style="padding-left: 23rem;" th:href="@{/logout}"><img
-						src="../static/css/icon/cerrar-sesión.svg"
-						th:src="@{/css/icon/cerrar-sesión.svg}" width="22.5" height="22.5"></a></li>
-			</ul>
-		</div>
-	</nav>
+<nav class="navbar navbar-expand-lg navbar-custom d-flex justify-content-between">
+	<div class="ml-5">
+		<a class="navbar-brand" href="index.html">Monster Fit</a>
+	</div>
+	<div class="mr-5">
+		<ul class="navbar-nav ms-auto">
+			<li class="nav-item"><a class="nav-link"
+									href="tu_ruta_de_redireccion"><img
+					src="../../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}" width="22.5" height="22.5"></a></li>
+		</ul>
+	</div>
+</nav>
+
 	<div class="wrapper">
 		<!-- Sidebar  -->
 		<nav id="sidebar">
 
-			<button type="button" id="sidebarCollapse" class="btn btn-info">
-				<i class="fas fa-align-left"></i>
-			</button>
+			<div class="d-flex justify-content-center">
+				<button type="button" id="sidebarCollapse" class="btn">
+					<i class="fas fa-align-left"></i>
+				</button>
+			</div>
 
-			<div class="sidebar-header">
+			<div class="sidebar-header d-flex justify-content-center">
 				<h3>Administrador</h3>
 				<strong>AD</strong>
 			</div>
@@ -75,8 +70,9 @@
                 </li>
 			</ul>
 		</nav>
+
 		<div id="content">
-			<div class="container">
+			<div class="container py-5 mt-6">
 				<form th:action="@{/rutina/guardar}" method="post">
 					<h1 class="titulo" th:value="${rutinaEntity.id}"
 						th:text="${rutinaEntity.nombre}" ></h1>
@@ -93,6 +89,7 @@
 						</div>
 					</div>
 
+					</div>
 
 					<table class="table" id="tablaEjercicios">
 						<thead class="thead-dark">
@@ -109,7 +106,7 @@
 					
 					<input type="hidden" name="ejerciciosIds" id="ejerciciosIds">
 
-					<button type="submit">Guardar</button>
+					<button class="btn btn-dark btn-lg" type="submit">Guardar</button>
 				</form>
 			</div>
 		</div>
