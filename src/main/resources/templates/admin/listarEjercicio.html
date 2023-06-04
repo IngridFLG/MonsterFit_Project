@@ -8,9 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>Listar ejercicio</title>
-    <link rel="icon" type="image/x-icon" href="../static/css/icon/barra-con-pesas.ico"
-        th:href="@{/css/icon/barra-con-pesas.ico}" />
-    <!-- Bootstrap CSS CDN -->
+    <link rel="icon" type="image/x-icon" href="../../static/css/icon/barra-con-pesas.ico"
+          th:href="@{/css/icon/barra-con-pesas.ico}" />
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
         integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
@@ -28,40 +28,33 @@
 
 <body>
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-custom">
-        <div class="container px-5">
-            <a class="navbar-brand" th:href="@{/ejercicio/listar}" style="padding-left: 16rem;">Monster Fit</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <nav class="navbar navbar-expand-lg navbar-custom d-flex justify-content-between">
+        <div class="ml-5">
+            <a class="navbar-brand" href="index.html">Monster Fit</a>
         </div>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+        <div class="mr-5">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" style="padding-left: 23rem;"
-                        sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><img
-                                src="../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}"
-                                width="22.5" height="22.5"></a></a></li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="tu_ruta_de_redireccion"><img
+                        src="../../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}" width="22.5" height="22.5"></a></li>
             </ul>
         </div>
     </nav>
+
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
 
-            <button type="button" id="sidebarCollapse" class="btn btn-info">
-                <i class="fas fa-align-left"></i>
-            </button>
 
-            <div class="sidebar-header">
+
+            <div class="sidebar-header d-flex justify-content-center">
                 <h3>Administrador</h3>
                 <strong>AD</strong>
             </div>
 
-            <ul class="list-unstyled components">
+            <ul class="list-unstyled components d-flex flex-column mb-3 justify-content-center">
                 <li>
-                    <a th:href="@{/ejercicio/listar}" aria-expanded="false">
-                        <!--<i class="fas fa-home"></i> -->
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" >
                         Ejercicio
                     </a>
                 </li>
@@ -75,16 +68,17 @@
 
         <!-- Page Content  -->
         <div id="content">
-            <h2 class="mb-5 text-center">Listado de Ejercicios</h2>
-
-
-            <a th:href="@{/ejercicio/formulario}" class="btn btn-dark btn-xl rounded-pill mt-5">Agregar nuevo
-                ejercicio</a>
-            <br><br>
-
             <div class="container">
-                <table class="table">
-                    <thead class="thead-dark">
+                <h2 class="mb-5 text-center">Listado de Ejercicios</h2>
+                <div class="d-flex justify-content-left mb-4">
+                    <button class="btn btn-dark btn-lg">
+                        <a th:href="@{/ejercicio/formulario}" >Agregar nuevo
+                            ejercicio</a>
+                    </button>
+                </div>
+
+                    <table class="table">
+                        <thead class="thead-dark">
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Nombre</th>
@@ -95,8 +89,8 @@
                             <th scope="col">Repeticiones</th>
                             <th scope="col">Acciones</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <tr th:each="ejer: ${ejercicios}">
                             <td th:text="${ejer.id}"></td>
                             <td th:text="${ejer.nombre}"></td>
@@ -110,10 +104,12 @@
                                 <a th:href="@{/ejercicio/eliminar/{id}(id=${ejer.id})}">Eliminar</a>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
             </div>
+
         </div>
+
     </div>
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->
