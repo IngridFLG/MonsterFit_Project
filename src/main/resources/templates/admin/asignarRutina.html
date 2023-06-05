@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es"  xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
   <meta charset="utf-8">
@@ -7,100 +7,117 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <title>Asignar rutina</title>
-  <link rel="icon" type="image/x-icon" href="../static/css/icon/barra-con-pesas.ico" th:href="@{/css/icon/barra-con-pesas.ico}" />
+  <link rel="icon" type="image/x-icon" href="../static/css/icon/barra-con-pesas.ico"
+    th:href="@{/css/icon/barra-con-pesas.ico}" />
+  <link rel="icon" type="image/x-icon" href="../../static/css/icon/barra-con-pesas.ico"
+        th:href="@{/css/icon/barra-con-pesas.ico}" />
   <!-- Bootstrap CSS CDN -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
   <!-- Our Custom CSS -->
   <link rel="stylesheet" type="text/css" href="../../static/css/style4.css" th:href="@{/css/style4.css}" />
   <link rel="stylesheet" type="text/css" href="../../static/css/style.css" th:href="@{/css/style.css}" />
 
   <!-- Font Awesome JS -->
-  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+    integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+    crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+    integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-custom d-flex justify-content-between">
-  <div class="ml-5">
-    <a class="navbar-brand" href="index.html">Monster Fit</a>
-  </div>
-  <div class="mr-5">
-    <ul class="navbar-nav ms-auto">
-      <li class="nav-item"><a class="nav-link"
-                              href="tu_ruta_de_redireccion"><img
-              src="../../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}" width="22.5" height="22.5"></a></li>
-    </ul>
-  </div>
-</nav>
-<div class="wrapper">
-  <!-- Sidebar  -->
-  <nav id="sidebar">
-
-    <div class="d-flex justify-content-center">
-      <button type="button" id="sidebarCollapse" class="btn">
-        <i class="fas fa-align-left"></i>
-      </button>
+  <nav class="navbar navbar-expand-lg navbar-custom d-flex justify-content-between">
+    <div class="ml-5">
+      <a class="navbar-brand" href="index.html">Monster Fit</a>
     </div>
-
-    <div class="sidebar-header d-flex justify-content-center">
-      <h3>Administrador</h3>
-      <strong>AD</strong>
+    <div class="mr-5">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" style="padding-left: 23rem;"
+          sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><img
+                  src="../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}"
+                  width="22.5" height="22.5"></a></a></li>
+      </ul>
     </div>
-
-    <ul class="list-unstyled components d-flex flex-column mb-3 justify-content-center">
-      <li>
-        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" >
-          Ejercicio
-        </a>
-      </li>
-      <li>
-        <a href="#" data-toggle="collapse" aria-expanded="true">
-          Rutina
-        </a>
-      </li>
-    </ul>
   </nav>
+  <div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
 
-  <div id="content">
-  <div class="container">
-    <h1 class="titulo">Asignar rutina</h1>
-
-    <form action="/submit" method="post">
-      <div class="form-group centrar-from">
-        <label for="selectOption">Select Option</label>
-        <select class="form-control" id="selectOption" name="selectedOption">
-          <option value="">-- Select an option --</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select>
+      <div class="d-flex justify-content-center">
+        <button type="button" id="sidebarCollapse" class="btn">
+          <i class="fas fa-align-left"></i>
+        </button>
       </div>
 
-      <div class="form-group centrar-from">
-        <label for="inputDate">Select Date (Input)</label>
-        <input type="date" class="form-control" id="inputDate" />
+      <div class="sidebar-header d-flex justify-content-center">
+        <h3>Administrador</h3>
+        <strong>AD</strong>
       </div>
 
-      <button class="btn btn-dark btn-lg centrar-button" type="submit">Aceptar</button>
-    </form>
-  </div>
-  </div>
-</div>
+      <ul class="list-unstyled components d-flex flex-column mb-3 justify-content-center">
+        <li>
+          <a th:href="@{/ejercicio/listar}" aria-expanded="false">
+            <!--<i class="fas fa-home"></i> -->
+            Ejercicio
+          </a>
+        </li>
+        <li><a th:href="@{/rutina}"> Rutina </a></li>
+        <li>
+          <a th:href="@{/administrarClientes}">
+              Clientes
+          </a>
+      </li>
+      </ul>
+    </nav>
 
-<!-- jQuery CDN - Slim version (=without AJAX) -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<!-- Popper.JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-<!-- Bootstrap JS -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <div id="content">
+      <div class="container">
+        <h1 class="titulo">Asignar rutina</h1>
 
-<script type="text/javascript">
-  $(document).ready(function () {
-    $('#sidebarCollapse').on('click', function () {
-      $('#sidebar').toggleClass('active');
+        <form th:action="@{/rutina}" method="post">
+          <div class="form-group centrar-from">
+            <label for="selectOption">Seleccione una rutina</label>
+            <select class="form-control" id="selectOption" name="selectedOption" required>
+              <option value="">-- Seleccione una opcion --</option>
+              <option th:each="rutina : ${tiposRutina}" th:value="${rutina.id}" th:text="${rutina.nombre}">Option 1
+              </option>
+
+            </select>
+          </div>
+
+          <div class="form-group centrar-from">
+            <label for="inputDate">Seleccione la fecha de la rutina</label>
+            <input type="date" class="form-control" id="inputDate" name="inputDate" required />
+          </div>
+
+          <button class="btn btn-dark btn-lg centrar-button" type="submit">Aceptar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery CDN - Slim version (=without AJAX) -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <!-- Popper.JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+    integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+    crossorigin="anonymous"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+    integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+    crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+      });
     });
-  });
-</script>
+  </script>
 </body>
 
 </html>

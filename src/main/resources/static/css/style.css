@@ -68,6 +68,10 @@ header.masthead2 {
     text-align: left !important;
 }
 
+.input-group {
+    width: auto !important;
+}
+
 .button-container {
   display: flex;
   justify-content: space-between;
@@ -115,7 +119,7 @@ header.masthead2 {
 }
 
 .min-vh-100 {
-    min-height: 82.4vh!important;
+    min-height: 100vh!important;
 }
 
 /*Estilos para el registro de datos*/
