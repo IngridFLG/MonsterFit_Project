@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.gym.monsterfit.entities.MiembroEntity;
 import com.gym.monsterfit.entities.UsuarioEntity;
 import com.gym.monsterfit.services.interfaces.UsuarioServiceInterface;
 
