@@ -82,5 +82,11 @@ public class UsuarioService implements UsuarioServiceInterface {
 	public void deleteUsuario(Integer id) {
 		usuarioRepository.deleteById(id);
 	}
-    
+
+	@Override
+	public boolean existe() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

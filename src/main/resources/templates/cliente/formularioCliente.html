@@ -34,39 +34,41 @@
           <div class="card-body p-5 bg-transparent">
             <h3 class="espaciado text-center">Registra tus datos</h3>
 
-            <form>
-              <div class="row g-3">
+            <form th:action="@{/form/registrar}" th:object="${miembroEntity}" method="post">
+               <div class="row g-3">
                 <div class="col-md-6">
                   <!-- Nombre input -->
                   <div class="form-group">
-                    <label class="col-form-label" for="nombre">Nombres y apellidos</label>
-                    <input type="text" id="nombre" class="form-control" required />
+                      <label class="col-form-label text-start" for="nombre">Nombres y Apellidos</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control" required />
                   </div>
                 </div>
-
+   
                 <div class="col-md-6">
-                  <!-- Sexo input -->
+                    <!-- Edad input -->
                   <div class="form-group">
-                    <label class="col-form-label text-start" for="sexo">Edad</label>
-                    <input type="text" id="sexo" class="form-control" required />
+                    <label class="col-form-label text-start" for="edad">Edad</label>
+                    <input type="text" id="edad" name="edad" class="form-control"  required/>
                   </div>
                 </div>
               </div>
+          
 
               <div class="row g-3">
                 <div class="col-md-6">
                   <!-- Peso input -->
                   <div class="form-group">
-                    <label class="col-form-label text-start" for="peso">Sexo</label>
-                    <input type="text" id="peso" class="form-control" required/>
+                    <label class="col-form-label text-start" for="peso">Peso</label>
+                    <input type="text" id="peso" name="peso" class="form-control"  required/>
                   </div>
                 </div>
 
                 <div class="col-md-6">
-                  <!-- Edad input -->
+                           
+                      <!-- Sexo input -->
                   <div class="form-group">
-                    <label class="col-form-label text-start" for="edad">Altura</label>
-                    <input type="text" id="edad" class="form-control" required/>
+                    <label class="col-form-label text-start" for="sexo">Sexo</label>
+                    <input type="text" id="sexo" name="sexo" class="form-control"  required />
                   </div>
                 </div>
               </div>
@@ -75,16 +77,16 @@
                 <div class="col-md-6">
                   <!-- Altura input -->
                   <div class="form-group">
-                    <label class="col-form-label text-start" for="altura">Peso</label>
-                    <input type="text" id="altura" class="form-control" required/>
+                    <label class="col-form-label text-start" for="altura">Altura</label>
+                    <input type="text" id="altura" name="altura" class="form-control"  required/>
                   </div>
                 </div>
-              </div>
+              </div>  
 
               <div class="row g-3">
                 <div class="col-md-6"></div>
                 <div class="col-md-6 d-flex justify-content-end">
-                  <button type="submit" class="btn btn-dark">Enviar</button>
+                  <button type="submit" class="btn btn-dark">Registrar</button>
                 </div>
               </div>
             </form>
@@ -104,5 +106,7 @@
         crossorigin="anonymous"></script>
 <!-- Core theme JS-->
 <script src="js/scripts.js"></script>
+
 </body>
 </html>
+    

@@ -4,4 +4,5 @@ import com.gym.monsterfit.entities.MiembroEntity;
 
 public interface MiembroRepository extends JpaRepository<MiembroEntity, Integer>{
 
-}
+	
+	}
