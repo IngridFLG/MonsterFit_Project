@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Listar ejercicio</title>
-    <link rel="icon" type="image/x-icon" href="../../static/css/icon/barra-con-pesas.ico"
-          th:href="@{/css/icon/barra-con-pesas.ico}" />
-
+    <title>Ver clientes</title>
+    <link rel="icon" type="image/x-icon" href="../static/css/icon/barra-con-pesas.ico"
+        th:href="@{/css/icon/barra-con-pesas.ico}" />
+    <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
         integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
@@ -24,6 +24,13 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
         crossorigin="anonymous"></script>
+
+    <!-- SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+
+    <!-- SweetAlert JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+
 </head>
 
 <body>
@@ -34,12 +41,14 @@
         </div>
         <div class="mr-5">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link"
+                <li class="nav-item"><a class="nav-link" style="padding-left: 23rem;"
                     sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><img
-                        src="../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}" width="22.5" height="22.5"></a></li>
+                            src="../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}"
+                            width="22.5" height="22.5"></a></a></li>
             </ul>
         </div>
     </nav>
+
 
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -58,7 +67,8 @@
 
             <ul class="list-unstyled components d-flex flex-column mb-3 justify-content-center">
                 <li>
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" >
+                    <a th:href="@{/ejercicio/listar}" aria-expanded="false">
+                        <!--<i class="fas fa-home"></i> -->
                         Ejercicio
                     </a>
                 </li>
@@ -74,51 +84,38 @@
                 </li>
             </ul>
         </nav>
-
         <!-- Page Content  -->
         <div id="content">
-            <div class="container">
-                <h2 class="mb-5 text-center">Listado de Ejercicios</h2>
-                <div class="d-flex justify-content-left mb-4">
-                    <button class="btn btn-dark btn-lg">
-                        <a th:href="@{/ejercicio/formulario}" >Agregar nuevo
-                            ejercicio</a>
-                    </button>
-                </div>
+            <h2 class="mb-5 text-center">Listado de clientes</h2>
 
-                    <table class="table">
-                        <thead class="thead-dark">
+
+            <div class="container">
+                <table class="table">
+                    <thead class="thead-dark">
                         <tr>
                             <th scope="col">Id</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Video</th>
-                            <th scope="col">Tiempo (min)</th>
-                            <th scope="col">Peso (kg)</th>
-                            <th scope="col">Series</th>
-                            <th scope="col">Repeticiones</th>
-                            <th scope="col">Acciones</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Contraseña</th>
+                            <th scope="col">Eliminar</th>
                         </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="ejer: ${ejercicios}">
-                            <td th:text="${ejer.id}"></td>
-                            <td th:text="${ejer.nombre}"></td>
-                            <td th:text="${ejer.url}"></td>
-                            <td th:text="${ejer.tiempo ?: '0'}"></td>
-                            <td th:text="${ejer.peso ?: '0'}"></td>
-                            <td th:text="${ejer.series ?: '0'}"></td>
-                            <td th:text="${ejer.repeticiones ?: '0'}"></td>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cliente: ${clientes}">
+                            <td th:text="${cliente.id}"></td>
+                            <td th:text="${cliente.email}"></td>
+                            <td ><a th:href="@{/administrarClientes/formulario/(id=${cliente.id})}"><img
+                                src="../static/css/img/trash-solid.svg" th:src="@{/css/img/pen-nib-solid.svg}"
+                                width="22.5" height="22.5"></a></td>
                             <td>
-                                <a th:href="@{/ejercicio/formulario(id=${ejer.id})}">Editar </a>
-                                <a th:href="@{/ejercicio/eliminar/{id}(id=${ejer.id})}">Eliminar</a>
+                                <a th:href="@{/administrarClientes/eliminar/{id}(id=${cliente.id})}"><img
+                                    src="../static/css/img/trash-solid.svg" th:src="@{/css/img/trash-solid.svg}"
+                                    width="22.5" height="22.5"></a>
                             </td>
                         </tr>
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
             </div>
-
         </div>
-
     </div>
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->
