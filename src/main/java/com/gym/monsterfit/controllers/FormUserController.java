@@ -45,7 +45,7 @@ public class FormUserController {
 		
 	    @GetMapping("/registrar")
 		public String registrarMiembro(MiembroEntity miembroEntity) {
-			return "formularioCliente";
+			return "cliente/formularioCliente";
 		} 
 		
 		@PostMapping("/registrar")

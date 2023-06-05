@@ -1,5 +1,8 @@
 package com.gym.monsterfit.controllers;
 
+import com.gym.monsterfit.entities.MiembroEntity;
+import com.gym.monsterfit.services.implementations.MiembroService;
+import com.gym.monsterfit.services.interfaces.MiembroServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +18,9 @@ public class LoginController {
 
 	@Autowired
 	UsuarioServiceInterface usuarioService;
+
+	@Autowired
+	MiembroService miembroService;
 
 	@GetMapping("/login")
 	public String iniciarSesion() {
@@ -32,12 +38,17 @@ public class LoginController {
 				return "redirect:/ejercicio/listar";
 
 			} else {
-				
-				if(usuarioService.existe()==true) {
-				return "cliente/ejerciciosRutinaMes";
+				MiembroEntity miembro = usuario.getMiembro();
+				if (miembro==null){
+					return "redirect:/form/registrar";
 				}
-				
-				return "cliente/ejerciciosRutinaDia";
+				else if(miembroService.esMiembro(usuario.getId())==true) {
+					System.out.println("si funciona");
+					return "cliente/ejerciciosRutinaMes";
+				}
+					System.out.println("no le sabemos");
+					return "cliente/chooseRoutine";
+
 			}
 
 		} catch (Exception e) {
