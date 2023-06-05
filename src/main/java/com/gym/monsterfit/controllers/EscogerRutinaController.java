@@ -39,12 +39,12 @@ public class EscogerRutinaController {
     @PostMapping
     public String procesarSeleccionTipoRutina(@RequestParam("selectedOption") String rutina, @RequestParam("inputDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha1, Model modal) {
     	System.out.println("RUTINA: " + rutina);
-    	RutinaEntity tipoEntity = rutinaRepository.getReferenceById(Integer.parseInt(rutina));
-    	System.out.println(tipoEntity.getNombre());
+    	RutinaEntity rutinaEntity = rutinaRepository.getReferenceById(Integer.parseInt(rutina));
+    	System.out.println(rutinaEntity.getNombre());
     	System.out.println(fecha1);
     	
     	List<EjercicioEntity> ejercicios = ejercicioRepository.findAll();
-    	//modal.addAttribute("RutinaEntity", RutinaEntity);
+    	modal.addAttribute("rutinaEntity", rutinaEntity);
     	modal.addAttribute("fecha", fecha1);
     	
     	modal.addAttribute("ejercicios", ejercicios);

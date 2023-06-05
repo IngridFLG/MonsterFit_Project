@@ -45,17 +45,8 @@ public class EjercicioEntity {
     private List<RutinaEjercicioEntity> ejercicio= new ArrayList<>();
 
 
-	@Override
-    public String toString() {
-        return "EjercicioEntity{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", peso=" + peso +
-                ", repeticiones=" + repeticiones +
-                ", series=" + series +
-                ", tiempo=" + tiempo +
-                ", url='" + url + '\'' +
-                '}';
-    }
+
+	
+
 
 }
