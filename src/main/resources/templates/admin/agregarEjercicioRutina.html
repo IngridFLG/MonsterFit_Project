@@ -73,7 +73,7 @@
 
 		<div id="content">
 			<div class="container py-5 mt-6">
-				<form th:action="@{/rutina/guardar}" method="post">
+				<form th:action="@{/rutina/guardar}" method="post" onsubmit="return validarRutinaEjercicio();">
 					<h1 class="titulo" th:value="${rutinaEntity.id}"
 						th:text="${rutinaEntity.nombre}" ></h1>
 					<div class="col-md-6">
@@ -84,17 +84,13 @@
 								<option value="">-- Select an option --</option>
 								<option th:each="ejercicio : ${ejercicios}"
 									th:value="${ejercicio.id}" th:text="${ejercicio.nombre}"></option>
-
 							</select>
 						</div>
-					</div>
-
 					</div>
 
 					<table class="table" id="tablaEjercicios">
 						<thead class="thead-dark">
 							<tr>
-
 								<th scope="col">Nombre</th>
 								<th scope="col">Eliminar</th>
 							</tr>
@@ -130,7 +126,7 @@
 
 
 	<script type="text/javascript">
-	document.addEventListener("DOMContentLoaded", function() {
+		document.addEventListener("DOMContentLoaded", function() {
 		  var select = document.getElementById("selectOption");
 		  var tabla = document.getElementById("tablaEjercicios");
 		  var ejercicioIdsInput = document.getElementById("ejerciciosIds");
@@ -188,6 +184,8 @@
 			});
 		});
 	</script>
+	<script type="text/javascript" src="../static/js/validarRutinaEjercicio.js"
+        th:src="@{/js/validarRutinaEjercicio.js}"></script>
 
 </body>
 
