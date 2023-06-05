@@ -58,42 +58,36 @@
 				<strong>AD</strong>
 			</div>
 
-			<ul class="list-unstyled components d-flex flex-column mb-3 justify-content-center">
+			<ul class="list-unstyled components">
+				<li><a th:href="@{/ejercicio/listar}" aria-expanded="false">
+						<!--<i class="fas fa-home"></i> --> Ejercicio
+				</a></li>
+				<li><a th:href="@{/rutina}"> Rutina </a></li>
 				<li>
-					<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" >
-						Ejercicio
-					</a>
-				</li>
-				<li>
-					<a th:href="@{/rutina}">
-						Rutina
-					</a>
-				</li>
+                    <a th:href="@{/administrarClientes}">
+                        Clientes
+                    </a>
+                </li>
 			</ul>
 		</nav>
 
 		<div id="content">
 			<div class="container py-5 mt-6">
 				<form th:action="@{/rutina/guardar}" method="post">
-					<div class="d-flex justify-content-left mb-4" >
-						<h1 th:value="${tipoEntity.id}" th:text="${tipoEntity.nombre}" >a</h1>
+					<h1 class="titulo" th:value="${rutinaEntity.id}"
+						th:text="${rutinaEntity.nombre}" ></h1>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="fecha">Fecha</label> <input type="date"
+								name="inputDate" th:value="${fecha}"> <select
+								class="form-control" id="selectOption" name="selectedOption">
+								<option value="">-- Select an option --</option>
+								<option th:each="ejercicio : ${ejercicios}"
+									th:value="${ejercicio.id}" th:text="${ejercicio.nombre}"></option>
+
+							</select>
+						</div>
 					</div>
-					<div class="d-flex flex-column mb-3">
-						<div class="container2">
-							<span for="fecha"> Fecha  </span>
-						</div>
-						<div class="row">
-							<div class="col-md-3 input-group align-items-center justify-content-between">
-								<input class="form-control" type="date" name="inputDate" th:value="${fecha}">
-							</div>
-							<div class="col-md-3 offset-md-6">
-								<select class="form-control" id="selectOption" name="selectedOption">
-									<option value="">-- Select an option --</option>
-									<option th:each="ejercicio : ${ejercicios}"
-											th:value="${ejercicio.id}" th:text="${ejercicio.nombre}"></option>
-								</select>
-							</div>
-						</div>
 
 					</div>
 
