@@ -1,5 +1,6 @@
 package com.gym.monsterfit.entities;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ejercicio", indexes = { @Index(columnList = "nombre", name = "index_nombre", unique = true) })
+@Table(name = "ejercicio", indexes = {@Index(columnList = "nombre", name = "index_nombre", unique = true) })
 public class EjercicioEntity {
 
 	@Id
@@ -26,10 +27,10 @@ public class EjercicioEntity {
 
 	@Column(unique = true, length = 50)
 	private String nombre;
-
+	
 	@Column(nullable = false, length = 255)
 	private String url;
-
+	
 	@Column(nullable = false, length = 50)
 	private String tiempo;
 
@@ -41,12 +42,11 @@ public class EjercicioEntity {
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "ejercicio")
-	private List<RutinaEjercicioEntity> ejercicio = new ArrayList<>();
+    private List<RutinaEjercicioEntity> ejercicio= new ArrayList<>();
 
-	@Override
-	public String toString() {
-		return "EjercicioEntity{" + "id=" + id + ", nombre='" + nombre + '\'' + ", peso=" + peso + ", repeticiones="
-				+ repeticiones + ", series=" + series + ", tiempo=" + tiempo + ", url='" + url + '\'' + '}';
-	}
+
+
+	
+
 
 }
