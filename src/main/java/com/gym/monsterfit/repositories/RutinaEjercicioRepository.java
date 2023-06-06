@@ -7,9 +7,12 @@ import com.gym.monsterfit.entities.RutinaEjercicioEntity;
 import java.util.List;
 import java.time.LocalDate;
 
-
 @Repository
-public interface RutinaEjercicioRepository extends JpaRepository<RutinaEjercicioEntity, Integer>{
-    
-    List<RutinaEjercicioEntity> findByFecha(LocalDate fecha);
+public interface RutinaEjercicioRepository extends JpaRepository<RutinaEjercicioEntity, Integer> {
+
+	List<RutinaEjercicioEntity> findByRutinaId(Integer rutinaId);
+
+	List<RutinaEjercicioEntity> findByFecha(LocalDate fecha);
+
+	void deleteById(Integer rutinaEjercicioId);
 }

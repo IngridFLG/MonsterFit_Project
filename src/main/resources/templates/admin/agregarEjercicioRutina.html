@@ -71,26 +71,29 @@
 
 		<div id="content">
 			<div class="container py-5 mt-6">
-
-
 				<form th:action="@{/rutina/guardar}" method="post">
 					<div class="d-flex justify-content-left mb-4">
 						<h1 class="titulo" th:value="${rutinaEntity.id}" th:text="${rutinaEntity.nombre}">a</h1>
+						<input type="hidden" name="rutinaId" th:value="${rutinaEntity.id}">
 					</div>
 					<div class="d-flex flex-column mb-3">
+					<div class="form-group">
 						<div class="container2">
 							<span for="fecha"> Fecha </span>
 						</div>
-						<div class="row">
+						<div class="row" style="justify-content: space-between;">
 							<div class="col-md-3 input-group align-items-center justify-content-between">
 								<input class="form-control" type="date" name="inputDate" th:value="${fecha}">
-							</div>
-							<div class="col-md-3 offset-md-6">
+							</div>							
+								<div class="input-group">
 								<select class="form-control" id="selectOption" name="selectedOption">
-									<option value="">-- Select an option --</option>
-									<option th:each="ejercicio : ${ejercicios}" th:value="${ejercicio.id}"
-										th:text="${ejercicio.nombre}"></option>
-								</select>
+                            		<option value="">-- Select an option --</option>
+                            		<option th:each="ejercicio : ${ejercicios}" th:value="${ejercicio.id}" th:text="${ejercicio.nombre}"></option>
+                        		</select>
+                        			<div class="input-group-append">
+                            			<button class="btn btn-primary" type="button" onclick="agregarEjercicio()">Agregar</button>
+                        			</div>
+								</div>
 							</div>
 						</div>
 
@@ -117,6 +120,32 @@
 		</div>
 	</div>
 
+	<script>
+    function agregarEjercicio() {
+        var ejercicioId = document.getElementById("selectOption").value;
+        var tabla = document.getElementById("tablaEjercicios");
+        var row = tabla.insertRow(-1);
+        var nombreCell = row.insertCell(0);
+        var eliminarCell = row.insertCell(1);
+        nombreCell.innerHTML = document.getElementById("selectOption").options[document.getElementById("selectOption").selectedIndex].text;
+        eliminarCell.innerHTML = '<button class="btn btn-danger" type="button" onclick="eliminarEjercicio(this)">Eliminar</button>';
+
+        // Agregar el id del ejercicio al campo hidden para enviarlo al controlador
+        var ejerciciosIdsInput = document.getElementById("ejerciciosIds");
+        ejerciciosIdsInput.value += ejercicioId + ",";
+    }
+
+    function eliminarEjercicio(button) {
+        var row = button.parentNode.parentNode;
+        var ejercicioId = row.cells[1].innerHTML;
+        row.parentNode.removeChild(row);
+
+        // Eliminar el id del ejercicio del campo hidden
+        var ejerciciosIdsInput = document.getElementById("ejerciciosIds");
+        ejerciciosIdsInput.value = ejerciciosIdsInput.value.replace(ejercicioId + ",", "");
+    }
+</script>
+
 
 	<!-- jQuery CDN - Slim version (=without AJAX) -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -131,58 +160,6 @@
 		integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
 		crossorigin="anonymous"></script>
 
-
-	<script type="text/javascript">
-		document.addEventListener("DOMContentLoaded", function () {
-			var select = document.getElementById("selectOption");
-			var tabla = document.getElementById("tablaEjercicios");
-			var ejercicioIdsInput = document.getElementById("ejerciciosIds");
-
-			select.addEventListener("change", function () {
-				var ejercicioSeleccionado = select.options[select.selectedIndex];
-				if (ejercicioSeleccionado.value !== "") {
-					var fila = tabla.insertRow();
-					var celdaNombre = fila.insertCell();
-					var celdaEliminar = fila.insertCell();
-					celdaNombre.textContent = ejercicioSeleccionado.text;
-
-					var inputId = document.createElement("input");
-					inputId.type = "hidden";
-					inputId.value = ejercicioSeleccionado.value;
-					celdaEliminar.appendChild(inputId);
-
-					var enlaceEliminar = document.createElement("a");
-					var iconoEliminar = document.createElement("img");
-					iconoEliminar.setAttribute("th:src", "@{/css/img/trash-solid.svg}");
-					iconoEliminar.width = 22.5;
-					iconoEliminar.height = 22.5;
-					enlaceEliminar.appendChild(iconoEliminar);
-					celdaEliminar.appendChild(enlaceEliminar);
-
-					enlaceEliminar.addEventListener("click", function () {
-						tabla.deleteRow(fila.rowIndex);
-						updateEjercicioIds();
-					});
-
-					select.selectedIndex = 0;
-					updateEjercicioIds();
-				}
-			});
-
-			function updateEjercicioIds() {
-				var ejercicioIds = [];
-				var filas = tabla.getElementsByTagName("tr");
-				for (var i = 0; i < filas.length; i++) {
-					var celdaEliminar = filas[i].getElementsByTagName("td")[1];
-					var inputId = celdaEliminar.getElementsByTagName("input")[0];
-					var ejercicioId = inputId.value;
-					ejercicioIds.push(ejercicioId);
-				}
-				ejercicioIdsInput.value = ejercicioIds.join(",");
-			}
-		});
-
-	</script>
 
 	<script type="text/javascript">
 		$(document).ready(function () {

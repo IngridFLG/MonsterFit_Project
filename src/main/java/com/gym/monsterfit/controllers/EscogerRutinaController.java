@@ -4,6 +4,8 @@ import com.gym.monsterfit.entities.EjercicioEntity;
 import com.gym.monsterfit.entities.RutinaEntity;
 import com.gym.monsterfit.repositories.EjercicioRepository;
 import com.gym.monsterfit.repositories.RutinaRepository;
+import com.gym.monsterfit.services.implementations.RutinaEjercicioService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -14,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/rutina")
@@ -25,6 +30,9 @@ public class EscogerRutinaController {
     
     @Autowired
     EjercicioRepository ejercicioRepository;
+    
+    @Autowired
+    RutinaEjercicioService rutinaEjercicioService;
 
     @GetMapping
     public String mostrarFormulario(Model model) {
@@ -55,14 +63,23 @@ public class EscogerRutinaController {
     
     @PostMapping("/guardar")
     public String procesarFormRutina(
-            @RequestParam("inputDate") String fechaString,
-            @RequestParam("ejerciciosIds") Integer[] ejerciciosIds) {
-    	System.out.println("tipoId" +  " fecha: " + fechaString);
-    	for(int i = 0; i < ejerciciosIds.length; i++) {
-    		System.out.println(ejerciciosIds[i]);
+    		@RequestParam("inputDate") String fechaString,
+    		@RequestParam("rutinaId") String rutinaIdString,
+            @RequestParam("ejerciciosIds") List<Integer> ejerciciosIds) {
+    	
+    	ejerciciosIds = ejerciciosIds.stream().filter(Objects::nonNull).collect(Collectors.toList());
+    	
+    	for (Integer ejercicioId : ejerciciosIds) {
+    	    System.out.println("Ejercicio ID: " + ejercicioId);
     	}
-    	return "admin/asignarRutina";
+    	
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate fecha = LocalDate.parse(fechaString, formatter);
+        RutinaEntity rutina = new RutinaEntity();
+        Integer id = Integer.parseInt(rutinaIdString);
+        rutina.setId(id);
+        rutinaEjercicioService.saveRoutine(fecha, ejerciciosIds, rutina);
+    	return "redirect:/rutina";
     }
-
 
 }
