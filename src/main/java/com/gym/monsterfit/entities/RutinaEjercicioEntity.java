@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -33,16 +34,19 @@ public class RutinaEjercicioEntity {
     private Long id;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "rutina_id")
     private RutinaEntity rutina;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "ejercicio_id")
     private EjercicioEntity ejercicio;
 
     @JsonIgnore
     @OneToMany(mappedBy = "rutinaEjercico")
     private List<HistorialEntity> historial = new ArrayList<>();
-
+    
+    @NotNull
     private LocalDate fecha;
 }

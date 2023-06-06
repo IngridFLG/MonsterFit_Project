@@ -13,7 +13,7 @@ function validarRutinaEjercicio() {
     return false;
   }
 
-// Validar si se han asignado ejercicios repetidos para la misma fecha y rutina
+  // Validar si se han asignado ejercicios repetidos para la misma fecha y rutina
   const ejerciciosIdsAnteriores = ejerciciosIdsInput.split(',');
   if (ejerciciosIdsAnteriores.includes(rutinaSeleccionada)) {
     Swal.fire({
@@ -23,5 +23,16 @@ function validarRutinaEjercicio() {
     });
     return false;
   }
+
+  // Validar si se ha agregado al menos 1 ejercicio
+  if (ejerciciosIdsAnteriores.length === 0) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Debes agregar al menos 1 ejercicio.',
+    });
+    return false;
+  }
+
   return true;
 }
