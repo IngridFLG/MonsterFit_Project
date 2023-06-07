@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 	import org.springframework.validation.BindingResult;
 	import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 	import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +19,7 @@ import com.gym.monsterfit.entities.UsuarioEntity;
 import com.gym.monsterfit.repositories.MiembroRepository;
 import com.gym.monsterfit.repositories.UsuarioRepository;
 import com.gym.monsterfit.services.implementations.MiembroService;
-import com.gym.monsterfit.services.implementations.UsuarioService;
 
-import lombok.Data;
 
 
 @Controller
@@ -54,7 +51,7 @@ public class FormUserController {
 	
 	    @GetMapping("/registrar")
 		public String registrarMiembro(MiembroEntity miembroEntity) {
-			return "formularioCliente";
+			return "cliente/formularioCliente";
 		} 
 		
 		@PostMapping("/registrar")

@@ -17,4 +17,6 @@ public interface MiembroServiceInterface {
 	public MiembroEntity updateMiembro(MiembroEntity miembro);
 	
 	public void deleteMiembro(Integer id);
+
+	public boolean esMiembro(Integer id);
 }

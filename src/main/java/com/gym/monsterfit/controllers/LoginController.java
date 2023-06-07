@@ -1,5 +1,7 @@
 package com.gym.monsterfit.controllers;
 
+
+import com.gym.monsterfit.services.implementations.MiembroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +17,9 @@ public class LoginController {
 
 	@Autowired
 	UsuarioServiceInterface usuarioService;
+
+	@Autowired
+	MiembroService miembroService;
 
 	@GetMapping("/login")
 	public String iniciarSesion() {
@@ -32,6 +37,7 @@ public class LoginController {
 				return "redirect:/ejercicio/listar";
 
 			} else {
+
 				
 				if(usuario.getMiembro()==null) {
 				
