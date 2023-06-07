@@ -33,11 +33,13 @@ public class LoginController {
 
 			} else {
 				
-				if(usuarioService.existe()==true) {
-				return "cliente/ejerciciosRutinaMes";
-				}
+				if(usuario.getMiembro()==null) {
+				
+				return "cliente/formularioCliente";
+			}
 				
 				return "cliente/ejerciciosRutinaDia";
+			
 			}
 
 		} catch (Exception e) {

@@ -12,7 +12,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.gym.monsterfit.entities.MiembroEntity;
 import com.gym.monsterfit.entities.UsuarioEntity;
+import com.gym.monsterfit.repositories.MiembroRepository;
 import com.gym.monsterfit.repositories.RolRepository;
 import com.gym.monsterfit.repositories.UsuarioRepository;
 import com.gym.monsterfit.services.interfaces.UsuarioServiceInterface;
@@ -83,10 +85,15 @@ public class UsuarioService implements UsuarioServiceInterface {
 		usuarioRepository.deleteById(id);
 	}
 
+	
+
 	@Override
-	public boolean existe() {
-		// TODO Auto-generated method stub
-		return false;
+	public UsuarioEntity optenerUsarioPorId(Integer id) {
+		
+		return usuarioRepository.getById(id);
+	
+		
+		
 	}
 
 }

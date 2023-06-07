@@ -21,5 +21,8 @@ public interface UsuarioServiceInterface extends UserDetailsService {
 
 	public UsuarioEntity selectUsuariobyEmail(String email);
 	
-	public boolean existe();
+	public UsuarioEntity optenerUsarioPorId(Integer id);
+		
+	
+
 }

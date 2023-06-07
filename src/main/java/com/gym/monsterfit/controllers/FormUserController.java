@@ -1,24 +1,30 @@
 package com.gym.monsterfit.controllers;
 import java.util.List;
+import java.util.Optional;
 
-	import javax.validation.Valid;
+import javax.validation.Valid;
 
 	import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 	import org.springframework.validation.BindingResult;
 	import org.springframework.web.bind.annotation.GetMapping;
-	import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 	import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gym.monsterfit.entities.MiembroDTO;
 import com.gym.monsterfit.entities.MiembroEntity;
-	import com.gym.monsterfit.repositories.MiembroRepository;
-	import com.gym.monsterfit.services.implementations.MiembroService;
+import com.gym.monsterfit.entities.UsuarioEntity;
+import com.gym.monsterfit.repositories.MiembroRepository;
+import com.gym.monsterfit.repositories.UsuarioRepository;
+import com.gym.monsterfit.services.implementations.MiembroService;
+import com.gym.monsterfit.services.implementations.UsuarioService;
 
 import lombok.Data;
 
-@Data
+
 @Controller
 @RequestMapping("/form")
 public class FormUserController {
@@ -29,7 +35,10 @@ public class FormUserController {
 		@Autowired
 		private MiembroRepository miembroRepository;
 		
-		boolean current;
+		@Autowired
+		private UsuarioRepository usuarioRepository;
+		
+
 		
 		@GetMapping("/listar")
 		public String listarMiembros(Model model) {
@@ -42,28 +51,36 @@ public class FormUserController {
 			return "miembroListar";
 		}
 		
-		
+	
 	    @GetMapping("/registrar")
 		public String registrarMiembro(MiembroEntity miembroEntity) {
 			return "formularioCliente";
 		} 
 		
 		@PostMapping("/registrar")
-		public String procesarRegistroMiembro(@Valid MiembroEntity miembroEntity, BindingResult result, Model model) {
+		public String procesarRegistroMiembro(@Valid MiembroDTO miembroEntity, BindingResult result, Model model) {
 			
+		
+
 			if(result.hasErrors()) {
 				return "cliente/formularioCliente";
 			}
-			miembroService.createMiembro(miembroEntity);
+			UsuarioEntity usuario = usuarioRepository.findByEmail(miembroEntity.getEmail());
+			
+			MiembroEntity miembro = new MiembroEntity();
+			miembro.setUsuario(usuario);
+			miembro.setNombre(miembroEntity.getNombre());
+			miembro.setEdad(miembroEntity.getEdad());
+			miembro.setSexo(miembroEntity.getSexo());
+			miembro.setAltura(miembroEntity.getAltura());
+			miembro.setPeso(miembroEntity.getPeso());
+			miembroService.createMiembro(miembro);
 			model.addAttribute("miembroEntity", miembroEntity);
-			if(miembroService.getMiembroById(miembroEntity)!=null) {
-				current = true;
-			}
-		    System.out.println(miembroEntity.getNombre() + "guarda?" +  current);
+		
+			
 		    
 		    return "cliente/ejerciciosRutinaDia";
 		}
-		
 		
 		
 		@GetMapping("/editar/{id}")
@@ -90,8 +107,8 @@ public class FormUserController {
 			return "redirect:/miembro/listar";
 		}
 		
-		
-	}
+}
+
 
 
 
