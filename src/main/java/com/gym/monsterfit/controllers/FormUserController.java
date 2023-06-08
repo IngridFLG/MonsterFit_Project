@@ -1,16 +1,17 @@
 package com.gym.monsterfit.controllers;
-import java.util.List;
-import java.util.Optional;
+
+
+import java.security.Principal;
 
 import javax.validation.Valid;
 
-	import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-	import org.springframework.validation.BindingResult;
-	import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-	import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gym.monsterfit.entities.MiembroDTO;
@@ -19,7 +20,6 @@ import com.gym.monsterfit.entities.UsuarioEntity;
 import com.gym.monsterfit.repositories.MiembroRepository;
 import com.gym.monsterfit.repositories.UsuarioRepository;
 import com.gym.monsterfit.services.implementations.MiembroService;
-
 
 
 @Controller
@@ -34,38 +34,25 @@ public class FormUserController {
 		
 		@Autowired
 		private UsuarioRepository usuarioRepository;
-		
-
-		
-		@GetMapping("/listar")
-		public String listarMiembros(Model model) {
-			List<MiembroEntity> miembros = miembroService.getAllMiembro();
-			System.out.println("entro auqi get ejercicio listar");
-			for(MiembroEntity miembro : miembros) {
-				System.out.println(miembro.getNombre());
-			}
-			model.addAttribute("miembros", miembros);
-			return "miembroListar";
-		}
-		
 	
 	    @GetMapping("/registrar")
 		public String registrarMiembro(MiembroEntity miembroEntity) {
+
 			return "cliente/formularioCliente";
 		} 
 		
 		@PostMapping("/registrar")
-		public String procesarRegistroMiembro(@Valid MiembroDTO miembroEntity, BindingResult result, Model model) {
+		public String procesarRegistroMiembro(@Valid MiembroDTO miembroEntity, BindingResult result, Model model,  Principal principal) {
 			
 		
 
 			if(result.hasErrors()) {
 				return "cliente/formularioCliente";
 			}
-			UsuarioEntity usuario = usuarioRepository.findByEmail(miembroEntity.getEmail());
-			
+			String username = principal.getName();
+			UsuarioEntity usuarioEntity= usuarioRepository.findByEmail(username);
 			MiembroEntity miembro = new MiembroEntity();
-			miembro.setUsuario(usuario);
+			miembro.setUsuario(usuarioEntity);
 			miembro.setNombre(miembroEntity.getNombre());
 			miembro.setEdad(miembroEntity.getEdad());
 			miembro.setSexo(miembroEntity.getSexo());

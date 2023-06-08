@@ -41,7 +41,9 @@ public class LoginController {
 				
 				if(usuario.getMiembro()==null) {
 				
-				return "cliente/formularioCliente";
+					modelo.addAttribute("usuarioLogin", usuario);
+					return "redirect:/form/registrar";
+
 			}
 				
 				return "cliente/ejerciciosRutinaDia";
