@@ -33,15 +33,16 @@
       <div class="col-12">
         <div>
           <div class="card-body p-5 bg-transparent">
-            <h3 class="espaciado text-center">Registra tus datos</h3>
-
+            <h3 th:if="${miembroEntity.nombre == null}" class="espaciado text-center">Registra tus datos</h3>
+            <h3 th:if="${miembroEntity.nombre != null}" class="espaciado text-center">Actualiza tus datos</h3>
             <form th:action="@{/form/registrar}" th:object="${miembroEntity}" method="post">
                <div class="row g-3">
                 <div class="col-md-6">
                   <!-- Nombre input -->
                   <div class="form-group">
-                      <label class="col-form-label text-start" for="nombre">Nombres y Apellidos</label>
-                    <input type="text" id="nombre" name="nombre" class="form-control" required />
+                    <input type="hidden" name="id"  th:if="${miembroEntity.id != null}" th:field="*{id}" />
+                    <label class="col-form-label text-start" for="nombre">Nombres y Apellidos</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control" th:field="*{nombre}" th:value="${miembroEntity.nombre}"  required />
                   </div>
                 </div>
    
@@ -49,7 +50,7 @@
                     <!-- Edad input -->
                   <div class="form-group">
                     <label class="col-form-label text-start" for="edad">Edad</label>
-                    <input type="text" id="edad" name="edad" class="form-control"  required/>
+                    <input type="text" id="edad" name="edad" class="form-control" th:field="*{edad}" th:value="${miembroEntity.edad}" required/>
                   </div>
                 </div>
               </div>
@@ -60,7 +61,7 @@
                   <!-- Peso input -->
                   <div class="form-group">
                     <label class="col-form-label text-start" for="peso">Peso</label>
-                    <input type="text" id="peso" name="peso" class="form-control"  required/>
+                    <input type="text" id="peso" name="peso" class="form-control" th:field="*{peso}" th:value="${miembroEntity.peso}"  required/>
                   </div>
                 </div>
 
@@ -69,7 +70,7 @@
                       <!-- Sexo input -->
                   <div class="form-group">
                     <label class="col-form-label text-start" for="sexo">Sexo</label>
-                    <input type="text" id="sexo" name="sexo" class="form-control"  required />
+                    <input type="text" id="sexo" name="sexo" class="form-control" th:field="*{sexo}" th:value="${miembroEntity.sexo}"  required />
                   </div>
                 </div>
               </div>
@@ -79,7 +80,7 @@
                   <!-- Altura input -->
                   <div class="form-group">
                     <label class="col-form-label text-start" for="altura">Altura</label>
-                    <input type="text" id="altura" name="altura" class="form-control"  required/>
+                    <input type="text" id="altura" name="altura" class="form-control" th:field="*{altura}" th:value="${miembroEntity.altura}" required/>
                   </div>
                 </div>
               </div>  

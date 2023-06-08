@@ -35,7 +35,7 @@
 		</div>
 		<div class="mr-5">
 			<ul class="navbar-nav ms-auto">
-				<li class="nav-item"><a class="nav-link" href="formularioCliente.html">Actualizar
+				<li class="nav-item"><a class="nav-link" th:href="@{/form/registrar(id=${miembroEntity.id})}">Actualizar
 					datos</a></li>
 				<li class="nav-item"><a class="nav-link"
 										sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><img

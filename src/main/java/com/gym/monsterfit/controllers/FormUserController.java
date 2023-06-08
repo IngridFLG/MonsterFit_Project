@@ -10,11 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gym.monsterfit.entities.MiembroDTO;
 import com.gym.monsterfit.entities.MiembroEntity;
 import com.gym.monsterfit.entities.UsuarioEntity;
 import com.gym.monsterfit.repositories.MiembroRepository;
@@ -36,16 +37,18 @@ public class FormUserController {
 		private UsuarioRepository usuarioRepository;
 	
 	    @GetMapping("/registrar")
-		public String registrarMiembro(MiembroEntity miembroEntity) {
-
+		public String registrarMiembro(@RequestParam(value = "id", required = false) Integer id, Model model) {
+			MiembroEntity miembroEntity = new MiembroEntity();
+			if(id != null) {
+				miembroEntity = miembroRepository.findById(id).get();
+			}
+			model.addAttribute("miembroEntity", miembroEntity);
 			return "cliente/formularioCliente";
 		} 
 		
 		@PostMapping("/registrar")
-		public String procesarRegistroMiembro(@Valid MiembroDTO miembroEntity, BindingResult result, Model model,  Principal principal) {
+		public String procesarRegistroMiembro(@Valid MiembroEntity miembroEntity, BindingResult result, Model model,  Principal principal) {
 			
-		
-
 			if(result.hasErrors()) {
 				return "cliente/formularioCliente";
 			}
@@ -63,24 +66,21 @@ public class FormUserController {
 		
 			
 		    
-		    return "cliente/ejerciciosRutinaDia";
+		    return "cliente/chooseRoutine";
 		}
 		
 		
-		@GetMapping("/editar/{id}")
-		public String editarMiembro(MiembroEntity miembroEntity, Model model) {
-			MiembroEntity miembro = miembroRepository.findById(miembroEntity.getId()).orElse(null);
-			
-			System.out.println(miembro.getNombre() + " editable");
-			model.addAttribute("miembroEntity", miembroEntity);
-			return "miembroRegistrar";
-		}
-		
-		@PostMapping("/editar/{id}")
-		public String procesarMiembroEditar(@PathVariable("id") Integer id, MiembroEntity miembroEntity) {
-			miembroEntity.setId(id);
+		@GetMapping("/editar")
+		public String procesarMiembroEditar(@RequestParam("id") Integer id, @ModelAttribute("miembroEntity") MiembroEntity miembroActualizado) {
+			MiembroEntity miembroEntity = miembroRepository.findById(id).get();
+			miembroEntity.setNombre(miembroActualizado.getNombre());
+			miembroEntity.setEdad(miembroActualizado.getEdad());
+			miembroEntity.setPeso(miembroActualizado.getPeso());
+			miembroEntity.setSexo(miembroActualizado.getSexo());
+			miembroEntity.setAltura(miembroActualizado.getAltura());
 			miembroRepository.save(miembroEntity);
-			return "redirect:/miembro/listar";
+			
+			return "cliente/chooseRoutine";
 		}
 		
 		
@@ -88,7 +88,7 @@ public class FormUserController {
 		@GetMapping("/eliminar/{id}")
 		public String eliminarMiembro(@PathVariable("id") Integer id) {
 			miembroService.deleteMiembro(id);
-			return "redirect:/miembro/listar";
+			return "cliente/chooseRoutine";
 		}
 		
 }
