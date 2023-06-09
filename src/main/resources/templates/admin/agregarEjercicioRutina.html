@@ -28,18 +28,19 @@
 
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-custom d-flex justify-content-between">
-		<div class="ml-5">
-			<a class="navbar-brand" href="index.html">Monster Fit</a>
-		</div>
-		<div class="mr-5">
-			<ul class="navbar-nav ms-auto">
-				<li class="nav-item"><a class="nav-link" sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><img
-								src="../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}"
-								width="22.5" height="22.5"></a></a></li>
-			</ul>
-		</div>
-	</nav>
+<nav class="navbar navbar-expand-lg navbar-custom d-flex justify-content-between">
+	<div class="ml-5">
+		<a class="navbar-brand" href="index.html">Monster Fit</a>
+	</div>
+	<div class="mr-5">
+		<ul class="navbar-nav ms-auto">
+			<li class="nav-item"><a class="nav-link"
+									sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><img
+					src="../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}"
+					width="22.5" height="22.5"></a></a></li>
+		</ul>
+	</div>
+</nav>
 
 	<div class="wrapper">
 		<!-- Sidebar  -->

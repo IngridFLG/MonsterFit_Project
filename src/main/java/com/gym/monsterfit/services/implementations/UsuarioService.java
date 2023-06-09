@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.gym.monsterfit.entities.UsuarioEntity;
+
 import com.gym.monsterfit.repositories.RolRepository;
 import com.gym.monsterfit.repositories.UsuarioRepository;
 import com.gym.monsterfit.services.interfaces.UsuarioServiceInterface;
@@ -82,5 +83,17 @@ public class UsuarioService implements UsuarioServiceInterface {
 	public void deleteUsuario(Integer id) {
 		usuarioRepository.deleteById(id);
 	}
-    
+
+
+
+	@Override
+	public UsuarioEntity optenerUsarioPorId(Integer id) {
+		
+		return usuarioRepository.getById(id);
+	
+		
+		
+	}
+
+
 }

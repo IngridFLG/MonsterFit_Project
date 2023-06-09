@@ -10,9 +10,13 @@ public interface MiembroServiceInterface {
 	
 	public MiembroEntity getMiembroById(MiembroEntity miembro);
 	
+	
+	
 	public MiembroEntity createMiembro(MiembroEntity miembro);
 	
 	public MiembroEntity updateMiembro(MiembroEntity miembro);
 	
 	public void deleteMiembro(Integer id);
+
+	public boolean esMiembro(Integer id);
 }

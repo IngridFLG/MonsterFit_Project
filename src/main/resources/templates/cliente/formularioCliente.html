@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es"  xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -10,6 +10,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="../../static/css/style.css" th:href="@{/css/style.css}" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
 </head>
 
 <body>
@@ -20,8 +22,9 @@
   <div class="mr-5">
     <ul class="navbar-nav ms-auto">
       <li class="nav-item"><a class="nav-link"
-                              href="tu_ruta_de_redireccion"><img
-              src="../../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}" width="22.5" height="22.5"></a></li>
+                              sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><img
+              src="../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}"
+              width="22.5" height="22.5"></a></a></li>
     </ul>
   </div>
 </nav>
@@ -32,41 +35,44 @@
       <div class="col-12">
         <div>
           <div class="card-body p-5 bg-transparent">
-            <h3 class="espaciado text-center">Registra tus datos</h3>
-
-            <form>
-              <div class="row g-3">
+            <h3 th:if="${miembroEntity.nombre == null}" class="espaciado text-center">Registra tus datos</h3>
+            <h3 th:if="${miembroEntity.nombre != null}" class="espaciado text-center">Actualiza tus datos</h3>
+            <form th:action="@{/form/registrar}" th:object="${miembroEntity}" method="post" onsubmit="return validarFormularioCliente();">
+               <div class="row g-3">
                 <div class="col-md-6">
                   <!-- Nombre input -->
                   <div class="form-group">
-                    <label class="col-form-label" for="nombre">Nombres y apellidos</label>
-                    <input type="text" id="nombre" class="form-control" required />
+                    <input type="hidden" name="id"  th:if="${miembroEntity.id != null}" th:field="*{id}" />
+                    <label class="col-form-label text-start" for="nombre">Nombres y Apellidos</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control" th:field="*{nombre}" th:value="${miembroEntity.nombre}"  required />
                   </div>
                 </div>
-
+   
                 <div class="col-md-6">
-                  <!-- Sexo input -->
+                    <!-- Edad input -->
                   <div class="form-group">
-                    <label class="col-form-label text-start" for="sexo">Edad</label>
-                    <input type="text" id="sexo" class="form-control" required />
+                    <label class="col-form-label text-start" for="edad">Edad</label>
+                    <input type="number" id="edad" name="edad" class="form-control" th:field="*{edad}" th:value="${miembroEntity.edad}" required/>
                   </div>
                 </div>
               </div>
+          
 
               <div class="row g-3">
                 <div class="col-md-6">
                   <!-- Peso input -->
                   <div class="form-group">
-                    <label class="col-form-label text-start" for="peso">Sexo</label>
-                    <input type="text" id="peso" class="form-control" required/>
+                    <label class="col-form-label text-start" for="peso">Peso</label>
+                    <input type="number" id="peso" name="peso" class="form-control" th:field="*{peso}" th:value="${miembroEntity.peso}"  required/>
                   </div>
                 </div>
 
                 <div class="col-md-6">
-                  <!-- Edad input -->
+                           
+                      <!-- Sexo input -->
                   <div class="form-group">
-                    <label class="col-form-label text-start" for="edad">Altura</label>
-                    <input type="text" id="edad" class="form-control" required/>
+                    <label class="col-form-label text-start" for="sexo">Sexo</label>
+                    <input type="text" id="sexo" name="sexo" class="form-control" th:field="*{sexo}" th:value="${miembroEntity.sexo}"  required />
                   </div>
                 </div>
               </div>
@@ -75,16 +81,16 @@
                 <div class="col-md-6">
                   <!-- Altura input -->
                   <div class="form-group">
-                    <label class="col-form-label text-start" for="altura">Peso</label>
-                    <input type="text" id="altura" class="form-control" required/>
+                    <label class="col-form-label text-start" for="altura">Altura</label>
+                    <input type="number" id="altura" name="altura" class="form-control" th:field="*{altura}" th:value="${miembroEntity.altura}" required/>
                   </div>
                 </div>
-              </div>
-
+              </div>  
+ 
               <div class="row g-3">
                 <div class="col-md-6"></div>
                 <div class="col-md-6 d-flex justify-content-end">
-                  <button type="submit" class="btn btn-dark">Enviar</button>
+                  <button type="submit" class="btn btn-dark">Registrar</button>
                 </div>
               </div>
             </form>
@@ -104,5 +110,9 @@
         crossorigin="anonymous"></script>
 <!-- Core theme JS-->
 <script src="js/scripts.js"></script>
+<script type="text/javascript" src="../static/js/validarFormularioCliente.js"
+        th:src="@{/js/validarFormularioCliente.js}"></script>
+
 </body>
 </html>
+    
