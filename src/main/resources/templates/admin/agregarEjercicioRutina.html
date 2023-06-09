@@ -77,22 +77,24 @@
 						<input type="hidden" name="rutinaId" th:value="${rutinaEntity.id}">
 					</div>
 					<div class="d-flex flex-column mb-3">
-					<div class="form-group">
-						<div class="container2">
-							<span for="fecha"> Fecha </span>
-						</div>
-						<div class="row" style="justify-content: space-between;">
-							<div class="col-md-3 input-group align-items-center justify-content-between">
-								<input class="form-control" type="date" name="inputDate" th:value="${fecha}">
-							</div>							
+						<div class="form-group">
+							<div class="container2">
+								<span for="fecha"> Fecha </span>
+							</div>
+							<div class="row" style="justify-content: space-between;">
+								<div class="col-md-3 input-group align-items-center justify-content-between">
+									<input class="form-control" type="date" id="inputDate" name="inputDate" th:value="${fecha}" readonly >
+								</div>
 								<div class="input-group">
-								<select class="form-control" id="selectOption" name="selectedOption" required>
-                            		<option value="">-- Select an option --</option>
-                            		<option th:each="ejercicio : ${ejercicios}" th:value="${ejercicio.id}" th:text="${ejercicio.nombre}"></option>
-                        		</select>
-                        			<div class="input-group-append">
-                            			<button class="btn btn-primary" type="button" onclick="agregarEjercicio()">Agregar</button>
-                        			</div>
+									<select class="form-control" id="selectOption" name="selectedOption" required>
+										<option value="">-- Select an option --</option>
+										<option th:each="ejercicio : ${ejercicios}" th:value="${ejercicio.id}"
+											th:text="${ejercicio.nombre}"></option>
+									</select>
+									<div class="input-group-append">
+										<button class="btn btn-primary" type="button"
+											onclick="agregarEjercicio()">Agregar</button>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -108,6 +110,16 @@
 							</tr>
 						</thead>
 						<tbody>
+							<tr th:each="rutinaEjercicio: ${rutinaEjercicios}">
+								<td th:if="${rutinaEjercicio != null}"
+									th:text="${rutinaEjercicio.ejercicio.nombre}"></td>
+								<td>
+									<a th:href="@{/rutina/borrar/{id}(id=${rutinaEjercicio.id})}"><img
+										src="../static/css/img/trash-solid.svg" th:src="@{/css/img/trash-solid.svg}"
+										width="22.5" height="22.5"></a>
+								</td>
+							</tr>
+
 
 						</tbody>
 					</table>
@@ -121,38 +133,37 @@
 	</div>
 
 	<script>
-    function agregarEjercicio() {
-    	var ejercicioId = document.getElementById("selectOption").value;
-         
-         // Verificar si se ha seleccionado una opción válida
-         if (ejercicioId !== "") {
-        	var tabla = document.getElementById("tablaEjercicios");
-        	var row = tabla.insertRow(-1);
-        	var nombreCell = row.insertCell(0);
-        	var eliminarCell = row.insertCell(1);
-        	nombreCell.innerHTML = document.getElementById("selectOption").options[document.getElementById("selectOption").selectedIndex].text;
-        	eliminarCell.innerHTML = '<button class="btn btn-danger" type="button" onclick="eliminarEjercicio(this)">Eliminar</button>';
+		function agregarEjercicio() {
+			var ejercicioId = document.getElementById("selectOption").value;
 
-        	// Agregar el id del ejercicio al campo hidden para enviarlo al controlador
-        	var ejerciciosIdsInput = document.getElementById("ejerciciosIds");
-        	ejerciciosIdsInput.value += ejercicioId + ",";
-         }
-    }
+			// Verificar si se ha seleccionado una opción válida
+			if (ejercicioId !== "") {
+				var tabla = document.getElementById("tablaEjercicios");
+				var row = tabla.insertRow(-1);
+				var nombreCell = row.insertCell(0);
+				var eliminarCell = row.insertCell(1);
+				nombreCell.innerHTML = document.getElementById("selectOption").options[document.getElementById("selectOption").selectedIndex].text;
+				eliminarCell.innerHTML = '<button class="btn btn-danger" type="button" onclick="eliminarEjercicio(this)">Eliminar</button>';
 
-    function eliminarEjercicio(button) {
-        var row = button.parentNode.parentNode;
-        var ejercicioId = row.cells[1].innerHTML;
-        row.parentNode.removeChild(row);
+				// Agregar el id del ejercicio al campo hidden para enviarlo al controlador
+				var ejerciciosIdsInput = document.getElementById("ejerciciosIds");
+				ejerciciosIdsInput.value += ejercicioId + ",";
+			}
+		}
 
-        // Eliminar el id del ejercicio del campo hidden
-        var ejerciciosIdsInput = document.getElementById("ejerciciosIds");
-        ejerciciosIdsInput.value = ejerciciosIdsInput.value.replace(ejercicioId + ",", "");
-    }
-    
-</script>
+		function eliminarEjercicio(button) {
+			var row = button.parentNode.parentNode;
+			var ejercicioId = row.cells[1].innerHTML;
+			row.parentNode.removeChild(row);
 
-<script type="text/javascript" src="../static/js/validarRutinaEjercicio.js"
-        th:src="@{/js/validarRutinaEjercicio.js}"></script>
+			// Eliminar el id del ejercicio del campo hidden
+			var ejerciciosIdsInput = document.getElementById("ejerciciosIds");
+			ejerciciosIdsInput.value = ejerciciosIdsInput.value.replace(ejercicioId + ",", "");
+		}
+
+	</script>
+
+
 
 	<!-- jQuery CDN - Slim version (=without AJAX) -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -175,6 +186,9 @@
 			});
 		});
 	</script>
+
+	<script type="text/javascript" src="../static/js/validarRutinaEjercicio.js"
+		th:src="@{/js/validarRutinaEjercicio.js}"></script>
 
 </body>
 

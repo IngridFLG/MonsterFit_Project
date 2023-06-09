@@ -14,5 +14,7 @@ public interface RutinaEjercicioRepository extends JpaRepository<RutinaEjercicio
 
 	List<RutinaEjercicioEntity> findByFecha(LocalDate fecha);
 
+	List<RutinaEjercicioEntity> findByRutinaIdAndFecha(Integer rutinaId, LocalDate fecha);
+
 	void deleteById(Integer rutinaEjercicioId);
 }

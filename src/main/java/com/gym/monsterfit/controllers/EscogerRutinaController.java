@@ -1,8 +1,10 @@
 package com.gym.monsterfit.controllers;
 
 import com.gym.monsterfit.entities.EjercicioEntity;
+import com.gym.monsterfit.entities.RutinaEjercicioEntity;
 import com.gym.monsterfit.entities.RutinaEntity;
 import com.gym.monsterfit.repositories.EjercicioRepository;
+import com.gym.monsterfit.repositories.RutinaEjercicioRepository;
 import com.gym.monsterfit.repositories.RutinaRepository;
 import com.gym.monsterfit.services.implementations.RutinaEjercicioService;
 
@@ -11,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +37,9 @@ public class EscogerRutinaController {
     @Autowired
     RutinaEjercicioService rutinaEjercicioService;
 
+    @Autowired
+    RutinaEjercicioRepository rutinaEjercicioRepository;
+
     @GetMapping
     public String mostrarFormulario(Model model) {
         List<RutinaEntity> tiposRutina = rutinaRepository.findAll();
@@ -52,6 +58,9 @@ public class EscogerRutinaController {
     	System.out.println(fecha1);
     	
     	List<EjercicioEntity> ejercicios = ejercicioRepository.findAll();
+        List<RutinaEjercicioEntity> rutinaEjercicios = rutinaEjercicioRepository.findByRutinaIdAndFecha(rutinaEntity.getId(), fecha1);
+        modal.addAttribute("rutinaEjercicios", rutinaEjercicios);
+
     	modal.addAttribute("rutinaEntity", rutinaEntity);
     	modal.addAttribute("fecha", fecha1);
     	
@@ -60,6 +69,14 @@ public class EscogerRutinaController {
     	return "admin/agregarEjercicioRutina";
     }
     
+    @GetMapping("/borrar/{id}")
+    public String eliminarCategoria(@PathVariable("id") Integer id) {
+
+        RutinaEjercicioEntity rutina = rutinaEjercicioRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Rutina ejercicio no encontrada con id: " + id));
+        rutinaEjercicioRepository.delete(rutina);
+        return "admin/agregarEjercicioRutina";
+    }
     
     @PostMapping("/guardar")
     public String procesarFormRutina(

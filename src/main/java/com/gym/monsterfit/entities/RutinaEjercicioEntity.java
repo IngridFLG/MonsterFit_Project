@@ -31,7 +31,7 @@ public class RutinaEjercicioEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @NotNull
