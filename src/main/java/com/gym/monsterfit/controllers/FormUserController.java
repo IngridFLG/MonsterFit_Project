@@ -54,18 +54,11 @@ public class FormUserController {
 			}
 			String username = principal.getName();
 			UsuarioEntity usuarioEntity= usuarioRepository.findByEmail(username);
-			MiembroEntity miembro = new MiembroEntity();
-			miembro.setUsuario(usuarioEntity);
-			miembro.setNombre(miembroEntity.getNombre());
-			miembro.setEdad(miembroEntity.getEdad());
-			miembro.setSexo(miembroEntity.getSexo());
-			miembro.setAltura(miembroEntity.getAltura());
-			miembro.setPeso(miembroEntity.getPeso());
-			miembroService.createMiembro(miembro);
+			miembroEntity.setUsuario(usuarioEntity);
+	
+			miembroService.createMiembro(miembroEntity);
 			model.addAttribute("miembroEntity", miembroEntity);
-		
-			
-		    
+
 		    return "cliente/chooseRoutine";
 		}
 		
@@ -79,7 +72,7 @@ public class FormUserController {
 			miembroEntity.setSexo(miembroActualizado.getSexo());
 			miembroEntity.setAltura(miembroActualizado.getAltura());
 			miembroRepository.save(miembroEntity);
-			
+
 			return "cliente/chooseRoutine";
 		}
 		
