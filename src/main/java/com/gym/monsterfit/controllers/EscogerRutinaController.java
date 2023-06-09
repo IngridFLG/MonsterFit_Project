@@ -70,11 +70,21 @@ public class EscogerRutinaController {
     }
     
     @GetMapping("/borrar/{id}")
-    public String eliminarCategoria(@PathVariable("id") Integer id) {
+    public String eliminarCategoria(@PathVariable("id") Integer id, Model model) {
 
-        RutinaEjercicioEntity rutina = rutinaEjercicioRepository.findById(id)
+        RutinaEjercicioEntity rutinaEjercicioEntity = rutinaEjercicioRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Rutina ejercicio no encontrada con id: " + id));
-        rutinaEjercicioRepository.delete(rutina);
+        rutinaEjercicioRepository.delete(rutinaEjercicioEntity);
+
+
+        List<EjercicioEntity> ejercicios = ejercicioRepository.findAll();
+        List<RutinaEjercicioEntity> rutinaEjercicios = rutinaEjercicioRepository.findByRutinaIdAndFecha(rutinaEjercicioEntity.getRutina().getId(), rutinaEjercicioEntity.getFecha());
+        model.addAttribute("rutinaEjercicios", rutinaEjercicios);
+
+    	model.addAttribute("rutinaEntity", rutinaEjercicioEntity.getRutina());
+    	model.addAttribute("fecha", rutinaEjercicioEntity.getFecha());
+    	
+    	model.addAttribute("ejercicios", ejercicios);
         return "admin/agregarEjercicioRutina";
     }
     
