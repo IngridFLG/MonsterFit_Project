@@ -4,7 +4,7 @@ function validarFormularioCliente() {
     let sexo = document.getElementById('sexo').value;
     let altura = document.getElementById('altura').value;
 
-    if(parseInt(edad) <= 0 || parseInt(edad) > 15){
+    if(parseInt(edad) < 15){
         Swal.fire({
             icon: 'error',
             title: 'Error',
