@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
 	<title>Listar ejercicio</title>
 	<link rel="icon" type="image/x-icon" href="../../static/css/icon/barra-con-pesas.ico"
 		th:href="@{/css/icon/barra-con-pesas.ico}" />
@@ -16,7 +14,6 @@
 	<!-- Our Custom CSS -->
 	<link rel="stylesheet" type="text/css" href="../../static/css/style4.css" th:href="@{/css/style4.css}" />
 	<link rel="stylesheet" type="text/css" href="../../static/css/style.css" th:href="@{/css/style.css}" />
-
 	<!-- Font Awesome JS -->
 	<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
 		integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
@@ -24,11 +21,12 @@
 	<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
 		integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
 		crossorigin="anonymous"></script>
-	<!-- SweetAlert CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
 
-    <!-- SweetAlert JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+	<!-- SweetAlert CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+
+	<!-- SweetAlert JS -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
 </head>
 
 <body>
@@ -45,22 +43,18 @@
 			</ul>
 		</div>
 	</nav>
-
 	<div class="wrapper">
 		<!-- Sidebar  -->
 		<nav id="sidebar">
-
 			<div class="d-flex justify-content-center">
 				<button type="button" id="sidebarCollapse" class="btn">
 					<i class="fas fa-align-left"></i>
 				</button>
 			</div>
-
 			<div class="sidebar-header d-flex justify-content-center">
 				<h3>Administrador</h3>
 				<strong>AD</strong>
 			</div>
-
 			<ul class="list-unstyled components d-flex flex-column mb-3 justify-content-center">
 				<li><a th:href="@{/ejercicio/listar}" aria-expanded="false">
 						<!--<i class="fas fa-home"></i> --> Ejercicio
@@ -74,102 +68,67 @@
 			</ul>
 		</nav>
 
+
 		<div id="content">
 			<div class="container py-5 mt-6">
-				<form th:action="@{/rutina/guardar}" method="post" onsubmit="return validarRutinaEjercicio();">
+				<form th:action="@{/rutina/guardar}" method="post" >
 					<div class="d-flex justify-content-left mb-4">
 						<h1 class="titulo" th:value="${rutinaEntity.id}" th:text="${rutinaEntity.nombre}">a</h1>
 						<input type="hidden" name="rutinaId" th:value="${rutinaEntity.id}">
 					</div>
 					<div class="d-flex flex-column mb-3">
-					<div class="form-group">
-						<div class="container2">
-							<span for="fecha"> Fecha </span>
-						</div>
-						<div class="row" style="justify-content: space-between;">
-							<div class="col-md-3 input-group align-items-center justify-content-between">
-								<input class="form-control" type="date" name="inputDate" th:value="${fecha}">
-							</div>							
-								<div class="input-group">
-								<select class="form-control" id="selectOption" name="selectedOption" required>
-                            		<option value="">-- Select an option --</option>
-                            		<option th:each="ejercicio : ${ejercicios}" th:value="${ejercicio.id}" th:text="${ejercicio.nombre}"></option>
-                        		</select>
-                        			<div class="input-group-append">
-                            			<button class="btn btn-primary" type="button" onclick="agregarEjercicio()">Agregar</button>
-                        			</div>
+						<div class="form-group">
+							<div class="container2">
+								<span for="fecha"> Fecha </span>
+							</div>
+							<div class="row" style="justify-content: space-between;">
+								<div class="col-md-3 input-group align-items-center justify-content-between">
+									<input class="form-control" type="date" id="inputDate" name="inputDate"
+										th:value="${fecha}" readonly>
+									</div>
+									<div class="input-group">
+	
+										<select class="form-control" id="selectOption" name="selectedOption" required>
+											<option value="">-- Select an option --</option>
+											<option th:each="ejercicio : ${ejercicios}" th:value="${ejercicio.id}"
+												th:text="${ejercicio.nombre}"></option>
+										</select>
+										<div class="input-group-append">
+											<button class="btn btn-primary" type="submit">Agregar</button>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-
-					</div>
-
-					<table class="table" id="tablaEjercicios">
-						<thead class="thead-dark">
-							<tr>
-
-								<th scope="col">Nombre</th>
-								<th scope="col">Eliminar</th>
+						<table class="table" id="tablaEjercicios">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">Nombre</th>
+									<th scope="col">Eliminar</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="rutinaEjercicio: ${rutinaEjercicios}">
+									<td th:if="${rutinaEjercicio != null}" th:text="${rutinaEjercicio.ejercicio.nombre}">
+									</td>
+								<td>
+									<a th:href="@{/rutina/borrar/{id}(id=${rutinaEjercicio.id})}"><img
+											src="../static/css/img/trash-solid.svg" th:src="@{/css/img/trash-solid.svg}"
+											width="22.5" height="22.5"></a>
+								</td>
 							</tr>
-						</thead>
-						<tbody>
+
 
 						</tbody>
 					</table>
 
-					<input type="hidden" name="ejerciciosIds" id="ejerciciosIds">
-
-					<button class="btn btn-dark btn-lg" type="submit">Guardar</button>
 				</form>
 			</div>
 		</div>
 	</div>
 
-	<script>
-    function agregarEjercicio() {
-    	var ejercicioId = document.getElementById("selectOption").value;
-    	
-    	var tabla = document.getElementById("tablaEjercicios");
-    	var row = tabla.insertRow(-1);
-    	var nombreCell = row.insertCell(0);
-    	var nombreEjercicio = document.getElementById("selectOption").options[document.getElementById("selectOption").selectedIndex].text;
-    	var ejerciciosIdsInput = document.getElementById("ejerciciosIds");
-    	const ejercicioIdsArray = ejerciciosIdsInput.value.split(",");
-    	console.log(ejercicioIdsArray);
-    	if(ejercicioIdsArray.includes(ejercicioId)){
-    		console.log("cualquier cosa");
-    		Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'El ejercicio '+ nombreEjercicio +' ya esta agregado' 
-            });
-    		return ;
-    	}
-    	
-         // Verificar si se ha seleccionado una opción válida
-         if (ejercicioId !== "") {
-        	var eliminarCell = row.insertCell(1);
-        	nombreCell.innerHTML = document.getElementById("selectOption").options[document.getElementById("selectOption").selectedIndex].text;
-        	eliminarCell.innerHTML = '<button class="btn btn-danger" type="button" onclick="eliminarEjercicio(this)">Eliminar</button>';
-        	// Agregar el id del ejercicio al campo hidden para enviarlo al controlador
-        	ejerciciosIdsInput.value += ejercicioId + ",";
-         }
-         
-    }
 
-    function eliminarEjercicio(button) {
-        var row = button.parentNode.parentNode;
-        var ejercicioId = row.cells[1].innerHTML;
-        row.parentNode.removeChild(row);
-        // Eliminar el id del ejercicio del campo hidden
-        var ejerciciosIdsInput = document.getElementById("ejerciciosIds");
-        ejerciciosIdsInput.value = ejerciciosIdsInput.value.replace(ejercicioId + ",", "");
-    }
-    
-</script>
 
-<script type="text/javascript" src="../static/js/validarRutinaEjercicio.js"
-        th:src="@{/js/validarRutinaEjercicio.js}"></script>
 
 	<!-- jQuery CDN - Slim version (=without AJAX) -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -183,13 +142,19 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
 		integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
 		crossorigin="anonymous"></script>
-
-
 	<script type="text/javascript">
 		$(document).ready(function () {
 			$('#sidebarCollapse').on('click', function () {
 				$('#sidebar').toggleClass('active');
 			});
+		});
+	</script>
+
+	<script th:if="${nombreDuplicado}">
+		Swal.fire({
+			icon: 'error',
+			title: 'Error',
+			text: 'El ejercicio ya está registrado en la rutina del dia',
 		});
 	</script>
 

@@ -15,12 +15,14 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
+@Data
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -45,6 +47,7 @@ public class UsuarioEntity {
     @JoinColumn(name = "authority_id", nullable = false)
     private RolEntity rol;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
     private MiembroEntity miembro;
     
@@ -54,6 +57,8 @@ public class UsuarioEntity {
         this.rol = rol;
     }
 
+
+    
 
     
 }

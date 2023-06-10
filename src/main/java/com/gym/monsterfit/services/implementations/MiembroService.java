@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gym.monsterfit.entities.MiembroEntity;
+import com.gym.monsterfit.entities.UsuarioEntity;
 import com.gym.monsterfit.repositories.MiembroRepository;
 import com.gym.monsterfit.services.interfaces.MiembroServiceInterface;
 
@@ -39,5 +40,12 @@ public class MiembroService implements MiembroServiceInterface{
 	public void deleteMiembro(Integer id) {
 		repository.deleteById(id);
 	}
+
+	@Override
+	public boolean esMiembro(Integer id) {
+		MiembroEntity miembro = repository.findByUsuario_Id(id);
+		return miembro.getNombre() != null && miembro.getEdad() != 0 && miembro.getSexo() != null && miembro.getAltura() != 0 && miembro.getPeso() != 0;
+	}
+
 
 }
