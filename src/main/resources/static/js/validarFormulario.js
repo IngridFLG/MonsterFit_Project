@@ -17,6 +17,25 @@ function validarFormulario() {
         });
         return false;
     }
+/**
+ * Funcion para hacer las validaciones en el formulario de agregar ejercicio
+ */
+function validarFormulario() {
+    let series = document.getElementById('series').value;
+    let repeticiones = document.getElementById('repeticiones').value;
+    let peso = document.getElementById('peso').value;
+    let tiempo = document.getElementById('tiempo').value;
+    let url = document.getElementById('url').value;
+    let validarUrl = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
+
+    if (validarUrl.test(url) === false) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'La URL no es válida.'
+        });
+        return false;
+    }
 
     if(parseInt(peso) === 0 || parseInt(series) === 0|| parseInt(tiempo) === 0 || parseFloat(repeticiones) === 0){
         Swal.fire({
