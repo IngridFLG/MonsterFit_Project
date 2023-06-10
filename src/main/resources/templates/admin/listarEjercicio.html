@@ -11,9 +11,6 @@
     <link rel="icon" type="image/x-icon" href="../../static/css/icon/barra-con-pesas.ico"
           th:href="@{/css/icon/barra-con-pesas.ico}" />
 
-    <link rel="icon" type="image/x-icon" href="../../static/css/icon/barra-con-pesas.ico"
-          th:href="@{/css/icon/barra-con-pesas.ico}" />
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
         integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
@@ -34,20 +31,16 @@
     <nav class="navbar navbar-expand-lg navbar-custom d-flex justify-content-between">
         <div class="ml-5">
             <a class="navbar-brand" href="index.html">Monster Fit</a>
-    <nav class="navbar navbar-expand-lg navbar-custom d-flex justify-content-between">
-        <div class="ml-5">
-            <a class="navbar-brand" href="index.html">Monster Fit</a>
         </div>
-        <div class="mr-5">
         <div class="mr-5">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link"
-                    sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><img
-                        src="../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}" width="22.5" height="22.5"></a></a></li>
+                                        sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><img
+                        src="../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}"
+                        width="22.5" height="22.5"></a></a></li>
             </ul>
         </div>
     </nav>
-
 
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -58,22 +51,14 @@
                     <i class="fas fa-align-left"></i>
                 </button>
             </div>
-            <div class="d-flex justify-content-center">
-                <button type="button" id="sidebarCollapse" class="btn">
-                    <i class="fas fa-align-left"></i>
-                </button>
-            </div>
 
-            <div class="sidebar-header d-flex justify-content-center">
             <div class="sidebar-header d-flex justify-content-center">
                 <h3>Administrador</h3>
                 <strong>AD</strong>
             </div>
 
             <ul class="list-unstyled components d-flex flex-column mb-3 justify-content-center">
-            <ul class="list-unstyled components d-flex flex-column mb-3 justify-content-center">
                 <li>
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" >
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" >
                         Ejercicio
                     </a>
@@ -81,11 +66,6 @@
                 <li>
                     <a th:href="@{/rutina}">
                         Rutina
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/administrarClientes}">
-                        Clientes
                     </a>
                 </li>
                 <li>
