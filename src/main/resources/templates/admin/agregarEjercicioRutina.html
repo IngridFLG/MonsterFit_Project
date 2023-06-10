@@ -24,6 +24,12 @@
 	<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
 		integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
 		crossorigin="anonymous"></script>
+
+	<!-- SweetAlert CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+
+	<!-- SweetAlert JS -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
 </head>
 
 <body>
@@ -71,7 +77,7 @@
 
 		<div id="content">
 			<div class="container py-5 mt-6">
-				<form th:action="@{/rutina/guardar}" method="post" onsubmit="return validarRutinaEjercicio();">
+				<form th:action="@{/rutina/guardar}" method="post" >
 					<div class="d-flex justify-content-left mb-4">
 						<h1 class="titulo" th:value="${rutinaEntity.id}" th:text="${rutinaEntity.nombre}">a</h1>
 						<input type="hidden" name="rutinaId" th:value="${rutinaEntity.id}">
@@ -83,17 +89,18 @@
 							</div>
 							<div class="row" style="justify-content: space-between;">
 								<div class="col-md-3 input-group align-items-center justify-content-between">
-									<input class="form-control" type="date" id="inputDate" name="inputDate" th:value="${fecha}" readonly >
+									<input class="form-control" type="date" id="inputDate" name="inputDate"
+										th:value="${fecha}" readonly>
 								</div>
 								<div class="input-group">
+									
 									<select class="form-control" id="selectOption" name="selectedOption" required>
 										<option value="">-- Select an option --</option>
 										<option th:each="ejercicio : ${ejercicios}" th:value="${ejercicio.id}"
 											th:text="${ejercicio.nombre}"></option>
 									</select>
 									<div class="input-group-append">
-										<button class="btn btn-primary" type="button"
-											onclick="agregarEjercicio()">Agregar</button>
+										<button class="btn btn-primary" type="submit">Agregar</button>
 									</div>
 								</div>
 							</div>
@@ -111,12 +118,12 @@
 						</thead>
 						<tbody>
 							<tr th:each="rutinaEjercicio: ${rutinaEjercicios}">
-								<td th:if="${rutinaEjercicio != null}"
-									th:text="${rutinaEjercicio.ejercicio.nombre}"></td>
+								<td th:if="${rutinaEjercicio != null}" th:text="${rutinaEjercicio.ejercicio.nombre}">
+								</td>
 								<td>
 									<a th:href="@{/rutina/borrar/{id}(id=${rutinaEjercicio.id})}"><img
-										src="../static/css/img/trash-solid.svg" th:src="@{/css/img/trash-solid.svg}"
-										width="22.5" height="22.5"></a>
+											src="../static/css/img/trash-solid.svg" th:src="@{/css/img/trash-solid.svg}"
+											width="22.5" height="22.5"></a>
 								</td>
 							</tr>
 
@@ -124,44 +131,11 @@
 						</tbody>
 					</table>
 
-					<input type="hidden" name="ejerciciosIds" id="ejerciciosIds">
-
-					<button class="btn btn-dark btn-lg" type="submit">Guardar</button>
 				</form>
 			</div>
 		</div>
 	</div>
 
-	<script>
-		function agregarEjercicio() {
-			var ejercicioId = document.getElementById("selectOption").value;
-
-			// Verificar si se ha seleccionado una opción válida
-			if (ejercicioId !== "") {
-				var tabla = document.getElementById("tablaEjercicios");
-				var row = tabla.insertRow(-1);
-				var nombreCell = row.insertCell(0);
-				var eliminarCell = row.insertCell(1);
-				nombreCell.innerHTML = document.getElementById("selectOption").options[document.getElementById("selectOption").selectedIndex].text;
-				eliminarCell.innerHTML = '<button class="btn btn-danger" type="button" onclick="eliminarEjercicio(this)">Eliminar</button>';
-
-				// Agregar el id del ejercicio al campo hidden para enviarlo al controlador
-				var ejerciciosIdsInput = document.getElementById("ejerciciosIds");
-				ejerciciosIdsInput.value += ejercicioId + ",";
-			}
-		}
-
-		function eliminarEjercicio(button) {
-			var row = button.parentNode.parentNode;
-			var ejercicioId = row.cells[1].innerHTML;
-			row.parentNode.removeChild(row);
-
-			// Eliminar el id del ejercicio del campo hidden
-			var ejerciciosIdsInput = document.getElementById("ejerciciosIds");
-			ejerciciosIdsInput.value = ejerciciosIdsInput.value.replace(ejercicioId + ",", "");
-		}
-
-	</script>
 
 
 
@@ -187,8 +161,13 @@
 		});
 	</script>
 
-	<script type="text/javascript" src="../static/js/validarRutinaEjercicio.js"
-		th:src="@{/js/validarRutinaEjercicio.js}"></script>
+	<script th:if="${nombreDuplicado}">
+		Swal.fire({
+			icon: 'error',
+			title: 'Error',
+			text: 'El ejercicio ya está registrado en la rutina del dia',
+		});
+	</script>
 
 </body>
 
