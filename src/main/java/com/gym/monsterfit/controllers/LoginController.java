@@ -52,12 +52,11 @@ public class LoginController {
 
 				
 				if(usuario.getMiembro()==null) {
-				
 					return "redirect:/form/registrar";
 				}
 				else {
 					modelo.addAttribute("miembroEntity", miembro);
-					return "redirect:/elegirRutina";
+					return "cliente/chooseRoutine";
 				}
 
 			}

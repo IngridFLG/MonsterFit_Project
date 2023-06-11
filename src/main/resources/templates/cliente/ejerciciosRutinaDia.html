@@ -35,29 +35,20 @@
     <div class="container py-5 min-vh-100 mt-5">
         <div class="d-flex">
             <div class="me-auto">
-                <h1 class="py-5 container2">Día 1</h1>
+                <h1 class="py-5 container2" th:text="${fechaActual}">Día 1</h1>
             </div>
         </div>
         <div class="row">
-            <div class="md-4 py-2">
-                <div></div>
-                <a href="ruta1.html" class="btn btn-dark btn-lg btn-block mb-3 w-100">
-                    <input type="checkbox" class="form-check-input"> Flexiones
-                </a>
-            </div>
-            <div class="md-4 py-2">
-                <a href="ruta2.html" class="btn btn-dark btn-lg btn-block mb-3 w-100">
-                    <input type="checkbox" class="form-check-input"> Correr
-                </a>
-            </div>
-            <div class="md-4 py-2">
-                <a href="ruta3.html" class="btn btn-dark btn-lg btn-block mb-3 w-100">
-                    <input type="checkbox" class="form-check-input"> Sentadilla
+            <div th:each="ejercicio : ${ejercicios}" class="md-4 py-2">
+                <a th:href="@{'/elegirRutina/ejercicio/' + ${ejercicio.id}}" class="btn btn-dark btn-lg btn-block mb-3 w-100">
+                    <input type="checkbox" class="form-check-input" th:id="${ejercicio.id}" th:value="${ejercicio.id}">
+                    <label th:for="${ejercicio.id}" th:text="${ejercicio.nombre}">Flexiones</label>
                 </a>
             </div>
         </div>
         <a href="ruta1.html" class="btn btn-dark btn-lg btn-block mb-3 text-start">Aceptar </a>
     </div>
+    
     <footer class="py-5 bg-black">
         <div class="container px-5">
             <p class="m-0 text-center text-white small">Copyright &copy; Monster Fit 2023</p>

@@ -43,17 +43,17 @@
     </div>
   </div>
   <div class="row">
-    <div class="md-4 py-2">
-      <a href="ruta1.html" class="btn btn-dark btn-lg btn-block mb-3 w-100">Día 1</a>
+    <div th:each="dia, iterStat : ${dias}" class="md-4 py-2">
+        <a th:href="@{${rutina.getId()} +'/' + ${dia.getFirst()}}" 
+           class="btn btn-dark btn-lg btn-block mb-3 w-100"
+           th:text="${dia.getSecond()} + ' - Día ' + ${iterStat.count}">
+        </a>
     </div>
-    <div class="md-4 py-2">
-      <a href="ruta2.html" class="btn btn-dark btn-lg btn-block mb-3 w-100">Día 2</a>
-    </div>
-    <div class="md-4 py-2">
-      <a href="ruta3.html" class="btn btn-dark btn-lg btn-block mb-3 w-100">Día 3</a>
-    </div>
-    <!-- Agrega más días según tus necesidades -->
-  </div>
+</div>
+
+  
+</div>
+
 </div>
 
 
