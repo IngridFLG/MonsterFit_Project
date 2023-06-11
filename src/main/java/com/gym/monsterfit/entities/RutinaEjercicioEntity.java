@@ -1,8 +1,9 @@
 package com.gym.monsterfit.entities;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+
+import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -30,19 +32,22 @@ public class RutinaEjercicioEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "rutina_id")
     private RutinaEntity rutina;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "ejercicio_id")
     private EjercicioEntity ejercicio;
 
     @JsonIgnore
     @OneToMany(mappedBy = "rutinaEjercico")
     private List<HistorialEntity> historial = new ArrayList<>();
-
+    
+    @NotNull
     private LocalDate fecha;
 }
