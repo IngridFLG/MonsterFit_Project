@@ -49,10 +49,10 @@ public class EscogerRutinaUserController {
 	@Autowired
 	MiembroRepository miembroRepository;
 
-	@GetMapping(value = "/{miembroId}")
-	public String seleccionarRutina(Model model, @PathVariable Integer miembroId) {
+	@GetMapping(value = "/{usuarioId}")
+	public String seleccionarRutina(Model model, @PathVariable Integer usuarioId) {
 		List<RutinaEntity> tiposRutina = rutinaRepository.findAll();
-		MiembroEntity miembro = miembroRepository.findByUsuario_Id(miembroId);
+		MiembroEntity miembro = miembroRepository.findByUsuario_Id(usuarioId);
 
 		RutinaEntity rutina1 = tiposRutina.get(0);
 		RutinaEntity rutina2 = tiposRutina.get(1);

@@ -15,7 +15,6 @@ INSERT IGNORE INTO authorities (id,authority) VALUES
 (1,"ROLE_ADMIN"),
 (2,"ROLE_CLIENTE");
 
-
 INSERT IGNORE INTO rutina (id,nombre) VALUES
 (1,"Bajar de peso"),
 (2,"Subir masa muscular"),

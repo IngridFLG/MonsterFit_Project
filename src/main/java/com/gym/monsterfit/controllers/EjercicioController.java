@@ -55,7 +55,8 @@ public class EjercicioController {
             model.addAttribute("nombreDuplicado", true);
             return "admin/agregarEjercicio";
         }
-
+		//la siguiente linea solo funciona para videos de youtube :D
+		ejercicioEntity.setUrl(ejercicioEntity.getUrl().replace("watch?v=", "embed/"));
 		ejercicioRepository.save(ejercicioEntity);
 		return "redirect:/ejercicio/listar";
 	}
