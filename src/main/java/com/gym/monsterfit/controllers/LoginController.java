@@ -57,7 +57,7 @@ public class LoginController {
 				}
 				else {
 					modelo.addAttribute("miembroEntity", miembro);
-					return "cliente/chooseRoutine";
+					return "redirect:/elegirRutina";
 				}
 
 			}
