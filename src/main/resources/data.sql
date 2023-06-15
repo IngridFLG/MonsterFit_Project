@@ -18,4 +18,4 @@ INSERT IGNORE INTO authorities (id,authority) VALUES
 INSERT IGNORE INTO rutina (id,nombre) VALUES
 (1,"Bajar de peso"),
 (2,"Subir masa muscular"),
-(3, "Personalizada");
+(3, "Estandar");

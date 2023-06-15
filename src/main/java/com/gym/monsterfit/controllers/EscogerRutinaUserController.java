@@ -1,13 +1,7 @@
 package com.gym.monsterfit.controllers;
 
-import com.gym.monsterfit.entities.EjercicioEntity;
-import com.gym.monsterfit.entities.MiembroEntity;
-import com.gym.monsterfit.entities.RutinaEjercicioEntity;
-import com.gym.monsterfit.entities.RutinaEntity;
-import com.gym.monsterfit.repositories.EjercicioRepository;
-import com.gym.monsterfit.repositories.MiembroRepository;
-import com.gym.monsterfit.repositories.RutinaEjercicioRepository;
-import com.gym.monsterfit.repositories.RutinaRepository;
+import com.gym.monsterfit.entities.*;
+import com.gym.monsterfit.repositories.*;
 import com.gym.monsterfit.services.implementations.RutinaEjercicioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -49,6 +44,9 @@ public class EscogerRutinaUserController {
 	@Autowired
 	MiembroRepository miembroRepository;
 
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+
 	@GetMapping(value = "/{usuarioId}")
 	public String seleccionarRutina(Model model, @PathVariable Integer usuarioId) {
 		List<RutinaEntity> tiposRutina = rutinaRepository.findAll();
@@ -67,7 +65,13 @@ public class EscogerRutinaUserController {
 	}
 
 	@GetMapping("/rutinaUser/{rutinaId}")
-	public String calendarioRutina(Model model, @PathVariable Integer rutinaId) {
+	public String calendarioRutina(Model model, @PathVariable Integer rutinaId, Principal principal) {
+
+		String username = principal.getName();
+		UsuarioEntity usuarioEntity= usuarioRepository.findByEmail(username);
+		MiembroEntity miembroEntity = miembroRepository.findByUsuario_Id(usuarioEntity.getId());
+		model.addAttribute("miembroEntity", miembroEntity);
+
 		RutinaEntity rutina = rutinaRepository.findById(rutinaId).orElse(null);
 		List<RutinaEjercicioEntity> dias = rutinaEjercicioRepository.findByRutinaId(rutinaId).stream()
 				.collect(Collectors.collectingAndThen(
@@ -100,7 +104,13 @@ public class EscogerRutinaUserController {
 	}
 
 	@GetMapping("/rutinaUser/{rutinaId}/{fecha}")
-	public String calendarioRutinaDia(Model model, @PathVariable Integer rutinaId, @PathVariable String fecha) {
+	public String calendarioRutinaDia(Model model, @PathVariable Integer rutinaId, @PathVariable String fecha, Principal principal) {
+
+		String username = principal.getName();
+		UsuarioEntity usuarioEntity= usuarioRepository.findByEmail(username);
+		MiembroEntity miembroEntity = miembroRepository.findByUsuario_Id(usuarioEntity.getId());
+		model.addAttribute("miembroEntity", miembroEntity);
+
 		RutinaEntity rutina = rutinaRepository.findById(rutinaId).orElse(null);
 		List<RutinaEjercicioEntity> dias = rutinaEjercicioRepository.findByRutinaId(rutinaId);
 
@@ -170,7 +180,12 @@ public class EscogerRutinaUserController {
 	}
 
 	@GetMapping(value = "ejercicio/{ejercicioId}")
-	public String verEjercicio(Model model, @PathVariable Integer ejercicioId) {
+	public String verEjercicio(Model model, @PathVariable Integer ejercicioId, Principal principal) {
+		String username = principal.getName();
+		UsuarioEntity usuarioEntity= usuarioRepository.findByEmail(username);
+		MiembroEntity miembroEntity = miembroRepository.findByUsuario_Id(usuarioEntity.getId());
+		model.addAttribute("miembroEntity", miembroEntity);
+
 		EjercicioEntity ejercicio = ejercicioRepository.findById(ejercicioId).orElse(null);
 
 		model.addAttribute("ejercicio", ejercicio);
