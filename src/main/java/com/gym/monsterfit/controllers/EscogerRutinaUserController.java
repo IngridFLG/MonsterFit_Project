@@ -2,18 +2,16 @@ package com.gym.monsterfit.controllers;
 
 import com.gym.monsterfit.entities.*;
 import com.gym.monsterfit.repositories.*;
-import com.gym.monsterfit.services.implementations.RutinaEjercicioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.time.LocalDate;
@@ -30,22 +28,23 @@ import java.util.stream.Collectors;
 public class EscogerRutinaUserController {
 
 	@Autowired
-	RutinaRepository rutinaRepository;
+	private RutinaRepository rutinaRepository;
 
 	@Autowired
-	EjercicioRepository ejercicioRepository;
+	private EjercicioRepository ejercicioRepository;
+
 
 	@Autowired
-	RutinaEjercicioService rutinaEjercicioService;
+	private RutinaEjercicioRepository rutinaEjercicioRepository;
 
 	@Autowired
-	RutinaEjercicioRepository rutinaEjercicioRepository;
-
-	@Autowired
-	MiembroRepository miembroRepository;
+	private MiembroRepository miembroRepository;
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+
+	@Autowired
+	private HistorialRepository historialRepository;
 
 	@GetMapping(value = "/{usuarioId}")
 	public String seleccionarRutina(Model model, @PathVariable Integer usuarioId) {
@@ -134,51 +133,6 @@ public class EscogerRutinaUserController {
 		return "cliente/ejerciciosRutinaDia";
 	}
 
-	@GetMapping
-	public String mostrarFormulario(Model model) {
-		List<RutinaEntity> tiposRutina = rutinaRepository.findAll();
-
-		model.addAttribute("tiposRutina", tiposRutina);
-		return "admin/asignarRutina";
-	}
-
-	@PostMapping
-	public String procesarSeleccionTipoRutina(@RequestParam("selectedOption") String rutina,
-			@RequestParam("inputDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fecha1, Model modal) {
-		RutinaEntity rutinaEntity = rutinaRepository.getReferenceById(Integer.parseInt(rutina));
-
-		List<EjercicioEntity> ejercicios = ejercicioRepository.findAll();
-		List<RutinaEjercicioEntity> rutinaEjercicios = rutinaEjercicioRepository
-				.findByRutinaIdAndFecha(rutinaEntity.getId(), fecha1);
-		modal.addAttribute("rutinaEjercicios", rutinaEjercicios);
-
-		modal.addAttribute("rutinaEntity", rutinaEntity);
-		modal.addAttribute("fecha", fecha1);
-
-		modal.addAttribute("ejercicios", ejercicios);
-
-		return "admin/agregarEjercicioRutina";
-	}
-
-	@GetMapping("/borrar/{id}")
-	public String eliminarCategoria(@PathVariable("id") Integer id, Model model) {
-
-		RutinaEjercicioEntity rutinaEjercicioEntity = rutinaEjercicioRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Rutina ejercicio no encontrada con id: " + id));
-		rutinaEjercicioRepository.delete(rutinaEjercicioEntity);
-
-		List<EjercicioEntity> ejercicios = ejercicioRepository.findAll();
-		List<RutinaEjercicioEntity> rutinaEjercicios = rutinaEjercicioRepository
-				.findByRutinaIdAndFecha(rutinaEjercicioEntity.getRutina().getId(), rutinaEjercicioEntity.getFecha());
-		model.addAttribute("rutinaEjercicios", rutinaEjercicios);
-
-		model.addAttribute("rutinaEntity", rutinaEjercicioEntity.getRutina());
-		model.addAttribute("fecha", rutinaEjercicioEntity.getFecha());
-
-		model.addAttribute("ejercicios", ejercicios);
-		return "admin/agregarEjercicioRutina";
-	}
-
 	@GetMapping(value = "ejercicio/{ejercicioId}")
 	public String verEjercicio(Model model, @PathVariable Integer ejercicioId, Principal principal) {
 		String username = principal.getName();
@@ -193,52 +147,27 @@ public class EscogerRutinaUserController {
 		return "cliente/ejercicioDetallado";
 	}
 
-	// @PostMapping("/guardar")
-	// public String procesarFormRutina(@RequestParam("inputDate") String
-	// fechaString,
-	// @RequestParam("rutinaId") String rutinaIdString,
-	// @RequestParam("selectedOption") Integer ejercicio,
-	// Model model) {
+	@PostMapping("/guardarHistorial")
+	public String guardarHistorial(@ModelAttribute("ejercicio") EjercicioEntity ejercicioEntity, Principal principal, Model model){
 
-	// DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	// LocalDate fecha = LocalDate.parse(fechaString, formatter);
+		String username = principal.getName();
+		UsuarioEntity usuarioEntity= usuarioRepository.findByEmail(username);
+		MiembroEntity miembroEntity = miembroRepository.findByUsuario_Id(usuarioEntity.getId());
+		model.addAttribute("miembroEntity", miembroEntity);
 
-	// Integer id = Integer.parseInt(rutinaIdString);
-	// RutinaEntity rutina = rutinaRepository.findById(id).get();
-	// EjercicioEntity ejercicioEntity =
-	// ejercicioRepository.findById(ejercicio).get();
 
-	// Se crea para realizar la relacion entre ejercicio y rutina
-	// RutinaEjercicioEntity rutinaEjercicioEntity = new RutinaEjercicioEntity();
-	// rutinaEjercicioEntity.setFecha(fecha);
-	// rutinaEjercicioEntity.setRutina(rutina);
-	// rutinaEjercicioEntity.setEjercicio(ejercicioEntity);
+		HistorialEntity historialEntity = new HistorialEntity();
+		LocalDate fecha = LocalDate.now();
+		historialEntity.setFecha(fecha);
+		historialEntity.setMiembro(miembroEntity);
+		historialEntity.setPeso(ejercicioEntity.getPeso());
+		historialEntity.setSeries(ejercicioEntity.getSeries());
+		historialEntity.setRepeticiones(ejercicioEntity.getRepeticiones());
+		historialEntity.setTiempo(ejercicioEntity.getTiempo());
 
-	// vainas que toca hacer para no totear el front
-	// List<EjercicioEntity> ejercicios = ejercicioRepository.findAll();
-	// List<RutinaEjercicioEntity> rutinaEjercicios = rutinaEjercicioRepository
-	// .findByRutinaIdAndFecha(rutinaEjercicioEntity.getRutina().getId(),
-	// rutinaEjercicioEntity.getFecha());
-	// model.addAttribute("rutinaEjercicios", rutinaEjercicios);
-	// model.addAttribute("rutinaEntity", rutina);
-	// model.addAttribute("fecha", rutinaEjercicioEntity.getFecha());
-	// model.addAttribute("ejercicios", ejercicios);
+		historialRepository.save(historialEntity);
+		return "redirect:/elegirRutina/ejercicio/" + ejercicioEntity.getId();
+	}
 
-	// validacion para comprobar que el ejercicio no este en la rutina
-	// boolean ejercicioDuplicado =
-	// rutinaEjercicioRepository.existsByRutinaAndEjercicioAndFecha(rutina,
-	// ejercicioEntity, fecha);
-	// if (ejercicioDuplicado) {
-
-	// model.addAttribute("nombreDuplicado", true);
-	// return "admin/agregarEjercicioRutina";
-	// }
-
-	// rutinaEjercicioRepository.save(rutinaEjercicioEntity);
-	// rutinaEjercicios.add(rutinaEjercicioEntity);
-	// model.addAttribute("rutinaEjercicios", rutinaEjercicios);
-	// model.addAttribute("nombreDuplicado", false);
-	// return "admin/agregarEjercicioRutina";
-	// }
-
+	
 }

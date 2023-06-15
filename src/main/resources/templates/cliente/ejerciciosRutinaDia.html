@@ -41,12 +41,10 @@
         <div class="row">
             <div th:each="ejercicio : ${ejercicios}" class="md-4 py-2">
                 <a th:href="@{'/elegirRutina/ejercicio/' + ${ejercicio.id}}" class="btn btn-dark btn-lg btn-block mb-3 w-100">
-                    <input type="checkbox" class="form-check-input" th:id="${ejercicio.id}" th:value="${ejercicio.id}">
-                    <label th:for="${ejercicio.id}" th:text="${ejercicio.nombre}">Flexiones</label>
+                    <label th:for="${ejercicio.id}" th:text="${ejercicio.nombre}"></label>
                 </a>
             </div>
         </div>
-        <a href="ruta1.html" class="btn btn-dark btn-lg btn-block mb-3 text-start">Aceptar </a>
     </div>
     
     <footer class="py-5 bg-black">

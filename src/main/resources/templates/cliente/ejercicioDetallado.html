@@ -39,7 +39,7 @@
               </div>
             </div>
             <iframe width="560" height="315" th:src="@{${ejercicio.getUrl()}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            <form method="post" th:action="@{/ejercicio/registrar}" th:object="${ejercicio}"
+            <form method="post" th:action="@{/elegirRutina/guardarHistorial}" th:object="${ejercicio}"
             onsubmit="return validarFormulario();">
                 <div class="row g-3">
                             <input type="hidden" name="id" th:if="${ejercicio?.id != null}"
