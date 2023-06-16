@@ -82,7 +82,7 @@ header.masthead2 {
 .button {
   width: 300px;
   height: 300px;
-  background-color: rgba(212, 180, 141, 0.8);
+  background-color: #588ab3;
   border-radius: 40px;
   display: flex;
   flex-direction: column;
@@ -93,7 +93,7 @@ header.masthead2 {
 }
 
 .button:hover {
-  background-color: rgba(134, 114, 78, 0.8);
+  background-color: rgba(34, 98, 157, 0.8);
   /*background-color: #e1e1e*/
 }
 

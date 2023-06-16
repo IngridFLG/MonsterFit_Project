@@ -6,7 +6,6 @@ import com.gym.monsterfit.entities.RutinaEntity;
 import com.gym.monsterfit.repositories.EjercicioRepository;
 import com.gym.monsterfit.repositories.RutinaEjercicioRepository;
 import com.gym.monsterfit.repositories.RutinaRepository;
-import com.gym.monsterfit.services.implementations.RutinaEjercicioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,9 +30,6 @@ public class EscogerRutinaController {
 
     @Autowired
     EjercicioRepository ejercicioRepository;
-
-    @Autowired
-    RutinaEjercicioService rutinaEjercicioService;
 
     @Autowired
     RutinaEjercicioRepository rutinaEjercicioRepository;

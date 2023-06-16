@@ -32,7 +32,7 @@ public class EjercicioEntity {
 	@Column(nullable = false, length = 255)
 	private String url;
 	
-	@Column(nullable = false, length = 50)
+	@Column(length = 50)
 	private String tiempo;
 
 	private Float peso;

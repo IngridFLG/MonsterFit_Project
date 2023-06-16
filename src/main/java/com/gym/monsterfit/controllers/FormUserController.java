@@ -59,7 +59,7 @@ public class FormUserController {
 			miembroService.createMiembro(miembroEntity);
 			model.addAttribute("miembroEntity", miembroEntity);
 
-		    return "cliente/chooseRoutine";
+		    return "redirect:/elegirRutina/" + miembroEntity.getUsuario().getId();
 		}
 		
 		

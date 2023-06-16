@@ -1,0 +1,28 @@
+INSERT IGNORE INTO usuario (email, password, authority_id) VALUES
+("admin@gmail.com", "$2a$10$RUZQBr7awu7vXsSTVoP23.DH8qocbk17IHrzaaJhLxpT1CjAWvruG", 1),
+("user@gmail.com", "$2a$10$RUZQBr7awu7vXsSTVoP23.DH8qocbk17IHrzaaJhLxpT1CjAWvruG", 2);
+
+INSERT IGNORE INTO miembro_ejercicio (id, altura, edad, nombre, peso, sexo, usuario_id) VALUES
+(1, 170, 20, "user", 70, "Masculino", 2);
+
+INSERT IGNORE INTO ejercicio (id, nombre, peso, repeticiones, series, tiempo, url) VALUES
+(1, "Curl de Biceps", 15, 15, 4, null, "https://www.youtube.com/embed/HU2lghjU29Y"),
+(2, "Press de Banca", 40, 15, 4, null, "https://www.youtube.com/embed/ICaZxO7RmKs"),
+(3, "Press Frances", 7, 20, 3, null, "https://www.youtube.com/embed/Rn6LgSEPsDc");
+
+INSERT IGNORE INTO rutina_ejercicio (id, fecha, ejercicio_id, rutina_id) VALUES	
+(1, "2023-06-01", 1, 1),
+(2, "2023-06-01", 2, 1),
+(3, "2023-06-01", 1, 2),
+(4, "2023-06-01", 2, 2),
+(5, "2023-06-01", 3, 2),
+(6, "2023-06-01", 1, 3),
+(7, "2023-06-01", 2, 3),
+(8, "2023-06-02", 1, 1),
+(9, "2023-06-02", 2, 1),
+(10, "2023-06-02", 3, 2),
+(11, "2023-06-02", 2, 3),
+(12, "2023-06-03", 1, 1),
+(13, "2023-06-03", 2, 1),
+(14, "2023-06-03", 3, 2),
+(15, "2023-06-03", 2, 3);
