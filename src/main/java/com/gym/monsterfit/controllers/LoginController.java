@@ -36,13 +36,6 @@ public class LoginController {
 	MiembroRepository miembroRepository;
 
 	@GetMapping("/login")
-	@Autowired
-	UsuarioRepository usuarioRepository;
-
-	@Autowired
-	MiembroRepository miembroRepository;
-
-	@GetMapping("/login")
 	public String iniciarSesion() {
 		return "login";
 	}
@@ -52,14 +45,9 @@ public class LoginController {
 	
 	@GetMapping("/")
 	public String inicio(Model modelo, Principal principal) {
-	public String inicio(Model modelo, Principal principal) {
 		try {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			UsuarioEntity usuario = usuarioService.selectUsuariobyEmail(auth.getName());
-			String username = principal.getName();
-			UsuarioEntity usuarioEntity= usuarioRepository.findByEmail(username);
-			MiembroEntity miembro = miembroRepository.findByUsuario_Id(usuarioEntity.getId());
-
 			String username = principal.getName();
 			UsuarioEntity usuarioEntity= usuarioRepository.findByEmail(username);
 			MiembroEntity miembro = miembroRepository.findByUsuario_Id(usuarioEntity.getId());
