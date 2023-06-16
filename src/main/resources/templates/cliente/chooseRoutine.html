@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport"
@@ -35,6 +37,7 @@
 		</div>
 		<div class="mr-5">
 			<ul class="navbar-nav ms-auto">
+				<li class="nav-item"><a class="nav-link" th:href="@{/form/registrar(id=${miembroEntity.id})}">Actualizar
 				<li class="nav-item"><a class="nav-link" th:href="@{/form/registrar(id=${miembroEntity.id})}">Actualizar
 					datos</a></li>
 				<li class="nav-item"><a class="nav-link"

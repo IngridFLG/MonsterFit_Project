@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
     <meta charset="utf-8" />
@@ -25,6 +27,9 @@
             <li class="nav-item"><a class="nav-link" th:href="@{/form/registrar(id=${miembroEntity.id})}">Actualizar
                 datos</a></li>
             <li class="nav-item"><a class="nav-link"
+                                    sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><img
+                    src="../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}"
+                    width="22.5" height="22.5"></a></a></li>
                                     sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><img
                     src="../static/css/icon/cerrar-sesión.svg" th:src="@{/css/icon/cerrar-sesión.svg}"
                     width="22.5" height="22.5"></a></a></li>
