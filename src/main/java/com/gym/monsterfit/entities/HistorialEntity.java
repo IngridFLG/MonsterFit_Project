@@ -22,8 +22,8 @@ public class HistorialEntity {
 	private Integer id;
 
 	@ManyToOne
-	@JoinColumn(name = "rutinaEjercicio_id")
-	private RutinaEjercicioEntity rutinaEjercico;
+	@JoinColumn(name = "rutina_id")
+	private RutinaEntity rutina;
 	
 	@ManyToOne
 	@JoinColumn(name = "miembroGimnasio_id")
@@ -31,7 +31,7 @@ public class HistorialEntity {
 	
 	private Integer series;
 
-	@Column(nullable = false, length = 50)
+	@Column(length = 50)
 	private String tiempo;
 
 	private Float peso;

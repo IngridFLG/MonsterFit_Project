@@ -86,14 +86,4 @@ public class UsuarioService implements UsuarioServiceInterface {
 
 
 
-	@Override
-	public UsuarioEntity optenerUsarioPorId(Integer id) {
-		
-		return usuarioRepository.getById(id);
-	
-		
-		
-	}
-
-
 }

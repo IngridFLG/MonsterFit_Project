@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gym.monsterfit.entities.MiembroEntity;
-import com.gym.monsterfit.entities.UsuarioEntity;
 import com.gym.monsterfit.repositories.MiembroRepository;
 import com.gym.monsterfit.services.interfaces.MiembroServiceInterface;
 
