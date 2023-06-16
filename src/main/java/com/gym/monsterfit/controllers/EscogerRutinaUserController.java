@@ -126,36 +126,36 @@ public class EscogerRutinaUserController {
 				.collect(Collectors.toList());
 
 		model.addAttribute("ejercicios", ejercicios);
-
+		model.addAttribute("rutina", rutina);
 
 		model.addAttribute("fechaActual", LocalDate.parse(fecha, simpleFormatter).format(formatter));
 
 		return "cliente/ejerciciosRutinaDia";
 	}
 
-	@GetMapping(value = "ejercicio/{ejercicioId}")
-	public String verEjercicio(Model model, @PathVariable Integer ejercicioId, Principal principal) {
+	@GetMapping(value = "ejercicio/{ejercicioId}/rutina/{rutinaId}")
+	public String verEjercicio(Model model, @PathVariable Integer ejercicioId, @PathVariable("rutinaId") Integer rutinaId, Principal principal) {
 		String username = principal.getName();
 		UsuarioEntity usuarioEntity= usuarioRepository.findByEmail(username);
 		MiembroEntity miembroEntity = miembroRepository.findByUsuario_Id(usuarioEntity.getId());
 		model.addAttribute("miembroEntity", miembroEntity);
 
 		EjercicioEntity ejercicio = ejercicioRepository.findById(ejercicioId).orElse(null);
-
+		RutinaEntity rutinaEntity = rutinaRepository.findById(rutinaId).get();
+		model.addAttribute("rutina", rutinaEntity);
 		model.addAttribute("ejercicio", ejercicio);
-
+		System.out.println(rutinaEntity.getNombre());
 		return "cliente/ejercicioDetallado";
 	}
 
 	@PostMapping("/guardarHistorial")
-	public String guardarHistorial(@ModelAttribute("ejercicio") EjercicioEntity ejercicioEntity, Principal principal, Model model){
+	public String guardarHistorial(@ModelAttribute("ejercicio") EjercicioEntity ejercicioEntity, Principal principal, Model model, @ModelAttribute("rutinaId") Integer rutinaId){
 
 		String username = principal.getName();
 		UsuarioEntity usuarioEntity= usuarioRepository.findByEmail(username);
 		MiembroEntity miembroEntity = miembroRepository.findByUsuario_Id(usuarioEntity.getId());
 		model.addAttribute("miembroEntity", miembroEntity);
-
-
+		RutinaEntity rutinaEntity = rutinaRepository.findById(rutinaId).get();
 		HistorialEntity historialEntity = new HistorialEntity();
 		LocalDate fecha = LocalDate.now();
 		historialEntity.setFecha(fecha);
@@ -164,9 +164,25 @@ public class EscogerRutinaUserController {
 		historialEntity.setSeries(ejercicioEntity.getSeries());
 		historialEntity.setRepeticiones(ejercicioEntity.getRepeticiones());
 		historialEntity.setTiempo(ejercicioEntity.getTiempo());
-
+		historialEntity.setRutina(rutinaEntity);
 		historialRepository.save(historialEntity);
-		return "redirect:/elegirRutina/ejercicio/" + ejercicioEntity.getId();
+		model.addAttribute("exito", true);
+		model.addAttribute("rutina", rutinaEntity);
+		return "redirect:/elegirRutina/ejercicio/" + ejercicioEntity.getId() + "/rutina/" + rutinaEntity.getId() +"?exito=true"; 
+	}
+
+
+	@GetMapping("/verHistorial/{rutinaId}")
+	public String verHistorial(Principal principal, Model model, @PathVariable("rutinaId") Integer rutinaId){
+		String username = principal.getName();
+		UsuarioEntity usuarioEntity= usuarioRepository.findByEmail(username);
+		MiembroEntity miembroEntity = miembroRepository.findByUsuario_Id(usuarioEntity.getId());
+		model.addAttribute("miembroEntity", miembroEntity);
+		RutinaEntity rutinaEntity = rutinaRepository.findById(rutinaId).get();
+		List<HistorialEntity> historial = historialRepository.findByMiembroAndRutina(miembroEntity, rutinaEntity);
+		model.addAttribute("historial", historial);
+		model.addAttribute("rutina", rutinaEntity);
+		return "/cliente/verHistorial";
 	}
 
 	

@@ -30,6 +30,10 @@ public class RutinaEntity {
 	@JsonIgnore
 	@OneToMany(mappedBy = "rutina")
     private List<RutinaEjercicioEntity> rutina= new ArrayList<>();
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "rutina")
+    private List<HistorialEntity> rutinaHistorial= new ArrayList<>();
 	
 	
 	

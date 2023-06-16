@@ -40,7 +40,7 @@
         </div>
         <div class="row">
             <div th:each="ejercicio : ${ejercicios}" class="md-4 py-2">
-                <a th:href="@{'/elegirRutina/ejercicio/' + ${ejercicio.id}}" class="btn btn-dark btn-lg btn-block mb-3 w-100">
+                <a th:href="@{'/elegirRutina/ejercicio/' + ${ejercicio.id} + '/rutina/' + ${rutina.id}}" class="btn btn-dark btn-lg btn-block mb-3 w-100">
                     <label th:for="${ejercicio.id}" th:text="${ejercicio.nombre}"></label>
                 </a>
             </div>
