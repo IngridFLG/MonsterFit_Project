@@ -43,6 +43,7 @@
       <table class="table">
           <thead class="thead-dark">
           <tr>
+            <th scope="col">Nombre</th>
               <th scope="col">Fecha</th>
               <th scope="col">Tiempo (min)</th>
               <th scope="col">Peso (kg)</th>
@@ -53,6 +54,7 @@
           </thead>
           <tbody>
           <tr th:each="his: ${historial}">
+              <td th:text="${his.nombre}"></td>
               <td th:text="${his.fecha}"></td>
               <td th:text="${his.tiempo ?: '0'}"></td>
               <td th:text="${his.peso ?: '0'}"></td>

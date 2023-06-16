@@ -67,6 +67,7 @@
             <div class="row g-3">
                 <input type="hidden" name="id" th:if="${ejercicio?.id != null}" th:field="*{id}" />
                 <input type="hidden" name="rutinaId" th:value="${rutina.id}" />
+                <input type="hidden" name="nombre" th:field="*{nombre}" th:value="${ejercicio.nombre}" />
                 <div class="col-md-6" th:if="${ejercicio?.tiempo != null && ejercicio?.tiempo != ''}">
                     <div class="form-group" >
                         <label class="col-form-label text-start" for="tiempo">Tiempo en minutos</label>

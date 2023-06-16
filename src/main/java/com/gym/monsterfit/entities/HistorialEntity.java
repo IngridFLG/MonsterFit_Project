@@ -32,6 +32,9 @@ public class HistorialEntity {
 	private Integer series;
 
 	@Column(length = 50)
+	private String nombre;
+
+	@Column(length = 50)
 	private String tiempo;
 
 	private Float peso;

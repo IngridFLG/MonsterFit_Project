@@ -165,6 +165,7 @@ public class EscogerRutinaUserController {
 		historialEntity.setRepeticiones(ejercicioEntity.getRepeticiones());
 		historialEntity.setTiempo(ejercicioEntity.getTiempo());
 		historialEntity.setRutina(rutinaEntity);
+		historialEntity.setNombre(ejercicioEntity.getNombre());
 		historialRepository.save(historialEntity);
 		model.addAttribute("exito", true);
 		model.addAttribute("rutina", rutinaEntity);
